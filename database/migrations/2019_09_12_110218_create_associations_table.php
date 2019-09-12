@@ -15,6 +15,9 @@ class CreateAssociationsTable extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('university_id');
+            $table->string('name');
+            $table->string('formal_name');
             $table->timestamps();
         });
     }
