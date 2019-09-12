@@ -12,6 +12,13 @@ class AssociationsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('associations')->insert([
+           'name' => 'Linda Carlstad',
+           'nickname' => 'Linda',
+           'university_id' => 1,
+           'created_at' => now(),
+           'updated_at' => now(),
+        ]);
         $associations = factory( Association::class, 100 )->create();
     }
 }
