@@ -15,6 +15,12 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('course_id');
+            $table->string('file_name');
+            $table->string('name');
+            $table->bigInteger('views')->nullable();
+            $table->decimal('rating')->nullable();
+            $table->string('grade')->nullable();
             $table->timestamps();
         });
     }
