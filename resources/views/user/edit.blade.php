@@ -5,7 +5,7 @@
     <h1>Inställningar</h1>
     <form class="" action="{{ '/user/' . Auth()->user()->id }}" method="post">
         @csrf
-        {{ method_field( 'patch' ) }}
+        @method( 'PUT' )
         <input type="hidden" name="type" value="info">
 
         <div class="form-group row">
@@ -19,22 +19,12 @@
             @endif
         </div>
         <div class="form-group row">
-            <label for="email">Email</label>
-            <input id="email" type="text" placeholder="Email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" email="email" value="{{ Auth()->user()->email }}" required autofocus>
+            <label for="association_id">Förening</label>
+            <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ Auth()->user()->association_id }}" required autofocus>
 
-            @if ($errors->has('email'))
+            @if ($errors->has('association_id'))
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email' ) }}</strong>
-                </span>
-            @endif
-        </div>
-        <div class="form-group row">
-            <label for="name">Förening</label>
-            <input id="name" type="text" placeholder="Förening" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ Auth()->user()->name }}" required autofocus>
-
-            @if ($errors->has('name'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('name' ) }}</strong>
+                    <strong>{{ $errors->first('association_id' ) }}</strong>
                 </span>
             @endif
         </div>
@@ -55,7 +45,7 @@
 
         <div class="form-group row">
             <label for="password">Lösenord</label>
-            <input id="password" type="text" placeholder="Lösenord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" password="password" value="" required autofocus>
+            <input id="password" type="text" placeholder="Lösenord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="" required autofocus>
 
             @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
@@ -65,7 +55,7 @@
         </div>
         <div class="form-group row">
             <label for="newPassword">Nytt lösenord:</label>
-            <input id="newPassword" type="text" placeholder="Nytt lösenord" class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}" newPassword="newPassword" value="" required autofocus>
+            <input id="newPassword" type="text" placeholder="Nytt lösenord" class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}" name="newPassword" value="" required autofocus>
 
             @if ($errors->has('newPassword'))
                 <span class="invalid-feedback" role="alert">
@@ -75,7 +65,7 @@
         </div>
         <div class="form-group row">
             <label for="confirmPassword">Bekräfta lösenord:</label>
-            <input id="confirmPassword" type="text" placeholder="Bekräfta lösenord" class="form-control{{ $errors->has('confirmPassword') ? ' is-invalid' : '' }}" confirmPassword="confirmPassword" value="" required autofocus>
+            <input id="confirmPassword" type="text" placeholder="Bekräfta lösenord" class="form-control{{ $errors->has('confirmPassword') ? ' is-invalid' : '' }}" name="confirmPassword" value="" required autofocus>
 
             @if ($errors->has('confirmPassword'))
                 <span class="invalid-feedback" role="alert">
