@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('/linda','FileUploadController@index');
 
 Route::post('/linda', 'FileUploadController@showUploadFile');
+
+Route::group( [ 'middleware' => 'verified' ], function()
+{
+    Route::get( 'profil', 'UserController@index' )->name( 'dashboard' );
+    Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile' );
+} );
