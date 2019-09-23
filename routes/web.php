@@ -27,7 +27,13 @@ Route::group( [ 'middleware' => 'verified' ], function()
     Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile' );
 } );
 
+
 Route::group( [ 'middleware' => [ 'admin' ] ], function()
 {
     Route::get( 'admin', 'AdminController@index' );
+} );
+
+Route::group( [ 'middleware' => [ 'super' ] ], function()
+{
+    Route::get( 'super', 'SuperController@index' );
 } );
