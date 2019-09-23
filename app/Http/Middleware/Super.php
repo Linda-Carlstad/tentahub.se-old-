@@ -18,7 +18,7 @@ class Super
      */
     public function handle($request, Closure $next)
     {
-        $this->auth = auth()->user() ? ( auth()->user()->role === 'Super' ) : false ;
+        $this->auth = auth()->user() ? ( auth()->user()->role === 'super' ) : false ;
 
         if( $this->auth === true )
         {
