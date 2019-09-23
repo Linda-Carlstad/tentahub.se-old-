@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use View;
+use Session;
+
+use App\User;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -66,9 +74,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id )
     {
-        abort( '404' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $user );
+
+        switch( $request->type ) {
+
+            case 'info':
+                $result = User::updateInfo( $request, $user );
+                break;
+
+            case 'security':
+                $result = User::updateSecurity( $request, $user );
+                break;
+
+            default:
+
+                break;
+        }
+
+        if( $result )
+        {
+            return redirect()->back()->with( 'success', 'Profil uppdaterad.' );
+        }
+        else {
+            return redirect()->back()->with( 'error', 'Något gick fel.' );
+        }
     }
 
     /**
