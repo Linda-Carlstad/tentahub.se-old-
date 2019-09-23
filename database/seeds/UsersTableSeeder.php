@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
            'email' => 'info@lindacarlstad.se',
            'password' => bcrypt('BytMigSnartLinda'),
            'association_id' => 1,
-           'role' => 2,
+           'role' => 3,
            'created_at' => now(),
            'updated_at' => now(),
         ]);
@@ -27,9 +27,10 @@ class UsersTableSeeder extends Seeder
             'email' => 'utbildning@lindacarlstad.se',
             'password' => bcrypt('BytMigSnartLinda'),
             'association_id' => 1,
-            'role' => 2,
+            'role' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $users = factory( User::class, 100 )->create();
     }
 }

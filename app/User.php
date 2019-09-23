@@ -35,7 +35,7 @@ class User extends Authenticatable
      */
     protected $guarded = [
         'role',
-    ]
+    ];
 
     /**
      * The attributes that should be cast to native types.
