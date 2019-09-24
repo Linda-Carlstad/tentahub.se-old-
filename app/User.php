@@ -52,8 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function associations(){
-        return $this->hasMany('App\Association');
+    public function association()
+    {
+        return $this->belongsTo( 'App\Association' );
     }
 
     public static function updateInfo( Request $request, User $user )
