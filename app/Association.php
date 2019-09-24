@@ -14,4 +14,8 @@ class Association extends Model
     public function courses(){
         return $this->hasMany('App\Course');
     }
+
+    public function exams(){
+        return $this->hasManyThrough( 'App\Exam', 'App\Course' );
+    }
 }

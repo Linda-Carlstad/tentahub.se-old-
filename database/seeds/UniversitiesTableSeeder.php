@@ -12,6 +12,13 @@ class UniversitiesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('universities')->insert([
+           'name' => 'Karlstad University',
+           'nickname' => 'KAU',
+           'city' => 'Karlstad',
+           'created_at' => now(),
+           'updated_at' => now(),
+        ]);
         $university = factory( University::class, 100 )->create();
     }
 }
