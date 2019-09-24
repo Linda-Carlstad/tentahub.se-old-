@@ -106,9 +106,7 @@ class UserController extends Controller
         {
             return redirect()->back()->with( 'success', 'Profil uppdaterad.' );
         }
-        else {
-            return redirect()->back()->with( 'error', 'Något gick fel.' );
-        }
+        return redirect()->back()->with( 'error', 'Något gick fel.' );
     }
 
     /**
