@@ -18,7 +18,9 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        $this->auth = auth()->user() ? ( auth()->user()->role === 'admin' || auth()->user()->role === 'super' ) : false;
+        $this->auth = auth()->user() ? (
+            auth()->user()->role === 'admin' ||
+            auth()->user()->role === 'super' ) : false;
 
 
         if( $this->auth )
