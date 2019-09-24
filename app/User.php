@@ -70,10 +70,10 @@ class User extends Authenticatable
     public static function updateSecurity( Request $request, User $user )
     {
         User::validateSecurity( $request, $user );
-
+        
         if( Hash::check( $request->password, $user->password ) )
         {
-            $user->password = Hash::make( $request->password );
+            $user->password = Hash::make( $request->newPassword );
             $user->save();
         }
 
