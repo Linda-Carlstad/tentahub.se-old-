@@ -21,7 +21,7 @@
         </div>
         <div class="form-group row">
             <label for="association_id">Förening</label>
-            <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ Auth::user()->association_id }}" required autofocus>
+            <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ Auth::user()->association_id }}" required>
 
             @if ($errors->has('association_id'))
                 <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
 
         <div class="form-group row">
             <label for="password">Lösenord</label>
-            <input id="password" type="text" placeholder="Lösenord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="" required autofocus>
+            <input id="password" type="password" placeholder="Lösenord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="" required>
 
             @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group row">
             <label for="newPassword">Nytt lösenord:</label>
-            <input id="newPassword" type="text" placeholder="Nytt lösenord" class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}" name="newPassword" value="" required autofocus>
+            <input id="newPassword" type="password" placeholder="Nytt lösenord" class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}" name="newPassword" value="" required>
 
             @if ($errors->has('newPassword'))
                 <span class="invalid-feedback" role="alert">
@@ -66,7 +66,7 @@
         </div>
         <div class="form-group row">
             <label for="confirmPassword">Bekräfta lösenord:</label>
-            <input id="confirmPassword" type="text" placeholder="Bekräfta lösenord" class="form-control{{ $errors->has('confirmPassword') ? ' is-invalid' : '' }}" name="confirmPassword" value="" required autofocus>
+            <input id="confirmPassword" type="password" placeholder="Bekräfta lösenord" class="form-control{{ $errors->has('confirmPassword') ? ' is-invalid' : '' }}" name="confirmPassword" value="" required>
 
             @if ($errors->has('confirmPassword'))
                 <span class="invalid-feedback" role="alert">
