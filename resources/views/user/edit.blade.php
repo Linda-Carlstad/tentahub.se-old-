@@ -1,16 +1,17 @@
+@section('title', 'Inställningar')
 @extends('layouts.app')
 
 @section('content')
 
     <h1>Inställningar</h1>
-    <form class="" action="{{ '/user/' . Auth()->user()->id }}" method="post">
+    <form class="" action="{{ '/user/' . Auth::user()->id }}" method="post">
         @csrf
         @method( 'PUT' )
         <input type="hidden" name="type" value="info">
 
         <div class="form-group row">
             <label for="name">Namn</label>
-            <input id="name" type="text" placeholder="Namn" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ Auth()->user()->name }}" required autofocus>
+            <input id="name" type="text" placeholder="Namn" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ Auth::user()->name }}" required autofocus>
 
             @if ($errors->has('name'))
                 <span class="invalid-feedback" role="alert">
@@ -20,7 +21,7 @@
         </div>
         <div class="form-group row">
             <label for="association_id">Förening</label>
-            <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ Auth()->user()->association_id }}" required autofocus>
+            <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ Auth::user()->association_id }}" required autofocus>
 
             @if ($errors->has('association_id'))
                 <span class="invalid-feedback" role="alert">
@@ -38,7 +39,7 @@
     </form>
     <hr>
     <h2>Byt lösenord</h2>
-    <form class="" action="{{ '/user/' . Auth()->user()->id }}" method="post">
+    <form class="" action="{{ '/user/' . Auth::user()->id }}" method="post">
         @csrf
         {{ method_field( 'patch' ) }}
         <input type="hidden" name="type" value="security">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use View;
 use Session;
 
@@ -11,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,7 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view( 'user.index' );
+        $user = User::findOrFail( Auth::user()->id );
+        $allowed = $this->authorize( 'view', Auth::user(), $user );
+
+        return view( 'user.index' )->with( 'user', $user );;
     }
 
     /**
@@ -31,7 +34,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'create', Auth::user() );
+
+        return view( 'user.create' );
     }
 
     /**
@@ -53,7 +59,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        abort( '404' );
+        $user = User::findOrFail( $id );
+        return view( 'user.show' )->with( 'user', $user );
+
     }
 
     /**
