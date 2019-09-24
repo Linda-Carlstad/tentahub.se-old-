@@ -29,7 +29,6 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        dd( $user->role );
         if( $user->role === 'super' )
         {
             return true;
