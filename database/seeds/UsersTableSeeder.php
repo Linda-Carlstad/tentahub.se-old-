@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
            'password' => bcrypt('BytMigSnartLinda'),
            'association_id' => 1,
            'role' => 3,
+           'email_verified_at' => now(),
            'created_at' => now(),
            'updated_at' => now(),
         ]);
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('BytMigSnartLinda'),
             'association_id' => 1,
             'role' => 3,
+            'email_verified_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
