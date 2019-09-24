@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+Auth::routes( [ 'verify' => true ] );
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,15 +26,37 @@ Route::group( [ 'middleware' => 'verified' ], function()
     Route::get( 'profil', 'UserController@index' )->name( 'dashboard' );
     Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile' );
     Route::match( [ 'put', 'patch' ], '/user/{id}', 'UserController@update' );
-} );
 
+    Route::group( [ 'middleware' => [ 'moderator' ] ], function()
+    {
+        Route::resource( 'exam', 'ExamController' );
+    } );
 
-Route::group( [ 'middleware' => [ 'admin' ] ], function()
-{
-    Route::get( 'admin', 'AdminController@index' );
-} );
+    Route::group( [ 'middleware' => [ 'admin' ] ], function()
+    {
+        Route::resource( 'user', 'UserController' )->only(
+        [
+            'create', 'store', 'show',
+        ] );
+        Route::resource( 'admin', 'AdminController' )->only(
+        [
+            'index',
+        ] );
 
-Route::group( [ 'middleware' => [ 'super' ] ], function()
-{
-    Route::get( 'super', 'SuperController@index' );
+    } );
+
+    Route::group( [ 'middleware' => [ 'super' ] ], function()
+    {
+        Route::get( 'super', 'SuperController@index' );
+
+        Route::resource( 'user', 'UserController' )->only(
+        [
+            'destroy',
+        ] );
+
+        Route::resource( 'admin', 'AdminController' )->only(
+        [
+            'create', 'store', 'show', 'destroy',
+        ] );
+    } );
 } );
