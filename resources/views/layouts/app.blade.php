@@ -89,7 +89,7 @@
             }
           },
           "content": {
-        		"message": "Den här webbplatsen använder cookies för att du ska få den bästa upplevelsen på vår hemsida.",
+        		"message": "Den här webbplatsen använder kakor för att du ska få den bästa upplevelsen på vår hemsida.",
         		"dismiss": "Uppfattat!",
         		"link": "Läs mer"
       	  }
