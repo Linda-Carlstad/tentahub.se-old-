@@ -23,40 +23,39 @@ Route::post('/linda', 'FileUploadController@showUploadFile');
 
 Route::group( [ 'middleware' => 'verified' ], function()
 {
-    Route::get( 'profil', 'UserController@index' )->name( 'dashboard' );
     Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile' );
     Route::match( [ 'put', 'patch' ], '/user/{id}', 'UserController@update' );
 
-    Route::group( [ 'middleware' => [ 'moderator' ] ], function()
+    Route::group( [ 'middleware' => 'valid_user' ], function()
     {
-        Route::resource( 'exam', 'ExamController' );
-    } );
+        Route::get( 'profil', 'UserController@index' )->name( 'dashboard' );
 
-    Route::group( [ 'middleware' => [ 'admin' ] ], function()
-    {
-        Route::resource( 'user', 'UserController' )->only(
-        [
-            'create', 'store', 'show',
-        ] );
-        Route::resource( 'admin', 'AdminController' )->only(
-        [
-            'index',
-        ] );
+        Route::group( [ 'middleware' => [ 'moderator' ] ], function()
+        {
+            Route::resource( 'exam', 'ExamController' );
+        } );
 
-    } );
+        Route::group( [ 'middleware' => [ 'admin' ] ], function()
+        {
+            Route::resource( 'users', 'UserController' )->only(
+            [
+                'create', 'store', 'show', 'destroy',
+            ] );
+            Route::resource( 'admins', 'AdminController' )->only(
+            [
+                'index',
+            ] );
 
-    Route::group( [ 'middleware' => [ 'super' ] ], function()
-    {
-        Route::get( 'super', 'SuperController@index' );
+        } );
 
-        Route::resource( 'user', 'UserController' )->only(
-        [
-            'destroy',
-        ] );
+        Route::group( [ 'middleware' => [ 'super' ] ], function()
+        {
+            Route::get( 'supers', 'SuperController@index' );
 
-        Route::resource( 'admin', 'AdminController' )->only(
-        [
-            'create', 'store', 'show', 'destroy',
-        ] );
+            Route::resource( 'admins', 'AdminController' )->only(
+            [
+                'create', 'store', 'show', 'destroy',
+            ] );
+        } );
     } );
 } );
