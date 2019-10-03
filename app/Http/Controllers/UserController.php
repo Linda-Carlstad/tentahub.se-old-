@@ -6,6 +6,8 @@ use View;
 use Session;
 
 use App\User;
+use App\University;
+use App\Association;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -22,9 +24,9 @@ class UserController extends Controller
     public function index()
     {
         $user = User::findOrFail( Auth::user()->id );
-        $allowed = $this->authorize( 'view', Auth::user(), $user );
+        $this->authorize( 'view', Auth::user(), $user );
 
-        return view( 'user.index' )->with( 'user', $user );;
+        return view( 'users.index' )->with( 'user', $user );;
     }
 
     /**
@@ -35,9 +37,11 @@ class UserController extends Controller
     public function create()
     {
         $user = User::findOrFail( Auth::user()->id );
-        $this->authorize( 'create', Auth::user() );
+        $this->authorize( 'create', $user );
 
-        return view( 'user.create' );
+        $universities = University::with( 'associations' )->get();
+
+        return view( 'users.create' )->with( 'universities', $universities )->with( 'user', $user );
     }
 
     /**
@@ -48,7 +52,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'store', $user );
+
+        User::createNew( $request );
+
+        return redirect( 'profil' )->with( 'success', 'Ny användare skapad!' );
     }
 
     /**
@@ -60,8 +69,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail( $id );
-        return view( 'user.show' )->with( 'user', $user );
-
+        return view( 'users.show' )->with( 'user', $user );
     }
 
     /**
@@ -72,7 +80,8 @@ class UserController extends Controller
      */
     public function edit( Request $request )
     {
-        return view( 'user.edit' );
+        $user = User::findOrFail( Auth::user()->id );
+        return view( 'users.edit' )->with( 'user', $user );
     }
 
     /**
@@ -86,11 +95,15 @@ class UserController extends Controller
     {
         $user = User::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $user );
+        $result = false;
 
-        switch( $request->type ) {
-
+        switch( $request->type )
+        {
             case 'info':
-                $result = User::updateInfo( $request, $user );
+                if( $user->valid )
+                {
+                    $result = User::updateInfo( $request, $user );
+                }
                 break;
 
             case 'security':
@@ -98,7 +111,7 @@ class UserController extends Controller
                 break;
 
             default:
-
+                $result = false;
                 break;
         }
 

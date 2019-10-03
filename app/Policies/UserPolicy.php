@@ -29,11 +29,22 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if( $user->role === 'super' )
+        if( $user->role >= 'admin' )
         {
             return true;
         }
-        elseif( $user->role === 'admin' )
+        return false;
+    }
+    
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function store(User $user)
+    {
+        if( $user->role >= 'admin' )
         {
             return true;
         }
