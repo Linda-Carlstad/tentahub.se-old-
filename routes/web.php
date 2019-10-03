@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Auth::routes( [ 'verify' => true ] );
 // Authentication Routes...
 Route::get('logga-in', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
