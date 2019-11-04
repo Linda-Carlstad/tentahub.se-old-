@@ -124,6 +124,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        abort( '403' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $user );
+        $user->delete();
+
+        return redirect( 'admins' )->with( 'success', 'Användare borttagen.' );
     }
 }

@@ -73,4 +73,17 @@
             </div>
         </div>
     </form>
+    <hr>
+    <form action="{{ '/admins/' . $user->id }}" method="post">
+        @csrf
+        {{ method_field( 'delete' ) }}
+        <div class="text-center">
+            <h4>Ta bort användare</h4>
+            <p>Denna åtgärd är permanent.</p>
+            <button type="submit" class="btn btn-danger">
+                Ta bort
+            </button>
+        </div>
+    </form>
+
 @endsection
