@@ -4,13 +4,15 @@
 @section('content')
 
     <div class="text-center">
-        <h2>Kontakta supporten</h2>
+        <h2>Kontakta oss</h2>
         <p>
-            Support kontaktformulär :)
+            Du är självklart välkommen att ringa till oss eller så kan du använda dig av
+            formuläret nedan för att komma i kontakt med oss
         </p>
     </div>
-    <form class="" action="/kontakta-email" method="post">
+    <form class="" action="/contact" method="post">
         @csrf
+        <input type="hidden" name="type" value="info">
         <div class="form-group">
             <label for="name">Namn</label>
             <input class="form-control" type="text" name="name" placeholder="Namn">
