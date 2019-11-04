@@ -20,16 +20,6 @@
                     </span>
                 @endif
             </div>
-            <div class="form-group row">
-                <label for="association_id">Förening</label>
-                <input id="association_id" type="number" placeholder="Förening" class="form-control{{ $errors->has('association_id') ? ' is-invalid' : '' }}" name="association_id" value="{{ $user->association_id }}" required>
-
-                @if ($errors->has('association_id'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('association_id' ) }}</strong>
-                    </span>
-                @endif
-            </div>
             <div class="form-group row mb-0">
                 <div class="col-lg-8 offset-lg-2">
                     <button type="submit" class="btn btn-primary ml-0">
