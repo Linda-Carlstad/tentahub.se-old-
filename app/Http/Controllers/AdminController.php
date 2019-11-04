@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\University;
+use App\Association;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-       $this->middleware( 'admin' );
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +28,12 @@ class AdminController extends Controller
      */
     public function create()
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'create', $user );
+
+        $universities = University::with( 'associations' )->get();
+
+        return view( 'admins.create' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
@@ -39,7 +44,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'store', $user );
+
+        User::createNew( $request );
+
+        return redirect( 'profil' )->with( 'success', 'Ny användare skapad!' );
     }
 
     /**
