@@ -18,7 +18,24 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view( 'admin.index' );
+        $this->middleware( 'admin' );
+        $user = Auth::user();
+
+        if( $user->role == 'super' )
+        {
+            $users = User::where( 'role', '<', $user->role )
+                ->orderBy( 'role', 'desc' )
+                ->paginate( 20 );
+        }
+        else
+        {
+            $users = User::where( 'role', '<', $user->role )
+                ->where( 'association_id', '=', $user->association_id )
+                ->orderBy( 'role', 'desc' )
+                ->paginate( 20 );
+        }
+
+        return view( 'admins.index' )->with( 'users', $users );
     }
 
     /**
