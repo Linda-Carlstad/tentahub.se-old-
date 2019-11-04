@@ -86,9 +86,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( Request $request )
+    public function edit( $id )
     {
-        return view( 'admin.edit' );
+        $user = User::findOrFail( $id );
+        $universities = University::with( 'associations' )->get();
+        return view( 'admins.edit' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
@@ -100,7 +102,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort( '404' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $user );
+
+        $result = false;
+        $result = User::updateInfo( $request, $user );
+
+        if( $result )
+        {
+            return redirect()->back()->with( 'success', 'Användare uppdaterad.' );
+        }
+        return redirect()->back()->with( 'error', 'Något gick fel.' );
+
     }
 
     /**
