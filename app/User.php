@@ -69,6 +69,10 @@ class User extends Authenticatable
         User::validateInfo( $request, $user );
         $user->name           = $request->name;
         $user->association_id = $request->association_id;
+        if( $request->email )
+        {
+            $user->email = $request->email;
+        }
         $user->save();
 
         return true;
@@ -92,6 +96,7 @@ class User extends Authenticatable
     {
         $request->validate( [
             'name'           => 'required|string',
+            'email'          => 'email',
             'association_id' => 'required|integer',
         ] );
     }

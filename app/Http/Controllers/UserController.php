@@ -36,12 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = User::findOrFail( Auth::user()->id );
-        $this->authorize( 'create', $user );
-
-        $universities = University::with( 'associations' )->get();
-
-        return view( 'users.create' )->with( 'universities', $universities )->with( 'user', $user );
+        abort( '404' );
     }
 
     /**
@@ -52,12 +47,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::findOrFail( Auth::user()->id );
-        $this->authorize( 'store', $user );
-
-        User::createNew( $request );
-
-        return redirect( 'profil' )->with( 'success', 'Ny användare skapad!' );
+        abort( '403' );
     }
 
     /**
@@ -66,7 +56,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
         $user = User::findOrFail( $id );
         return view( 'users.show' )->with( 'user', $user );
@@ -128,7 +118,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
         abort( '403' );
     }

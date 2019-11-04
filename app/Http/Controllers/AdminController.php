@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\University;
+use App\Association;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-       $this->middleware( 'admin' );
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +18,24 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view( 'admin.index' );
+        $this->middleware( 'admin' );
+        $user = Auth::user();
+
+        if( $user->role == 'super' )
+        {
+            $users = User::where( 'role', '<', $user->role )
+                ->orderBy( 'role', 'desc' )
+                ->paginate( 20 );
+        }
+        else
+        {
+            $users = User::where( 'role', '<', $user->role )
+                ->where( 'association_id', '=', $user->association_id )
+                ->orderBy( 'role', 'desc' )
+                ->paginate( 20 );
+        }
+
+        return view( 'admins.index' )->with( 'users', $users );
     }
 
     /**
@@ -28,7 +45,12 @@ class AdminController extends Controller
      */
     public function create()
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'create', $user );
+
+        $universities = University::with( 'associations' )->get();
+
+        return view( 'admins.create' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
@@ -39,7 +61,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        abort( '403' );
+        $user = User::findOrFail( Auth::user()->id );
+        $this->authorize( 'store', $user );
+
+        User::createNew( $request );
+
+        return redirect( 'profil' )->with( 'success', 'Ny användare skapad!' );
     }
 
     /**
@@ -48,7 +75,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
         abort( '404' );
     }
@@ -59,9 +86,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( Request $request )
+    public function edit( $id )
     {
-        return view( 'admin.edit' );
+        $user = User::findOrFail( $id );
+        $universities = University::with( 'associations' )->get();
+        return view( 'admins.edit' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
@@ -73,7 +102,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort( '404' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $user );
+
+        $result = false;
+        $result = User::updateInfo( $request, $user );
+
+        if( $result )
+        {
+            return redirect()->back()->with( 'success', 'Användare uppdaterad.' );
+        }
+        return redirect()->back()->with( 'error', 'Något gick fel.' );
+
     }
 
     /**
@@ -84,6 +124,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        abort( '403' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $user );
+        $user->delete();
+
+        return redirect( 'admins' )->with( 'success', 'Användare borttagen.' );
     }
 }
