@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/linda','FileUploadController@index');
+Route::get('/linda', 'FileController@index');
+Route::get('/download', 'FileController@download');
+Route::get('/show', 'FileController@show');
 
-Route::post('/linda', 'FileUploadController@showUploadFile');
+Route::post('/linda', 'FileController@store');
 
 Route::group( [ 'middleware' => 'verified' ], function()
 {
