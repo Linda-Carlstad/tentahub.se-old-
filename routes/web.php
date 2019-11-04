@@ -30,6 +30,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get( 'kontakt', function()
+{
+    return view( 'contacts/info' );
+} )->name( 'contacts.info' );
+
+Route::get( 'support/kontakt', function()
+{
+    return view( 'contacts/support' );
+} )->name( 'contacts.support' );
+
+Route::get( 'integritetspolicy', function()
+{
+    return view( 'policy' );
+} )->name( 'policy' );
+
+
+Route::post( '/contact', 'SendContactRequest' );
+
 Route::get('/linda','FileUploadController@index');
 
 Route::post('/linda', 'FileUploadController@showUploadFile');
