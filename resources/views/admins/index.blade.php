@@ -11,7 +11,7 @@
     <ul>
         @foreach( $users as $user )
             <li>
-                <a href="{{ 'users/' . $user->id  }}">{{ $user->name }} - {{ $user->role }}</a> -||- <a href="{{ '/admins/' . $user->id . '/edit' }}">Redigera</a>
+                <a href="{{ '/users/' . $user->id  }}">{{ $user->name }} - {{ $user->role }}</a> -||- <a href="{{ '/admins/' . $user->id . '/edit' }}">Redigera</a>
             </li>
         @endforeach
     </ul>
