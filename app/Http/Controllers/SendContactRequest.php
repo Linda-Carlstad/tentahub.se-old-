@@ -33,6 +33,21 @@ class SendContactRequest extends Controller
             return redirect()->back()->with( 'error', 'Ni måste godkänna avtalet, vänligen försök igen.' );
         }
 
+        switch( $request->type )
+        {
+            case 'support':
+                Mail::to( 'support@lindacarlstad.se' )
+                    ->send( new Support( $request ) );
+                break;
+
+            case 'info':
                 Mail::to( 'info@lindacarlstad.se' )
                     ->send( new Info( $request ) );
+                break;
+            default:
+                return redirect()->back()->with( 'error', 'Något gick fel, vänligen försök igen.' );
+                break;
+        }
         return redirect()->back()->with( 'success', 'Ditt meddelande har skickats.' );
+    }
+}
