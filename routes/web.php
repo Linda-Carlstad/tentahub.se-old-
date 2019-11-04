@@ -50,13 +50,14 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
         Route::group( [ 'middleware' => [ 'admin' ] ], function()
         {
+
             Route::resource( 'users', 'UserController' )->only(
             [
                 'create', 'store', 'show', 'destroy',
             ] );
             Route::resource( 'admins', 'AdminController' )->only(
             [
-                'index',
+                'index', 'edit'
             ] );
 
         } );
