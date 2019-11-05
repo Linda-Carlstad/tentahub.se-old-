@@ -12,7 +12,7 @@
 */
 // Authentication Routes...
 Route::get('logga-in', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@login')->name( 'login' );
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Password Reset Routes...
