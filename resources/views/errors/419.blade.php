@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends( 'layouts.error' )
+@section( 'error' )
 
-@section('title', __('Page Expired'))
-@section('code', '419')
-@section('message', __('Page Expired'))
+    <img class="img-fluid text-center" src="https://http.cat/{{ $exception->getStatusCode() }}"/>
+
+@endsection

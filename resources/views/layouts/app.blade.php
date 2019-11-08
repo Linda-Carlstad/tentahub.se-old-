@@ -42,7 +42,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Logga in</a>
+                                <a class="nav-link" href="{{ route('login-form') }}">Logga in</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">

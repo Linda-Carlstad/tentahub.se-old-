@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends( 'layouts.error' )
+@section( 'error' )
 
-@section('title', __('Server Error'))
-@section('code', '500')
-@section('message', __('Server Error'))
+    <img class="img-fluid text-center" src="https://http.cat/{{ $exception->getStatusCode() }}"/>
+
+@endsection

@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends( 'layouts.error' )
+@section( 'error' )
 
-@section('title', __('Unauthorized'))
-@section('code', '401')
-@section('message', __('Unauthorized'))
+    <img class="img-fluid text-center" src="https://http.cat/{{ $exception->getStatusCode() }}"/>
+
+@endsection

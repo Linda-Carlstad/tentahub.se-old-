@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends( 'layouts.error' )
+@section( 'error' )
 
-@section('title', __('Too Many Requests'))
-@section('code', '429')
-@section('message', __('Too Many Requests'))
+    <img class="img-fluid text-center" src="https://http.cat/{{ $exception->getStatusCode() }}"/>
+
+@endsection

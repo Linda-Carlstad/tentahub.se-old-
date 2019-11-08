@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends( 'layouts.error' )
+@section( 'error' )
 
-@section('title', __('Service Unavailable'))
-@section('code', '503')
-@section('message', __($exception->getMessage() ?: 'Service Unavailable'))
+    <img class="img-fluid text-center" src="https://http.cat/{{ $exception->getStatusCode() }}"/>
+
+@endsection
