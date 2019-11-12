@@ -38,6 +38,7 @@
             @include( 'layouts.partials.flash-messages' )
             @yield('content')
         </main>
+        @include( 'layouts.partials.footer' )
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
