@@ -7,9 +7,9 @@
     <div id="app">
         @include( 'layouts.partials.navbar' )
 
-        <main class="pb-4">
+        <main class="container">
             @include( 'layouts.partials.flash-messages' )
-            @yield('content')
+            @yield( 'content' )
         </main>
         @include( 'layouts.partials.footer' )
     </div>
