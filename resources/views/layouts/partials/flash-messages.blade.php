@@ -11,3 +11,10 @@
         {{ session()->get( 'error' ) }}
     </div>
 @endif
+
+@if( session( 'resent' ) )
+    <div class="notification is-info">
+        <button class="delete"></button>
+        Ett nytt verifieringsmail har skickats till din e-postadress.
+    </div>
+@endif
