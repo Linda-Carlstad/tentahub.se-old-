@@ -2,7 +2,7 @@
 @section( 'title', $exception->getStatusCode() )
 @section( 'content' )
 
-    <section class="error">
+    <section class="error section">
         <div class="columns is-centered">
             <div class="column is-half is-widescreen has-text-centered">
                 @yield( 'error' )
