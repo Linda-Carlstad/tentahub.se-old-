@@ -11,12 +11,12 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet" type="text/css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel="stylesheet" type="text/css">
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 <!-- Scripts -->
 <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<script defer src="{{ asset('js/app.js') }}"></script>
+<script defer src="{{ mix('js/app.js') }}"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-136489552-2"></script>
