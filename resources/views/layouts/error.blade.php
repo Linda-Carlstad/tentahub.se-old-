@@ -2,11 +2,13 @@
 @section( 'title', $exception->getStatusCode() )
 @section( 'content' )
 
-    <section class="d-flex align-items-center justify-content-center py-5">
-        <div class="text-center">
-            @yield( 'error' )
-            <br>
-            <a class="btn btn-primary mt-4" href="{{ url()->previous() }}">Gå tillbaka</a>
+    <section class="error">
+        <div class="columns is-centered">
+            <div class="column is-half is-widescreen has-text-centered">
+                @yield( 'error' )
+                <br>
+                <a class="button is-medium is-primary" href="{{ url()->previous() }}">Gå tillbaka</a>
+            </div>
         </div>
     </section>
 
