@@ -48,18 +48,18 @@ Route::get( 'integritetspolicy', function()
 
 Route::post( '/contact', 'SendContactRequest' );
 
-Route::get('/linda','FileUploadController@index');
+Route::get('/linda','FileUploadController@index')->name( 'linda' );
 
 Route::post('/linda', 'FileUploadController@showUploadFile');
 
 Route::group( [ 'middleware' => 'verified' ], function()
 {
-    Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile' );
+    Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile.settings' );
     Route::match( [ 'put', 'patch' ], '/user/{id}', 'UserController@update' );
 
     Route::group( [ 'middleware' => 'valid_user' ], function()
     {
-        Route::get( 'profil', 'UserController@index' )->name( 'dashboard' );
+        Route::get( 'profil', 'UserController@index' )->name( 'profile' );
 
         Route::group( [ 'middleware' => [ 'moderator' ] ], function()
         {
