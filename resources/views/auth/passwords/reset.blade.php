@@ -17,7 +17,7 @@
                             <input placeholder="E-postadress" id="email" type="email" class="input @error( 'email' ) is-danger @enderror" name="email" value="{{ $email ?? old( 'email' ) }}" required autocomplete="email" autofocus>
                         </div>
                         @error( 'email' )
-                        <span class="has-text-danger" role="alert">
+                            <span class="has-text-danger" role="alert">
                                     {{ $message }}
                                 </span>
                         @enderror
@@ -27,7 +27,7 @@
                         <div class="control">
                             <input class="input @error( 'password' ) is-danger @enderror" name="password" type="password" placeholder="Lösenord" required>
                             @error( 'password' )
-                            <span class="has-text-danger" role="alert">
+                                <span class="has-text-danger" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror
@@ -38,7 +38,7 @@
                         <div class="control">
                             <input class="input @error( 'password-confirm' ) is-danger @enderror" name="password-confirm" type="password" placeholder="Lösenord" required>
                             @error( 'password-confirm' )
-                            <span class="has-text-danger" role="alert">
+                                <span class="has-text-danger" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror

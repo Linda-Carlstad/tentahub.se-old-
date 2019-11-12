@@ -15,7 +15,7 @@
                         <div class="control">
                             <input class="input @error( 'email' ) is-danger @enderror" type="email" placeholder="E-postadress" name="email" value="{{ old( 'email' ) }}">
                             @error( 'email' )
-                            <span class="has-text-danger" role="alert">
+                                <span class="has-text-danger" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror
