@@ -25,6 +25,6 @@ class Super
             return $next($request);
         }
 
-        return redirect()->route( 'login' )->with( 'error', 'Access denied, login to continue.' );
+        return redirect()->route( 'login-form' )->with( 'error', 'Aja baja, du saknar rättigheterna för det där, logga in för att fortsätta.' );
     }
 }
