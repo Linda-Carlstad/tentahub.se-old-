@@ -1,2 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css?family=Nunito);.is-fullwidth {
+  min-width: 100vw;
+  margin-left: -33.33%;
+  margin-right: -33.33%;
+}
 
