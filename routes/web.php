@@ -59,6 +59,11 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
     Route::group( [ 'middleware' => 'valid_user' ], function()
     {
+        Route::get( '/', function()
+        {
+           return view( 'dashboard.index' );
+        } )->name( 'dashboard' );
+
         Route::get( 'profil', 'UserController@index' )->name( 'profile' );
 
         Route::group( [ 'middleware' => [ 'moderator' ] ], function()
