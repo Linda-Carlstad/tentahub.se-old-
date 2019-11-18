@@ -1,65 +1,65 @@
 @extends('layouts.app')
-
+@section( 'title', 'Återställ ditt lösenord här' )
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    <section class="section">
+        <div class="columns level">
+            <div class="column is-half is-widescreen level-item">
+                <h1 class="title">Återställ ditt lösenord här</h1>
+                <p>Dags att återställa ditt lösenord, se till att komma ihåg det. :)</p>
+                <br>
+                <form method="POST" action="{{ route( 'password.update' ) }}">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <div class="field">
+                        <label class="label">E-postadress</label>
+                        <div class="control">
+                            <input placeholder="E-postadress" id="email" type="email" class="input @error( 'email' ) is-danger @enderror" name="email" value="{{ $email ?? old( 'email' ) }}" required autocomplete="email" autofocus>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        @error( 'email' )
+                            <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label">Lösenord</label>
+                        <div class="control">
+                            <input class="input @error( 'password' ) is-danger @enderror" name="password" type="password" placeholder="Lösenord" required>
+                            @error( 'password' )
+                                <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Verifiera lösenordet</label>
+                        <div class="control">
+                            <input class="input @error( 'password-confirm' ) is-danger @enderror" name="password-confirm" type="password" placeholder="Lösenord" required>
+                            @error( 'password-confirm' )
+                                <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Återställ lösenordet</button>
                         </div>
-                    </form>
-                </div>
+                        <div class="control">
+                            <button class="button is-light" href="{{ '/' }}">Avbryt</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="column is-half is-widescreen level-item has-text-centered">
+                <figure class="image">
+                    <img src="https://via.placeholder.com/400x400.png/09f/fff" />
+                </figure>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
 @endsection

@@ -1,5 +1,11 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Import partials
 
-// Variables
-@import 'variables';
+// General
+@import 'general/variables';
+@import 'general/colors';
+@import 'general/typography';
+@import 'general/layout';
+
+//Layout
+@import "layout/footer";
+@import "layout/navbar";

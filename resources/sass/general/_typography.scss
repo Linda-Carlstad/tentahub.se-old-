@@ -1,0 +1,19 @@
+// Imports
+@import url('https://fonts.googleapis.com/css?family=Exo|Noto+Sans&display=swap');
+
+// Typography
+$font-family-sans-serif: 'Noto Sans', sans-serif;
+$header-font: 'Exo', Arial, sans-serif;
+$text-font: 'Noto Sans', Arial, sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+h1, h2, h3
+{
+    font-family: $header-font;
+}
+
+p, a, button, input, label
+{
+    font-family: $text-font;
+}

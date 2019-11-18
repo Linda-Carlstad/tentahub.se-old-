@@ -1,2 +1,25 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css?family=Exo|Noto+Sans&display=swap);h1,
+h2,
+h3 {
+  font-family: "Exo", Arial, sans-serif;
+}
+
+p,
+a,
+button,
+input,
+label {
+  font-family: "Noto Sans", Arial, sans-serif;
+}
+
+.is-fullwidth {
+  min-width: 100vw;
+  margin-left: -33.33%;
+  margin-right: -33.33%;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.footer {
+  padding: 2.5rem;
+}
 
