@@ -41,8 +41,18 @@ Route::get( 'support/kontakt', function()
 
 Route::get( 'integritetspolicy', function()
 {
-    return view( 'policy' );
+    return view( 'general.policy' );
 } )->name( 'policy' );
+
+Route::get( 'hur-funkar-det', function()
+{
+    return view( 'general.how-to-use' );
+} )->name( 'how-to-use' );
+
+Route::get( 'om-oss', function()
+{
+    return view( 'general.about' );
+} )->name( 'about' );
 
 Route::post( '/contact', 'SendContactRequest' );
 
