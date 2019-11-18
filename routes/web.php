@@ -44,15 +44,20 @@ Route::get( 'integritetspolicy', function()
     return view( 'general.policy' );
 } )->name( 'policy' );
 
-Route::get( 'hur-funkar-det', function()
-{
-    return view( 'general.how-to-use' );
-} )->name( 'how-to-use' );
-
 Route::get( 'om-oss', function()
 {
     return view( 'general.about' );
 } )->name( 'about' );
+
+Route::get( 'vad-är-' . strtolower( env( 'APP_NAME' ) ), function()
+{
+    return view( 'general.what-is' );
+} )->name( 'what-is' );
+
+Route::get( 'hur-funkar-' . strtolower( env( 'APP_NAME' ) ), function()
+{
+    return view( 'general.how-to-use' );
+} )->name( 'how-to-use' );
 
 Route::post( '/contact', 'SendContactRequest' );
 
