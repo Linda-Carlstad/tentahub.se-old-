@@ -20,6 +20,14 @@
             <a class="navbar-item" href="{{ route( 'linda' ) }}">
                 Linda
             </a>
+            @guest
+                <a class="navbar-item" href="{{ route( 'about' ) }}">
+                    Om oss
+                </a>
+                <a class="navbar-item" href="{{ route( 'how-to-use' ) }}">
+                    Hur funkar {{ env('APP_NAME') }}?
+                </a>
+            @endguest
         </div>
         <div class="navbar-end">
             {{-- Right side of the navbar --}}
@@ -35,27 +43,25 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="{{ route( 'profile' ) }}">
-                                    Profil
-                                </a>
-                                <a class="navbar-item" href="{{ route( 'profile.settings' ) }}">
-                                    Inställningar
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Logga ut
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </div>
-                    @endguest
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{{ route( 'profile' ) }}">
+                            Profil
+                        </a>
+                        <a class="navbar-item" href="{{ route( 'profile.settings' ) }}">
+                            Inställningar
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                            Logga ut
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endguest
         </div>
     </div>
 </nav>
