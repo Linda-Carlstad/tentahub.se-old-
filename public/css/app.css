@@ -23,3 +23,44 @@ label {
   padding: 2.5rem;
 }
 
+.navbar {
+  background: linear-gradient(170deg, #4B7BEC, #3867D6);
+}
+
+.navbar a.navbar-link {
+  color: white;
+}
+
+.navbar a.navbar-item {
+  color: white;
+}
+
+.navbar a.navbar-item:hover {
+  color: #4d4d4d;
+}
+
+.navbar .navbar-item.has-dropdown:hover a.navbar-link {
+  background-color: linear-gradient(170deg, #4B7BEC, #3867D6);
+  color: #4d4d4d;
+}
+
+.navbar .navbar-item.has-dropdown .navbar-dropdown {
+  border-top: 2px solid linear-gradient(170deg, #4B7BEC, #3867D6);
+}
+
+.navbar .navbar-item.has-dropdown .navbar-dropdown a.navbar-item {
+  color: #4d4d4d;
+}
+
+.button.is-primary {
+  background: #3867D6;
+}
+
+.button.is-primary:hover {
+  background: #2550b6;
+}
+
+.section {
+  padding: 5rem 1.5rem;
+}
+

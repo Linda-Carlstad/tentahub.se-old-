@@ -1,0 +1,7 @@
+.button.is-primary {
+    background: $secondary;
+
+    &:hover {
+        background: $secondary-dark;
+    }
+}

@@ -16,12 +16,12 @@ class ShowDashboard extends Controller
      */
     public function __invoke(Request $request)
     {
-        if( Auth::id() )
+        if( Auth::check() )
         {
             $user = User::findOrFail( Auth::id() );
             return view('dashboard.index')->with('user', $user);
         }
 
-        return view( '/welcome' );
+        return view( 'general.welcome' );
     }
 }

@@ -1,0 +1,31 @@
+.navbar {
+    background: $primary-background;
+
+    a.navbar-link {
+        color: white;
+    }
+
+    a.navbar-item  {
+        color: white;
+
+        &:hover {
+            color: darken( grey, 20% );
+        }
+    }
+
+    .navbar-item.has-dropdown {
+        &:hover {
+            a.navbar-link {
+                background-color: $primary-background;
+                color: darken( grey, 20% );
+            }
+        }
+
+        .navbar-dropdown {
+            border-top: 2px solid $primary-background;
+            a.navbar-item {
+                color: darken( grey, 20% );
+            }
+        }
+    }
+}
