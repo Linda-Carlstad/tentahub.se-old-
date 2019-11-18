@@ -34,17 +34,17 @@
         </div>
         <div class="navbar-end">
             {{-- Right side of the navbar --}}
-            <div class="navbar-item">
-                <div class="buttons">
-                    @guest
-                        <a class="button is-light" href="{{ route( 'login-form' ) }}">
-                            Logga in
-                        </a>
-                    @else
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                {{ Auth::user()->name }}
-                            </a>
+            @guest
+                <div class="navbar-item">
+                    <a class="button is-gradient" href="{{ route( 'login-form' ) }}">
+                        Logga in
+                    </a>
+                </div>
+            @else
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        {{ Auth::user()->name }}
+                    </a>
 
                     <div class="navbar-dropdown">
                         <a class="navbar-item" href="{{ route( 'profile' ) }}">
