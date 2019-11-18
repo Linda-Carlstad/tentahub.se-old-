@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get( '/', 'ShowDashboard' )->name( 'dashboard' );
+
 // Authentication Routes...
 Route::get('logga-in', 'Auth\LoginController@showLoginForm')->name('login-form');
 Route::post('login', 'Auth\LoginController@login')->name( 'login' );
@@ -26,25 +29,20 @@ Route::get('email/verifiera', 'Auth\VerificationController@show')->name('verific
 Route::get('email/verifiera/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify'); // v6.x
 Route::get('email/skicka-igen', 'Auth\VerificationController@resend')->name('verification.resend');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get( 'kontakt', function()
 {
-    return view( 'contacts/info' );
+    return view( 'contacts.info' );
 } )->name( 'contacts.info' );
 
 Route::get( 'support/kontakt', function()
 {
-    return view( 'contacts/support' );
+    return view( 'contacts.support' );
 } )->name( 'contacts.support' );
 
 Route::get( 'integritetspolicy', function()
 {
     return view( 'policy' );
 } )->name( 'policy' );
-
 
 Route::post( '/contact', 'SendContactRequest' );
 
@@ -59,11 +57,6 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
     Route::group( [ 'middleware' => 'valid_user' ], function()
     {
-        Route::get( '/', function()
-        {
-           return view( 'dashboard.index' );
-        } )->name( 'dashboard' );
-
         Route::get( 'profil', 'UserController@index' )->name( 'profile' );
 
         Route::group( [ 'middleware' => [ 'moderator' ] ], function()
