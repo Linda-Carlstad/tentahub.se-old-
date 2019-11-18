@@ -1,13 +1,11 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Import partials
 
-// Variables
-@import 'variables';
+// General
+@import 'general/variables';
+@import 'general/colors';
+@import 'general/typography';
+@import 'general/layout';
 
-
-.is-fullwidth {
-    min-width: 100vw;
-    margin-left: -33.33%;
-    margin-right: -33.33%;
-    font-family: $font-family-sans-serif;
-}
+//Layout
+@import "layout/footer";
+@import "layout/navbar";
