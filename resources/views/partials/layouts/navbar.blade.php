@@ -24,6 +24,9 @@
                 <a class="navbar-item" href="{{ route( 'about' ) }}">
                     Om oss
                 </a>
+                <a class="navbar-item" href="{{ route( 'what-is' ) }}">
+                    Vad är {{ env( 'APP_NAME' ) }}?
+                </a>
                 <a class="navbar-item" href="{{ route( 'how-to-use' ) }}">
                     Hur funkar {{ env('APP_NAME') }}?
                 </a>
