@@ -45,7 +45,7 @@
                             <button class="button is-primary" type="submit">Logga in</button>
                         </div>
                         <div class="control">
-                            <button class="button is-light" href="{{ url()->previous() }}">Avbryt</button>
+                            <a class="button is-light" href="{{ route( 'dashboard' )  }}">Avbryt</a>
                         </div>
                     </div>
                     <a class="is-link" href="{{ route( 'password.request' ) }}">Glömt ditt lösenord?</a>
