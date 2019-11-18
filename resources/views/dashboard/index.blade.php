@@ -11,17 +11,15 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="columns is-centered">
-            <div class="column is-half is-widescreen has-text-centered">
-                <h1 class="title">Vad vill du göra idag?</h1>
-                <h2 class="subtitle">Välj ett alternativ nedan:</h2>
-                <p>Din roll: {{ $user->role  }}</p>
-                <div class="buttons is-centered">
-                    <a class="button is-primary">Saker</a>
-                    <a class="button is-primary">Saker</a>
-                    <a class="button is-primary">Saker</a>
-                </div>
+
+    <section class="hero is-medium has-text-centered">
+        <div class="hero-body">
+            <h1 class="title">Vad vill du göra idag?</h1>
+            <h2 class="subtitle">Välj ett alternativ nedan:</h2>
+            <div class="buttons is-centered">
+                <a class="button is-primary">Saker</a>
+                <a class="button is-primary">Saker</a>
+                <a class="button is-primary">Saker</a>
             </div>
         </div>
     </section>
