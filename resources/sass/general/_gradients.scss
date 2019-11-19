@@ -2,5 +2,5 @@ $gradient-start: $primary;
 $gradient-end: $secondary;
 $gradient-deg: 170deg;
 
-$primary-background: linear-gradient($gradient-deg, $primary, $secondary);
+$primary-background: linear-gradient($gradient-deg, $gradient-start, $secondary);
 $dark-primary-background: linear-gradient($gradient-deg, $primary-dark, $secondary-dark);
