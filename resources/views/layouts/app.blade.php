@@ -13,7 +13,5 @@
         </main>
         @include( 'partials.layouts.footer' )
     </div>
-
-
 </body>
 </html>
