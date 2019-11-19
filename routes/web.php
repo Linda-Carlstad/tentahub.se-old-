@@ -79,6 +79,7 @@ Route::group( [ 'middleware' => 'verified' ], function()
 Route::resources(
 [
     'admins' => 'AdminController',
+    'associations' => 'AssociationController',
     'universities' => 'UniversityController',
     'users' => 'UserController',
     'supers' => 'SuperController',
