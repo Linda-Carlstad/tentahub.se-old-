@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class ModeratorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'verified' );
+        $this->middleware( 'valid_user' );
+    }
+
     /**
      * Display a listing of the resource.
      *

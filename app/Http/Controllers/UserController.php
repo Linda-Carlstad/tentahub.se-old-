@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'verified' );
+        $this->middleware( 'valid_user' )->except( 'edit', 'update' );
+        $this->middleware( 'admin' )->only( 'create', 'store', 'show', 'destroy' );
+    }
+
     /**
      * Display a listing of the resource.
      *

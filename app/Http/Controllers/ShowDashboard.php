@@ -18,6 +18,7 @@ class ShowDashboard extends Controller
     {
         if( Auth::check() )
         {
+            $this->middleware( 'verified' );
             $user = User::findOrFail( Auth::id() );
             return view('dashboard.index')->with('user', $user);
         }
