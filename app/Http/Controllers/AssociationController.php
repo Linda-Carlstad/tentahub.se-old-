@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Association;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssociationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'verified' );
+        $this->middleware( 'valid_user' );
+        $this->middleware( 'super' )->except( 'index', 'show' );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,9 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        //
+        $associations = Association::orderBy( 'name', 'asc' )->get();
+
+        return view( 'universities.index' )->with( 'associations', $associations );
     }
 
     /**
@@ -23,7 +35,7 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        //
+        return view( 'universities.create' );
     }
 
     /**
@@ -32,9 +44,16 @@ class AssociationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
-        //
+        $association = Association::store( $request );
+
+        if( $association )
+        {
+            return redirect()->route( 'universities.show', $association->id )->with( 'success', 'Ny förening tillagd, va nice!' );
+        }
+
+        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
     }
 
     /**
@@ -43,9 +62,11 @@ class AssociationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
-        //
+        $association = Association::findOrFail( $id );
+
+        return view( 'universities.show' )->with( 'association', $association );
     }
 
     /**
@@ -56,7 +77,9 @@ class AssociationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $association = Association::findOrFail( $id );
+
+        return view( 'universities.edit' )->with( 'association', $association );
     }
 
     /**
@@ -68,7 +91,14 @@ class AssociationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $association = Association::updateAttributes( $request, $id );
+
+        if( $association )
+        {
+            return redirect()->route( 'universities.show', $association->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
+        }
+
+        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
     }
 
     /**
@@ -79,6 +109,9 @@ class AssociationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $association = Association::findOrFail( $id );
+
+        $association->delete();
+        return redirect()->back()->with( 'success', 'Föreningen borttagen, ohh, scary...' );
     }
 }
