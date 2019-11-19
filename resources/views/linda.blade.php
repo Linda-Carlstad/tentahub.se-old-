@@ -1,24 +1,37 @@
 @extends('layouts.app')
+@section( 'title', 'Linda Carlstad tentaportal' )
+@section( 'content' )
 
-@if (\Session::has('success'))
-    <div class="alert alert-success alert-dismissible fade show text-center">
-        <h1>{!! \Session::get('success') !!}</h1>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-
-<div class="jumbotron text-center">
-  <h1 class="display-2">Tentaportal för Linda</h1>
-  <p class="lead">Här kan du ladda ner tentasvar och dela med dig anonymt av dina egna svar</p>
-  <hr class="my-4">
-  <p>Antal tentor från din förening just nu:</p>
-</div>
-
-<form class="form-group col-2" action="" enctype="multipart/form-data" method="POST">
-<input type="file" name="image" value="">
-<input type="hidden" name="_token" value="{{ csrf_token()}}">
-<br>
-<button class="btn btn-primary" type="submit" name="button">Upload Exam</button>
-</form>
+    <section class="section hero is-small has-text-centered">
+        <div class="hero-body">
+            <h1 class="title">Linda Carlstad tentaportal</h1>
+            <p>Här kan du ladda ner tentasvar och dela med dig anonymt av dina egna svar</p>
+            <hr>
+            <p>Antal tentor från din förening just nu:</p>
+        </div>
+    </section>
+    <section class="section">
+        <h2 class="title is-3">Ladda upp din tenta:</h2>
+        <form class="form-group" action="" enctype="multipart/form-data" method="POST">
+            @csrf
+            <div id="file-upload" class="file has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="exam" accept="application/pdf">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        No file uploaded
+                    </span>
+                </label>
+            </div>
+            <br>
+            <button class="button is-primary" type="submit">Upload Exam</button>
+        </form>
+    </section>
+@endsection
