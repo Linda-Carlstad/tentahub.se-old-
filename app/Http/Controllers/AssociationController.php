@@ -11,9 +11,9 @@ class AssociationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' );
-        $this->middleware( 'valid_user' );
-        $this->middleware( 'super' )->except( 'index', 'show' );
+        $this->middleware( 'verified' )->except( 'index', 'show' );
+        $this->middleware( 'valid_user' )->except( 'index', 'show' );
+        $this->middleware( 'admin' )->except( 'index', 'show' );
     }
 
     /**
