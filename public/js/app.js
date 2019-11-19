@@ -102,6 +102,14 @@ $(document).on('click', '.notification > button.delete', function () {
     return false;
   });
 });
+var fileInput = document.querySelector('#file-upload input[type=file]');
+
+fileInput.onchange = function () {
+  if (fileInput.files.length > 0) {
+    var fileName = document.querySelector('#file-upload .file-name');
+    fileName.textContent = fileInput.files[0].name;
+  }
+};
 
 /***/ }),
 
