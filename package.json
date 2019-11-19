@@ -22,5 +22,9 @@
         "sass-loader": "7.*",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "bulma": "^0.8.0",
+        "bulma-tooltip": "^3.0.2"
     }
 }
