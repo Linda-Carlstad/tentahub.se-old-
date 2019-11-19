@@ -25,7 +25,7 @@ class AssociationController extends Controller
     {
         $associations = Association::orderBy( 'name', 'asc' )->get();
 
-        return view( 'universities.index' )->with( 'associations', $associations );
+        return view( 'associations.index' )->with( 'associations', $associations );
     }
 
     /**
@@ -35,7 +35,7 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        return view( 'universities.create' );
+        return view( 'associations.create' );
     }
 
     /**
@@ -50,7 +50,7 @@ class AssociationController extends Controller
 
         if( $association )
         {
-            return redirect()->route( 'universities.show', $association->id )->with( 'success', 'Ny förening tillagd, va nice!' );
+            return redirect()->route( 'associations.show', $association->id )->with( 'success', 'Ny förening tillagd, va nice!' );
         }
 
         return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
@@ -66,7 +66,7 @@ class AssociationController extends Controller
     {
         $association = Association::findOrFail( $id );
 
-        return view( 'universities.show' )->with( 'association', $association );
+        return view( 'associations.show' )->with( 'association', $association );
     }
 
     /**
@@ -79,7 +79,7 @@ class AssociationController extends Controller
     {
         $association = Association::findOrFail( $id );
 
-        return view( 'universities.edit' )->with( 'association', $association );
+        return view( 'associations.edit' )->with( 'association', $association );
     }
 
     /**
@@ -95,7 +95,7 @@ class AssociationController extends Controller
 
         if( $association )
         {
-            return redirect()->route( 'universities.show', $association->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
+            return redirect()->route( 'associations.show', $association->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
         }
 
         return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
