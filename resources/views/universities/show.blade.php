@@ -20,15 +20,21 @@
                 </ul>
             @else
                 <h3 class="subtitle">Inga föreningar har lagts till på det här universitetet, vill du lägga till en ny?</h3>
+                @auth
+                    @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
+                        <a class="button is-primary" href="/">Lägg till förening</a>
+                    @endif
+                @endauth
+            @endif
+            @auth
                 @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
-                    <a class="button is-primary" href="/">Lägg till förening</a>
+                    <hr>
+                    <h3 class="subtitle is-4">Ändra uppgifter</h3>
+                    <a class="button is-primary" href="{{ route( 'universities.edit', $university->id ) }}">Ändra uppggifter</a>
                 @endif
-            @endif
-            @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
-                <hr>
-                <h3 class="subtitle is-4">Ändra uppgifter</h3>
-                <a class="button is-primary" href="{{ route( 'universities.edit', $university->id ) }}">Ändra uppggifter</a>
-            @endif
+            @endauth
+            <hr>
+            <a class="button is-primary" href="{{ url()->previous() }}">Tillbaka</a>
         </div>
     </section>
 

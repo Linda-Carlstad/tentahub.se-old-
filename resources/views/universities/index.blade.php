@@ -5,9 +5,11 @@
     <section class="section">
         <h1 class="title">Universitet</h1>
         <p>Se alla universitet nedan</p>
-        @if( Auth::user()->role === 'super' )
-            <a class="button is-primary" href="{{ route( 'universities.create' ) }}">Lägg till universitet</a>
-        @endif
+        @auth
+            @if( Auth::user()->role === 'super' )
+                <a class="button is-primary" href="{{ route( 'universities.create' ) }}">Lägg till universitet</a>
+            @endif
+        @endauth
         <hr>
         <div class="columns is-multiline">
         @foreach( $universites as $university )
@@ -25,13 +27,13 @@
                     <a href="{{ route( 'universities.show', $university->id ) }}" class="card-footer-item">
                         Läs mer
                     </a>
-                    @if( Auth::check() )
+                    @auth
                         @if( Auth::user()->role == 'super' )
                             <a href="{{ route( 'universities.edit', $university->id ) }}" class="card-footer-item">
                                 Redigera
                             </a>
                         @endif
-                    @endif
+                    @endauth
                 </footer>
             </div>
             </div>
