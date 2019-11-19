@@ -13,8 +13,8 @@
     </section>
 
     <section class="section">
-        <h4 class="title is-3">Förening: {{ $user->association->name }}</h4>
-        <h4 class="subtitle is-5">Tillhör universitet: {{ $user->association->university->name }}</h4>
+        <h4 class="title is-3">Förening: <a href="/">{{ $user->association->name }}</a></h4>
+        <h4 class="subtitle is-5">Tillhör universitet: <a href="{{ route( 'universities.show', $user->association->university->id ) }}">{{ $user->association->university->name }}</a></h4>
         <p><b>Statistik om din föreing:</b></p>
         <p>Kurser: {{ $user->association->courses->count() }}</p>
         <p>Tentor: {{ $user->association->exams->count() }}</p>
