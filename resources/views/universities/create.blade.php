@@ -36,7 +36,7 @@
                     <div class="control">
                         <textarea class="textarea" rows="1" name="description" type="text"></textarea>
                     </div>
-                    @error( 'nickname' )
+                    @error( 'description' )
                     <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>

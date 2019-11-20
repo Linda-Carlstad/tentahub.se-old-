@@ -1,5 +1,5 @@
 @extends( 'layouts.app' )
-@section( 'title', 'Skapa ett nytt universitet' )
+@section( 'title', $university->name )
 @section( 'content' )
 
     <section class="section">
@@ -37,7 +37,7 @@
                     <div class="control">
                         <textarea class="textarea" rows="1" name="description" type="text">{{ $university->description }}</textarea>
                     </div>
-                    @error( 'nickname' )
+                    @error( 'description' )
                     <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
