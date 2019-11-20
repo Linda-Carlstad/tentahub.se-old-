@@ -20,6 +20,7 @@ class CreateUniversitiesTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->longText('description');
+            $table->string('url');
             $table->timestamps();
         });
     }

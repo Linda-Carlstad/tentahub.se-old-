@@ -16,8 +16,9 @@ class UniversitiesTableSeeder extends Seeder
            'name' => 'Karlstad University',
            'nickname' => 'KAU',
            'city' => 'Karlstad',
-           'country' => 'Sweden',
+            'country' => 'Sweden',
            'description' => 'En text om KAUs historia.',
+            'url' => 'https://kau.se',
            'created_at' => now(),
            'updated_at' => now(),
         ]);

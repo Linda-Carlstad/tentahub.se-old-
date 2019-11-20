@@ -11,7 +11,7 @@ class University extends Model
 
     protected $fillable =
     [
-        'name', 'nickname', 'city', 'country', 'description'
+        'name', 'nickname', 'city', 'country', 'description', 'url'
     ];
 
 
@@ -51,6 +51,7 @@ class University extends Model
             'city'        => 'required|string',
             'country'     => 'required|string',
             'description' => 'string',
+            'url'         => 'string'
         ] );
     }
 }

@@ -11,6 +11,7 @@ $factory->define(University::class, function (Faker $faker) {
         'nickname' => $faker->userName,
         'city' => $faker->city,
         'country' => $faker->country,
-        'description' => $faker->text
+        'description' => $faker->text,
+        'url' => $faker->url,
     ];
 });
