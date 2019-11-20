@@ -11,17 +11,19 @@ class Association extends Model
 
     protected $fillable =
         [
-            'name', 'nickname', 'university_id'
+            'name', 'nickname', 'university_id', 'description', 'url'
         ];
 
-    public function university(){
-        return $this->belongsTo('App\University');
+    public function university()
+    {
+        return $this->belongsTo( 'App\University' );
     }
     public function courses(){
-        return $this->hasMany('App\Course');
+        return $this->hasMany( 'App\Course' );
     }
 
-    public function exams(){
+    public function exams()
+    {
         return $this->hasManyThrough( 'App\Exam', 'App\Course' );
     }
 
@@ -37,7 +39,7 @@ class Association extends Model
     {
         Association::validate( $request );
         $association = Association::findOrFail( $id );
-        $association->update( $request->except( '_token' ) );
+        $association->update( $request->except( '_token', '_method' ) );
 
         return $association;
     }
@@ -47,8 +49,9 @@ class Association extends Model
         $request->validate(
             [
                 'name'          => 'required|string',
-                'nickname'      => 'required|string|max:20',
-                'university_id' => 'required|integer'
+                'university_id' => 'required|integer',
+                'url'           => 'string',
+                'description'   => 'string'
             ] );
     }
 }

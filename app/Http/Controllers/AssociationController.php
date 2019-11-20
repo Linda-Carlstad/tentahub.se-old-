@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Association;
 
+use App\Course;
+use App\University;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +15,8 @@ class AssociationController extends Controller
     {
         $this->middleware( 'verified' )->except( 'index', 'show' );
         $this->middleware( 'valid_user' )->except( 'index', 'show' );
-        $this->middleware( 'admin' )->except( 'index', 'show' );
+        $this->middleware( 'moderator' )->only( 'edit', 'update' );
+        $this->middleware( 'admin' )->only( 'create', 'store', 'destroy' );
     }
 
     /**
@@ -35,7 +38,9 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        return view( 'associations.create' );
+        $universities = University::all();
+
+        return view( 'associations.create' )->with( 'universities', $universities );
     }
 
     /**
@@ -65,8 +70,9 @@ class AssociationController extends Controller
     public function show( $id )
     {
         $association = Association::findOrFail( $id );
+        $courses = $association->courses;
 
-        return view( 'associations.show' )->with( 'association', $association );
+        return view( 'associations.show' )->with( 'association', $association )->with( 'courses', $courses );
     }
 
     /**
@@ -78,8 +84,9 @@ class AssociationController extends Controller
     public function edit($id)
     {
         $association = Association::findOrFail( $id );
+        $universities = University::all();
 
-        return view( 'associations.edit' )->with( 'association', $association );
+        return view( 'associations.edit' )->with( 'association', $association )->with( 'universities', $universities );;
     }
 
     /**

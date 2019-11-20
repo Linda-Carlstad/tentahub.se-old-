@@ -7,8 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Association::class, function (Faker $faker) {
     return [
-        'university_id' => $faker->numberBetween(0,100),
-        'nickname' => $faker->word,
-        'name' => $faker->company
+        'university_id' => $faker->numberBetween(1,100),
+        'url' => $faker->url,
+        'name' => $faker->company,
+        'description' => $faker->text
     ];
 });
