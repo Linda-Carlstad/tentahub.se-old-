@@ -14110,7 +14110,8 @@ hr {
 }
 
 .textarea,
-.input {
+.input,
+.select > select {
   border-radius: 0;
   border: 0;
   outline: 0;
@@ -14122,7 +14123,9 @@ hr {
 .textarea:focus,
 .textarea:hover,
 .input:focus,
-.input:hover {
+.input:hover,
+.select > select:focus,
+.select > select:hover {
   box-shadow: none;
   border-bottom: 1px solid #330012;
 }
