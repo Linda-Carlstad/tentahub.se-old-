@@ -81,6 +81,7 @@ Route::resources(
     'admins' => 'AdminController',
     'associations' => 'AssociationController',
     'courses' => 'CourseController',
+    'exams' => 'ExamController',
     'universities' => 'UniversityController',
     'users' => 'UserController',
     'supers' => 'SuperController',
