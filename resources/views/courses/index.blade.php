@@ -19,9 +19,15 @@
                     <p class="title is-5">
                         {{ $course->name }} ({{ $course->code }})
                     </p>
-                    <a href="{{ route( 'associations.show', $course->association->id ) }}">
-                        {{ $course->association->name }}
-                    </a>
+                    <p>
+                        <a href="{{ route( 'associations.show', $course->association->id ) }}">
+                            {{ $course->association->name }}
+                        </a>
+                        -
+                        <a href="{{ route( 'universities.show', $course->association->university->id ) }}">
+                            {{ $course->association->university->name }}
+                        </a>
+                    </p>
                 </div>
                 <footer class="card-footer">
                     <a href="{{ route( 'courses.show', $course->id ) }}" class="card-footer-item">
