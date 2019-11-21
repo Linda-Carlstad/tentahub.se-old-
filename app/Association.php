@@ -10,9 +10,9 @@ class Association extends Model
     protected $table = 'associations';
 
     protected $fillable =
-        [
-            'name', 'nickname', 'university_id', 'description', 'url'
-        ];
+    [
+        'name', 'nickname', 'university_id', 'description', 'url'
+    ];
 
     public function university()
     {

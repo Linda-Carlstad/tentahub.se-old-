@@ -6,7 +6,7 @@
         <h1 class="title">Föreningar</h1>
         <p>Se alla föreningar nedan</p>
         @auth
-            @if( Auth::user()->role === 'super' )
+            @if( Auth::user()->role >= 'admin' )
                 <a class="button is-primary" href="{{ route( 'associations.create' ) }}">Lägg till förening</a>
             @endif
         @endauth
@@ -16,7 +16,7 @@
             <div class="column is-half is-widescreen">
             <div class="card">
                 <div class="card-content">
-                    <p class="title is-4">
+                    <p class="title is-5">
                         {{ $association->name }}
                     </p>
                     <a href="{{ route( 'universities.show', $association->university->id ) }}" class="link">
@@ -28,7 +28,7 @@
                         Läs mer
                     </a>
                     @auth
-                        @if( Auth::user()->role == 'super' )
+                        @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association === $association )
                             <a href="{{ route( 'associations.edit', $association->id ) }}" class="card-footer-item">
                                 Redigera
                             </a>

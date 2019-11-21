@@ -5,7 +5,7 @@
     <section class="section">
         <div class="column is-half">
             <h1 class="title">Ändra uppgifter för {{ $university->name }}</h1>
-            <p>Alla fält är obligatoriska</p>
+            <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
             <hr>
             <form class="" method="POST" action="{{ route( 'universities.update', $university->id ) }}">
                 @csrf
@@ -22,7 +22,7 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Uiversitet blir KAU">?</button></label>
+                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
                     <div class="control">
                         <input class="input" name="nickname" type="text" required value="{{ $university->nickname }}">
                     </div>

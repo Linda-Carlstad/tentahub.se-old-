@@ -5,7 +5,7 @@
     <section class="section">
         <div class="column is-half">
             <h1 class="title">Ändra uppgifter för {{ $association->name }}</h1>
-            <p>Alla fält är obligatoriska</p>
+            <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
             <hr>
             <form class="" method="POST" action="{{ route( 'associations.update', $association->id ) }}">
                 @csrf

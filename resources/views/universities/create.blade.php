@@ -21,7 +21,7 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Uiversitet blir KAU">?</button></label>
+                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
                     <div class="control">
                         <input class="input" name="nickname" type="text" required>
                     </div>
