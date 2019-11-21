@@ -80,6 +80,7 @@ Route::resources(
 [
     'admins' => 'AdminController',
     'associations' => 'AssociationController',
+    'courses' => 'CourseController',
     'universities' => 'UniversityController',
     'users' => 'UserController',
     'supers' => 'SuperController',

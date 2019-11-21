@@ -37,6 +37,9 @@
             <a class="navbar-item" href="{{ route( 'associations.index' ) }}">
                 Föreningar
             </a>
+            <a class="navbar-item" href="{{ route( 'courses.index' ) }}">
+                Kurser
+            </a>
         </div>
         <div class="navbar-end">
             {{-- Right side of the navbar --}}
