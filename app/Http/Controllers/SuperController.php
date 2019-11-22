@@ -8,7 +8,9 @@ class SuperController extends Controller
 {
     public function __construct()
     {
-       $this->middleware( 'super' );
+        $this->middleware( 'verified' );
+        $this->middleware( 'valid_user' );
+        $this->middleware( 'super' );
     }
 
     /**
@@ -18,7 +20,7 @@ class SuperController extends Controller
      */
     public function index()
     {
-        return view( 'super.index' );
+        return view( 'supers.index' );
     }
 
     /**

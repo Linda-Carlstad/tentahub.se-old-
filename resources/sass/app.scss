@@ -1,4 +1,6 @@
 // Import partials
+@import '~bulma/bulma';
+@import '~bulma-tooltip';
 
 // General
 @import 'general/variables';
@@ -8,7 +10,11 @@
 @import 'general/gradients';
 
 //Layout
+@import "layout/common";
+@import "layout/forms";
 @import "layout/footer";
 @import "layout/navbar";
 @import "layout/buttons";
 @import "layout/section";
+@import "layout/flash-messages";
+

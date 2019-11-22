@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <section class="hero is-primary is-fullwidth has-text-centered">
+    <section class="hero is-fullwidth has-text-centered">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Hejsan, {{ $user->name }}</h1>
@@ -11,10 +11,10 @@
             </div>
         </div>
     </section>
-
+    <hr>
     <section class="section">
-        <h4 class="title is-3">Förening: {{ $user->association->name }}</h4>
-        <h4 class="subtitle is-5">Tillhör universitet: {{ $user->association->university->name }}</h4>
+        <h4 class="title is-3">Förening: <a href="/">{{ $user->association->name }}</a></h4>
+        <h4 class="subtitle is-5">Tillhör universitet: <a href="{{ route( 'universities.show', $user->association->university->id ) }}">{{ $user->association->university->name }}</a></h4>
         <p><b>Statistik om din föreing:</b></p>
         <p>Kurser: {{ $user->association->courses->count() }}</p>
         <p>Tentor: {{ $user->association->exams->count() }}</p>

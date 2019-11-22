@@ -14,8 +14,9 @@ class AssociationsTableSeeder extends Seeder
     {
         DB::table('associations')->insert([
            'name' => 'Linda Carlstad',
-           'nickname' => 'Linda',
+           'url' => 'https://lindacarlstad.se',
            'university_id' => 1,
+           'description' => 'Linjeförening för datavetare',
            'created_at' => now(),
            'updated_at' => now(),
         ]);

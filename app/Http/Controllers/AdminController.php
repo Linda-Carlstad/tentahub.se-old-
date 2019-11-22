@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'verified' );
+        $this->middleware( 'valid_user' );
+        $this->middleware( 'admin' )->except( 'create', 'store', 'destroy' );
+        $this->middleware( 'super' )->only( 'create', 'store', 'destroy' );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,18 +26,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $this->middleware( 'admin' );
         $user = Auth::user();
 
-        if( $user->role == 'super' )
+        if( $user->role === 'super' )
         {
-            $users = User::where( 'role', '<', $user->role )
+            $users = User::where( 'role', '<=', $user->role )
                 ->orderBy( 'role', 'desc' )
                 ->paginate( 20 );
         }
         else
         {
-            $users = User::where( 'role', '<', $user->role )
+            $users = User::where( 'role', '<=', $user->role )
                 ->where( 'association_id', '=', $user->association_id )
                 ->orderBy( 'role', 'desc' )
                 ->paginate( 20 );

@@ -2,7 +2,7 @@
 @section( 'title', Auth::user()->name )
 @section( 'content' )
 
-    <section class="hero is-primary is-fullwidth has-text-centered">
+    <section class="hero is-fullwidth has-text-centered">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Hejsan, {{ Auth::user()->name }}</h1>
@@ -10,8 +10,7 @@
             </div>
         </div>
     </section>
-
-
+    <hr>
     <section class="hero is-medium has-text-centered">
         <div class="hero-body">
             <h1 class="title">Vad vill du göra idag?</h1>

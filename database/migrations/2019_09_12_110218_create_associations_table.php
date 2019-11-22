@@ -17,7 +17,8 @@ class CreateAssociationsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('university_id');
             $table->string('name');
-            $table->string('nickname');
+            $table->string('url')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

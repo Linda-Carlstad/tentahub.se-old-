@@ -9,6 +9,9 @@ $factory->define(University::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'nickname' => $faker->userName,
-        'city' => $faker->city
+        'city' => $faker->city,
+        'country' => $faker->country,
+        'description' => $faker->text,
+        'url' => $faker->url,
     ];
 });
