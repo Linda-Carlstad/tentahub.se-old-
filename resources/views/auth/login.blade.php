@@ -11,9 +11,9 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="field">
-                        <label class="label">E-postadress</label>
+                        <label for="email" class="label">E-postadress</label>
                         <div class="control">
-                            <input class="input @error( 'email' ) is-danger @enderror" type="email" placeholder="E-postadress" name="email" value="{{ old( 'email' ) }}" required autofocus>
+                            <input id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="email" placeholder="E-postadress" name="email" value="{{ old( 'email' ) }}" required autofocus>
                             @error( 'email' )
                                 <span class="has-text-danger" role="alert">
                                     {{ $message }}
@@ -22,9 +22,9 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label class="label">Lösenord</label>
+                        <label for="password" class="label">Lösenord</label>
                         <div class="control">
-                            <input class="input @error( 'password' ) is-danger @enderror" type="password" name="password" placeholder="Lösenord" required>
+                            <input id="password" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" type="password" name="password" placeholder="Lösenord" required>
                             @error( 'password' )
                                 <span class="has-text-danger" role="alert">
                                     {{ $message }}

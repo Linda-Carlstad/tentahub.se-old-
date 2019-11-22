@@ -9,58 +9,58 @@
             <hr>
             <form class="" method="POST" action="{{ route( 'universities.update', $university->id ) }}">
                 @csrf
-                {{ method_field( 'patch' ) }}
+                @method( 'PATCH' )
                 <div class="field">
-                    <label class="label">Namn *</label>
+                    <label for="name" class="label">Namn *</label>
                     <div class="control">
-                        <input class="input" name="name" type="text" autofocus required value="{{ $university->name }}">
+                        <input id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" name="name" type="text" autofocus required value="{{ $university->name }}">
                     </div>
                     @error( 'name' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
+                    <label for="nickname" class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
                     <div class="control">
-                        <input class="input" name="nickname" type="text" required value="{{ $university->nickname }}">
+                        <input id="nickname" class="input {{ $errors->has('nickname') ? ' is-danger' : '' }}" name="nickname" type="text" required value="{{ $university->nickname }}">
                     </div>
                     @error( 'nickname' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Beskrivning</label>
+                    <label for="description" class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea class="textarea" rows="1" name="description" type="text">{{ $university->description }}</textarea>
+                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="1" name="description" type="text">{{ $university->description }}</textarea>
                     </div>
                     @error( 'description' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Stad *</label>
+                    <label for="city" class="label">Stad *</label>
                     <div class="control">
-                        <input class="input" name="city" type="text" required value="{{ $university->city }}">
+                        <input id="city" class="input {{ $errors->has('city') ? ' is-danger' : '' }}" name="city" type="text" required value="{{ $university->city }}">
                     </div>
                     @error( 'city' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Land *</label>
+                    <label for="country" class="label">Land *</label>
                     <div class="control">
-                        <input class="input" name="country" type="text" required value="{{ $university->country }}">
+                        <input id="country" class="input {{ $errors->has('country') ? ' is-danger' : '' }}" name="country" type="text" required value="{{ $university->country }}">
                     </div>
                     @error( 'country' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror

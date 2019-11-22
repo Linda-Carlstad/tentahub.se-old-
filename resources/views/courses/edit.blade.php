@@ -11,87 +11,85 @@
                 @csrf
                 {{ method_field( 'patch' ) }}
                 <div class="field">
-                    <label class="label">Namn *</label>
+                    <label for="name" class="label">Namn *</label>
                     <div class="control">
-                        <input class="input" name="name" type="text" autofocus required value="{{ $course->name }}">
+                        <input id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" name="name" type="text" autofocus required value="{{ $course->name }}">
                     </div>
                     @error( 'name' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Kod * <button type="button" data-tooltip="Exempel: ISGC00">?</button></label>
+                    <label for="code" class="label">Kod * <button type="button" data-tooltip="Exempel: ISGC00">?</button></label>
                     <div class="control">
-                        <input class="input" name="code" type="text" required value="{{ $course->code }}">
+                        <input id="code" class="input {{ $errors->has('code') ? ' is-danger' : '' }}" name="code" type="text" required value="{{ $course->code }}">
                     </div>
                     @error( 'code' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Poäng *</label>
+                    <label for="points" class="label">Poäng *</label>
                     <div class="control">
-                        <input class="input" name="points" type="number" required value="{{ $course->points }}">
+                        <input id="points" class="input {{ $errors->has('points') ? ' is-danger' : '' }}" name="points" type="number" required value="{{ $course->points }}">
                     </div>
                     @error( 'points' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
-                @if( Auth::user()->role === 'super' )
+                @if( Auth::user()->role >= 'admin' )
                     <div class="field">
-                        <label class="label">Förening *</label>
+                        <label for="association_id" class="label">Förening *</label>
                         <div class="control">
-                            <div class="select">
+                            <div class="select {{ $errors->has('association_id') ? ' is-danger' : '' }}">
                                 <select id="association_id" name="association_id">
-                                    <option selected disabled>Välj förening...</option>
-                                    @foreach( $universities as $university )
-                                        @if( !$university->associations->isEmpty() )
-                                            <option disabled>---{{ $university->name }}---</option>
-                                        @endif
-                                        @foreach( $university->associations as $association )
-                                            <option {{ Auth::user()->association->id == $association->id ? 'selected' : '' }} value="{{ $association->id }}">{{ $association->name }}</option>
+                                    @if( Auth::user()->role === 'super' )
+
+                                        <option selected disabled>Välj universitet...</option>
+                                        @foreach( $universities as $university )
+                                            @if( !$university->associations->isEmpty() )
+                                                <option disabled>---{{ $university->name }}---</option>
+                                            @endif
+                                            @foreach( $university->associations as $association )
+                                                <option {{ $course->association->id == $association->id ? 'selected' : '' }} value="{{ $association->id }}">{{ $association->name }}</option>
+                                            @endforeach
                                         @endforeach
-                                    @endforeach
+                                    @else
+                                        @foreach( Auth::user()->association->university->associations as $association )
+                                            <option value="{{ $association->id }}">{{ $association->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
-                    </div>
-                @elseif( Auth::user()->role === 'admin' )
-                    <div class="form-group row">
-                        <label for="association_id">Förening</label>
-                        <select class="form-control" id="association_id" name="association_id">
-                            @foreach( Auth::user()->association->university->associations as $association )
-                                <option value="{{ $association->id }}">{{ $association->name }}</option>
-                            @endforeach
-                        </select>
                     </div>
                 @else
                     <input type="hidden" name="association_id" value="{{ Auth::user()->association->id }}">
                 @endif
                 <div class="field">
-                    <label class="label">Beskrivning</label>
+                    <label for="description" class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea class="textarea" rows="1" name="description" type="text">{{ $course->description }}</textarea>
+                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="1" name="description" type="text">{{ $course->description }}</textarea>
                     </div>
                     @error( 'description' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Länk</label>
+                    <label for="url" class="label">Länk</label>
                     <div class="control">
-                        <input class="input" name="url" type="text" value="{{ $course->url }}">
+                        <input id="url" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="url" type="text" value="{{ $course->url }}">
                     </div>
                     @error( 'url' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror

@@ -17,7 +17,7 @@
                         <div class="field">
                             <label for="name" class="label">Namn</label>
                             <div class="control">
-                                <input id="name" class="input" type="text" name="name" placeholder="Namn" />
+                                <input id="name" class="input" type="text" name="name" placeholder="Namn" required />
                             </div>
                             @error( 'name' )
                                 <span class="has-text-danger" role="alert">
@@ -38,7 +38,7 @@
                     <div class="field">
                         <label for="password" class="label">Lösenord</label>
                         <div class="control">
-                            <input id="password" class="input {{ $errors->has('password') ? ' is-danger' : '' }}" type="password" name="password" placeholder="Lösenord">
+                            <input id="password" class="input {{ $errors->has('password') ? ' is-danger' : '' }}" type="password" name="password" placeholder="Lösenord" required>
                         </div>
                         @error( 'password' )
                         <span class="has-text-danger" role="alert">
@@ -49,7 +49,7 @@
                     <div class="field">
                         <label for="newPassword" class="label">Nytt lösenord</label>
                         <div class="control">
-                            <input id="newPassword" class="input  {{ $errors->has('newPassword') ? ' is-danger' : '' }}" type="password" name="newPassword" placeholder="Nytt lösenord">
+                            <input id="newPassword" class="input {{ $errors->has('newPassword') ? ' is-danger' : '' }}" type="password" name="newPassword" placeholder="Nytt lösenord" required>
                         </div>
                         @error( 'newPassword' )
                         <span class="has-text-danger" role="alert">
@@ -60,7 +60,7 @@
                     <div class="field">
                         <label for="confirmPassword" class="label">Bekräfta lösenord</label>
                         <div class="control">
-                            <input id="confirmPassword" class="input  {{ $errors->has('confirmPassword') ? ' is-danger' : '' }}" type="password" name="confirmPassword" placeholder="Bekräfta lösenord">
+                            <input id="confirmPassword" class="input {{ $errors->has('confirmPassword') ? ' is-danger' : '' }}" type="password" name="confirmPassword" placeholder="Bekräfta lösenord" required>
                         </div>
                         @error( 'confirmPassword' )
                         <span class="has-text-danger" role="alert">

@@ -12,9 +12,9 @@
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                     <div class="field">
-                        <label class="label">E-postadress</label>
+                        <label for="email" class="label">E-postadress</label>
                         <div class="control">
-                            <input placeholder="E-postadress" id="email" type="email" class="input @error( 'email' ) is-danger @enderror" name="email" value="{{ $email ?? old( 'email' ) }}" required autocomplete="email" autofocus>
+                            <input placeholder="E-postadress" id="email" type="email" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="email" value="{{ $email ?? old( 'email' ) }}" required autocomplete="email" autofocus>
                         </div>
                         @error( 'email' )
                             <span class="has-text-danger" role="alert">
@@ -23,9 +23,9 @@
                         @enderror
                     </div>
                     <div class="field">
-                        <label class="label">Lösenord</label>
+                        <label for="password" class="label">Lösenord</label>
                         <div class="control">
-                            <input class="input @error( 'password' ) is-danger @enderror" name="password" type="password" placeholder="Lösenord" required>
+                            <input class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="password" type="password" placeholder="Lösenord" required>
                             @error( 'password' )
                                 <span class="has-text-danger" role="alert">
                                     {{ $message }}
@@ -34,9 +34,9 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label class="label">Verifiera lösenordet</label>
+                        <label for="password-confirm" class="label">Verifiera lösenordet</label>
                         <div class="control">
-                            <input class="input @error( 'password-confirm' ) is-danger @enderror" name="password-confirm" type="password" placeholder="Lösenord" required>
+                            <input id="password-confirm" class="input @error( 'password-confirm' ) is-danger @enderror" name="password-confirm" type="password" placeholder="Lösenord" required>
                             @error( 'password-confirm' )
                                 <span class="has-text-danger" role="alert">
                                     {{ $message }}
@@ -49,7 +49,7 @@
                             <button class="button is-primary" type="submit">Återställ lösenordet</button>
                         </div>
                         <div class="control">
-                            <button class="button is-light" href="{{ '/' }}">Avbryt</button>
+                            <button class="button is-light" href="{{ route( 'dashboard' ) }}">Avbryt</button>
                         </div>
                     </div>
                 </form>

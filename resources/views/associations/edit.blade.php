@@ -11,21 +11,21 @@
                 @csrf
                 {{ method_field( 'patch' ) }}
                 <div class="field">
-                    <label class="label">Namn *</label>
+                    <label for="name" class="label">Namn *</label>
                     <div class="control">
-                        <input class="input" name="name" type="text" autofocus required value="{{ $association->name }}">
+                        <input id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" name="name" type="text" autofocus required value="{{ $association->name }}">
                     </div>
                     @error( 'name' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 @if( Auth::user()->role === 'super' )
                     <div class="field">
-                        <label class="label">Universitet *</label>
+                        <label for="university_id" class="label">Universitet *</label>
                         <div class="control">
-                            <div class="select">
+                            <div class="select {{ $errors->has('university_id') ? ' is-danger' : '' }}">
                                 <select id="university_id" name="university_id">
                                     <option selected disabled>Välj universitet...</option>
                                     @foreach( $universities as $university )
@@ -33,29 +33,34 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @error( 'university_id' )
+                                <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 @else
                     <input type="hidden" name="university_id" value="{{ Auth::user()->association->university->id }}">
                 @endif
                 <div class="field">
-                    <label class="label">Webbsida</label>
+                    <label for="url" class="label">Webbsida</label>
                     <div class="control">
-                        <input class="input" name="url" type="text" required value="{{ $association->url }}">
+                        <input id="url" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="url" type="text" required value="{{ $association->url }}">
                     </div>
                     @error( 'url' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Beskrivning</label>
+                    <label for="description" class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea class="textarea" rows="1" name="description" type="text">{{ $association->description }}</textarea>
+                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="1" name="description" type="text">{{ $association->description }}</textarea>
                     </div>
                     @error( 'description' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
