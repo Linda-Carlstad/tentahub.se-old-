@@ -21,6 +21,7 @@ class CreateExamsTable extends Migration
             $table->bigInteger('views')->nullable();
             $table->decimal('rating')->nullable();
             $table->string('grade')->nullable();
+            $table->decimal('points')->nullable();
             $table->timestamps();
         });
     }
