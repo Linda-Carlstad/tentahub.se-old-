@@ -1,14 +1,32 @@
 .navbar {
     background: $primary-background;
 
+    a.navbar-burger {
+        color: white;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
     a.navbar-link {
         color: white;
+
+        &:hover {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        &:not(.is-arrowless)::after {
+            border-color: $primary;
+        }
     }
 
     a.navbar-item  {
         color: white;
 
         &:hover {
+            background-color: white;
             color: darken( grey, 20% );
         }
     }

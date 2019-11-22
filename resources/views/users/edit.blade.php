@@ -1,84 +1,87 @@
 @section('title', 'Inställningar')
 @extends('layouts.app')
-
 @section('content')
 
-    <h1>Inställningar</h1>
-    @if( $user->valid )
-        <form class="" action="{{ '/user/' . $user->id }}" method="post">
-            @csrf
-            @method( 'PUT' )
-            <input type="hidden" name="type" value="info">
+    <section class="section">
+        <div class="columns level">
+            <div class="column is-half is-widescreen level-item">
+                <h1 class="title">Inställningar</h1>
 
-            <div class="form-group row">
-                <label for="name">Namn</label>
-                <input id="name" type="text" placeholder="Namn" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required autofocus>
+                @if( $user->valid )
+                    <h2 class="title is-5">Byt namn</h2>
+                    <form class="" action="{{ '/user/' . $user->id }}" method="post">
+                        @csrf
+                        @method( 'PATCH' )
+                        <input type="hidden" name="type" value="info">
 
-                @if ($errors->has('name'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('name' ) }}</strong>
-                    </span>
+                        <div class="field">
+                            <label for="name" class="label">Namn</label>
+                            <div class="control">
+                                <input id="name" class="input" type="text" name="name" placeholder="Namn" required />
+                            </div>
+                            @error( 'name' )
+                                <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </form>
+                    <hr>
                 @endif
+
+                <h2 class="title is-5">Byt lösenord</h2>
+                <form class="" action="{{ '/user/' . $user->id }}" method="post">
+                    @csrf
+                    @method( 'PATCH' )
+                    <input type="hidden" name="type" value="security">
+
+                    <div class="field">
+                        <label for="password" class="label">Lösenord</label>
+                        <div class="control">
+                            <input id="password" class="input {{ $errors->has('password') ? ' is-danger' : '' }}" type="password" name="password" placeholder="Lösenord" required>
+                        </div>
+                        @error( 'password' )
+                        <span class="has-text-danger" role="alert">
+                        {{ $message }}
+                    </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label for="newPassword" class="label">Nytt lösenord</label>
+                        <div class="control">
+                            <input id="newPassword" class="input {{ $errors->has('newPassword') ? ' is-danger' : '' }}" type="password" name="newPassword" placeholder="Nytt lösenord" required>
+                        </div>
+                        @error( 'newPassword' )
+                        <span class="has-text-danger" role="alert">
+                        {{ $message }}
+                    </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label for="confirmPassword" class="label">Bekräfta lösenord</label>
+                        <div class="control">
+                            <input id="confirmPassword" class="input {{ $errors->has('confirmPassword') ? ' is-danger' : '' }}" type="password" name="confirmPassword" placeholder="Bekräfta lösenord" required>
+                        </div>
+                        @error( 'confirmPassword' )
+                        <span class="has-text-danger" role="alert">
+                        {{ $message }}
+                    </span>
+                        @enderror
+                    </div>
+
+                </form>
             </div>
-            <div class="form-group row mb-0">
-                <div class="col-lg-8 offset-lg-2">
-                    <button type="submit" class="btn btn-primary ml-0">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </form>
-        <hr>
-    @endif
-    <h2>Byt lösenord</h2>
-    <form class="" action="{{ '/user/' . $user->id }}" method="post">
-        @csrf
-        {{ method_field( 'patch' ) }}
-        <input type="hidden" name="type" value="security">
+            <div class="column is-half is-widescreen level-item">
 
-        <div class="form-group row">
-            <label for="password">Lösenord</label>
-            <input id="password" type="password" placeholder="Lösenord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="" required>
-
-            @if ($errors->has('password'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('password' ) }}</strong>
-                </span>
-            @endif
-        </div>
-        <div class="form-group row">
-            <label for="newPassword">Nytt lösenord:</label>
-            <input id="newPassword" type="password" placeholder="Nytt lösenord" class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}" name="newPassword" value="" required>
-
-            @if ($errors->has('newPassword'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('newPassword' ) }}</strong>
-                </span>
-            @endif
-        </div>
-        <div class="form-group row">
-            <label for="confirmPassword">Bekräfta lösenord:</label>
-            <input id="confirmPassword" type="password" placeholder="Bekräfta lösenord" class="form-control{{ $errors->has('confirmPassword') ? ' is-invalid' : '' }}" name="confirmPassword" value="" required>
-
-            @if ($errors->has('confirmPassword'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('confirmPassword' ) }}</strong>
-                </span>
-            @endif
-        </div>
-        <div class="form-group row mb-0">
-            <div class="col-lg-8 offset-lg-2">
-                <button type="submit" class="btn btn-primary ml-0">
-                    Save
-                </button>
             </div>
         </div>
-    </form>
-    <div class="text-center">
+    </section>
+    <hr>
+    <section class="column has-text-centered">
         <p>
             Vill du byta email?
             <br>
-            Kontakta supporten här <a href="{{ url( '/' ) }}">!!!!!!!!!!!!!!!!!! :) !!!!!!!!!!!!!!!!!</a>
+            <a href="{{ route( 'contacts.support' ) }}">Kontakta supporten här</a>
         </p>
-    </div>
+    </section>
 @endsection

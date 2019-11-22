@@ -1,18 +1,18 @@
 @extends( 'layouts.app' )
-@section( 'title', 'Lägg ett nytt universitet' )
+@section( 'title', 'Lägg till nytt universitet' )
 @section( 'content' )
 
     <section class="section">
         <div class="column is-half">
-            <h1 class="title">Skapa nytt universitet</h1>
+            <h1 class="title">Lägg till nytt universitet</h1>
             <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
             <hr>
             <form class="" method="POST" action="{{ route( 'universities.store' ) }}">
                 @csrf
                 <div class="field">
-                    <label class="label">Namn *</label>
+                    <label for="name" class="label">Namn *</label>
                     <div class="control">
-                        <input class="input" name="name" type="text" autofocus required>
+                        <input id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" name="name" type="text" autofocus required>
                     </div>
                     @error( 'name' )
                         <span class="has-text-danger" role="alert">
@@ -21,9 +21,9 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
+                    <label for="nickname" class="label">Initialer * <button type="button" data-tooltip="Exempel: Karlstads Universitet blir KAU">?</button></label>
                     <div class="control">
-                        <input class="input" name="nickname" type="text" required>
+                        <input id="nickname" class="input {{ $errors->has('nickname') ? ' is-danger' : '' }}" name="nickname" type="text" required>
                     </div>
                     @error( 'nickname' )
                         <span class="has-text-danger" role="alert">
@@ -32,20 +32,20 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Beskrivning</label>
+                    <label for="description" class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea class="textarea" rows="1" name="description" type="text"></textarea>
+                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="1" name="description" type="text"></textarea>
                     </div>
                     @error( 'description' )
-                    <span class="has-text-danger" role="alert">
+                        <span class="has-text-danger" role="alert">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Stad *</label>
+                    <label for="city" class="label">Stad *</label>
                     <div class="control">
-                        <input class="input" name="city" type="text" required>
+                        <input id="city" class="input {{ $errors->has('city') ? ' is-danger' : '' }}" name="city" type="text" required>
                     </div>
                     @error( 'city' )
                         <span class="has-text-danger" role="alert">
@@ -54,9 +54,9 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="label">Land *</label>
+                    <label for="country" class="label">Land *</label>
                     <div class="control">
-                        <input class="input" name="country" type="text" required>
+                        <input id="country" class="input {{ $errors->has('country') ? ' is-danger' : '' }}" name="country" type="text" required>
                     </div>
                     @error( 'country' )
                     <span class="has-text-danger" role="alert">

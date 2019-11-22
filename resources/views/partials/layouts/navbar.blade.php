@@ -13,9 +13,6 @@
 
     <div id="navbarMain" class="navbar-menu">
         <div class="navbar-start">
-            <a href="{{ route( 'dashboard' ) }}" class="navbar-item">
-                {{ env( 'APP_NAME' )  }}
-            </a>
             {{-- Left side of the navbar --}}
             <a class="navbar-item" href="{{ route( 'linda' ) }}">
                 Linda

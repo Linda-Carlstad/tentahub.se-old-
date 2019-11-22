@@ -14138,8 +14138,25 @@ hr {
   background: linear-gradient(170deg, #660023, #3867D6);
 }
 
+.navbar a.navbar-burger {
+  color: white;
+}
+
+.navbar a.navbar-burger:hover {
+  color: #660023;
+}
+
 .navbar a.navbar-link {
   color: white;
+}
+
+.navbar a.navbar-link:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.navbar a.navbar-link:not(.is-arrowless)::after {
+  border-color: #660023;
 }
 
 .navbar a.navbar-item {
@@ -14147,6 +14164,7 @@ hr {
 }
 
 .navbar a.navbar-item:hover {
+  background-color: white;
   color: #4d4d4d;
 }
 
