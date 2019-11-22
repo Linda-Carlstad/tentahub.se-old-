@@ -3,12 +3,18 @@
 
     a.navbar-link {
         color: white;
+
+        &:hover {
+            background-color: white;
+            cursor: pointer;
+        }
     }
 
     a.navbar-item  {
         color: white;
 
         &:hover {
+            background-color: white;
             color: darken( grey, 20% );
         }
     }

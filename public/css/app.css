@@ -14142,11 +14142,17 @@ hr {
   color: white;
 }
 
+.navbar a.navbar-link:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
 .navbar a.navbar-item {
   color: white;
 }
 
 .navbar a.navbar-item:hover {
+  background-color: white;
   color: #4d4d4d;
 }
 
