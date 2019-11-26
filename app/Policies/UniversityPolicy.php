@@ -18,7 +18,7 @@ class UniversityPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class UniversityPolicy
      */
     public function view(User $user, University $university)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,11 @@ class UniversityPolicy
      */
     public function create(User $user)
     {
-        //
+        if( $user->role >= 'super' )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -53,7 +57,11 @@ class UniversityPolicy
      */
     public function update(User $user, University $university)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'admin' && $user->association->university === $university )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -65,7 +73,11 @@ class UniversityPolicy
      */
     public function delete(User $user, University $university)
     {
-        //
+        if( $user->role >= 'super' )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,7 +89,11 @@ class UniversityPolicy
      */
     public function restore(User $user, University $university)
     {
-        //
+        if( $user->role >= 'super' )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -89,6 +105,10 @@ class UniversityPolicy
      */
     public function forceDelete(User $user, University $university)
     {
-        //
+        if( $user->role >= 'super' )
+        {
+            return true;
+        }
+        return false;
     }
 }
