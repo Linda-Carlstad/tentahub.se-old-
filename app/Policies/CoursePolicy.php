@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Association;
 use App\User;
 use App\Course;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -18,7 +19,7 @@ class CoursePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,18 +31,23 @@ class CoursePolicy
      */
     public function view(User $user, Course $course)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can create courses.
      *
      * @param  \App\User  $user
+     * @param  \App\Association  $association
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Association $association)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association === $association )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -53,7 +59,11 @@ class CoursePolicy
      */
     public function update(User $user, Course $course)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -65,7 +75,11 @@ class CoursePolicy
      */
     public function delete(User $user, Course $course)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,7 +91,11 @@ class CoursePolicy
      */
     public function restore(User $user, Course $course)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -89,6 +107,10 @@ class CoursePolicy
      */
     public function forceDelete(User $user, Course $course)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        {
+            return true;
+        }
+        return false;
     }
 }
