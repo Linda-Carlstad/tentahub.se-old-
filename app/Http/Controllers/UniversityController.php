@@ -35,6 +35,7 @@ class UniversityController extends Controller
      */
     public function create()
     {
+        $this->authorize( 'create', Auth::user() );
         return view( 'universities.create' );
     }
 
@@ -46,6 +47,7 @@ class UniversityController extends Controller
      */
     public function store( Request $request )
     {
+        $this->authorize( 'create', Auth::user() );
         $university = University::store( $request );
 
         if( $university )
@@ -78,6 +80,7 @@ class UniversityController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize( 'update', Auth::user() );
         $university = University::findOrFail( $id );
 
         return view( 'universities.edit' )->with( 'university', $university );
@@ -92,6 +95,7 @@ class UniversityController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize( 'update', Auth::user() );
         $university = University::updateAttributes( $request, $id );
 
         if( $university )
@@ -110,6 +114,7 @@ class UniversityController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize( 'delete', Auth::user() );
         $university = University::findOrFail( $id );
 
         $university->delete();
