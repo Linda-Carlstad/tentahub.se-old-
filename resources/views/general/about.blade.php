@@ -13,6 +13,9 @@
                 Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
                 looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
                 and going through the cites of the word in classical literature, discovered the undoubtable source.
+                <br>
+                <br>
+                Utvecklat av <a target="_blank" href="https://lindacarlstad.se">Linda Carlstad</a>.
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
