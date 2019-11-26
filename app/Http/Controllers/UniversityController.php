@@ -80,8 +80,8 @@ class UniversityController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize( 'update', Auth::user() );
         $university = University::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $university );
 
         return view( 'universities.edit' )->with( 'university', $university );
     }
@@ -95,7 +95,9 @@ class UniversityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize( 'update', Auth::user() );
+        $university = University::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $university );
+
         $university = University::updateAttributes( $request, $id );
 
         if( $university )
