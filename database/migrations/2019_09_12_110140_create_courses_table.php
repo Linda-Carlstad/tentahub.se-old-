@@ -18,9 +18,9 @@ class CreateCoursesTable extends Migration
             $table->integer('association_id');
             $table->string('name');
             $table->string('code');
-            $table->longText( 'description' );
+            $table->longText( 'description' )->nullable();
             $table->decimal( 'points', 8, 1 );
-            $table->string( 'url' );
+            $table->string( 'url' )->nullable();
             $table->timestamps();
         });
     }
