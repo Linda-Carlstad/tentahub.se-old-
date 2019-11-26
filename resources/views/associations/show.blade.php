@@ -18,19 +18,23 @@
                 <ul>
                     @foreach( $courses as $course )
                         <li>
-                            <a href="/">
+                            <a href="{{ route( 'courses.show', $course->id ) }}">
                                 {{ $course->name }}
                             </a>
                         </li>
                     @endforeach
                 </ul>
-                <br>
-                <a class="button is-primary" href="/">Lägg till kurs</a>
+                @auth
+                    @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association == $association )
+                        <br>
+                        <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>
+                    @endif
+                @endauth
             @else
                 <h3 class="subtitle">Inga kurser har lagts till på den här föreningen, vill du lägga till en nu?</h3>
                 @auth
                     @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association == $association )
-                        <a class="button is-primary" href="/">Lägg till kurs</a>
+                        <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>
                     @endif
                 @endauth
             @endif
