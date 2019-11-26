@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\University;
 use App\User;
 use App\Association;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -18,7 +19,7 @@ class AssociationPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,18 +31,23 @@ class AssociationPolicy
      */
     public function view(User $user, Association $association)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can create associations.
      *
      * @param  \App\User  $user
+     * @param  \App\University  $university
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, University $university)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'admin' && $user->university === $university )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -53,7 +59,11 @@ class AssociationPolicy
      */
     public function update(User $user, Association $association)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association === $association )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -65,7 +75,11 @@ class AssociationPolicy
      */
     public function delete(User $user, Association $association)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'admin' && $user->association === $association )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,7 +91,11 @@ class AssociationPolicy
      */
     public function restore(User $user, Association $association)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association === $association )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -89,6 +107,10 @@ class AssociationPolicy
      */
     public function forceDelete(User $user, Association $association)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association === $association )
+        {
+            return true;
+        }
+        return false;
     }
 }
