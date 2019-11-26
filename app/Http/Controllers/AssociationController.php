@@ -52,7 +52,9 @@ class AssociationController extends Controller
      */
     public function store( Request $request )
     {
-        $this->authorize( 'create', Auth::user(), Auth::user()->university );
+        $university = University::findOrFail( $request->university_id );
+        $this->authorize( 'create', Auth::user(), $university );
+
         $association = Association::store( $request );
 
         if( $association )
@@ -125,7 +127,7 @@ class AssociationController extends Controller
     public function destroy($id)
     {
         $association = Association::findOrFail( $id );
-        $this->authorize( 'delete', Auth::user() );
+        $this->authorize( 'delete', Auth::user(), $association );
 
         $association->delete();
         return redirect()->back()->with( 'success', 'Föreningen borttagen, ohh, scary...' );
