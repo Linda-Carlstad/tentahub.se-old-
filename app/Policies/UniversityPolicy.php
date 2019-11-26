@@ -57,7 +57,7 @@ class UniversityPolicy
      */
     public function update(User $user, University $university)
     {
-        if( $user->role === 'super' || $user->role >= 'admin' && $user->association->university === $university )
+        if( $user->role === 'super' || $user->role >= 'admin' && $user->university === $university )
         {
             return true;
         }
