@@ -25,6 +25,14 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Ändra</button>
+                            </div>
+                            <div class="control">
+                                <a href="{{ url()->previous() }}" class="button is-link is-light">Avbryt</a>
+                            </div>
+                        </div>
                     </form>
                     <hr>
                 @endif
@@ -63,12 +71,19 @@
                             <input id="confirmPassword" class="input {{ $errors->has('confirmPassword') ? ' is-danger' : '' }}" type="password" name="confirmPassword" placeholder="Bekräfta lösenord" required>
                         </div>
                         @error( 'confirmPassword' )
-                        <span class="has-text-danger" role="alert">
-                        {{ $message }}
-                    </span>
+                            <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
-
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Ändra</button>
+                        </div>
+                        <div class="control">
+                            <a href="{{ url()->previous() }}" class="button is-link is-light">Avbryt</a>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="column is-half is-widescreen level-item">
