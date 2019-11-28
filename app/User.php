@@ -66,13 +66,10 @@ class User extends Authenticatable
 
     public static function updateInfo( Request $request, User $user )
     {
+
         User::validateInfo( $request, $user );
-        $user->name           = $request->name;
-        $user->association_id = $request->association_id;
-        if( $request->email )
-        {
-            $user->email = $request->email;
-        }
+
+        $user->name = $request->name;
         $user->save();
 
         return true;
@@ -96,7 +93,7 @@ class User extends Authenticatable
     {
         $request->validate( [
             'name'           => 'required|string',
-            'email'          => 'email',
+            'email'          => 'required|email',
             'association_id' => 'required|integer',
         ] );
     }

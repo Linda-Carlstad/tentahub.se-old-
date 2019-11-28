@@ -9,15 +9,17 @@
 
                 @if( $user->valid )
                     <h2 class="title is-5">Byt namn</h2>
-                    <form class="" action="{{ '/user/' . $user->id }}" method="post">
+                    <form class="" action="{{ route( 'users.update', $user->id ) }}" method="post">
                         @csrf
                         @method( 'PATCH' )
                         <input type="hidden" name="type" value="info">
+                        <input type="hidden" name="email" value="{{ $user->email }}">
+                        <input type="hidden" name="association_id" value="{{ $user->association->id }}">
 
                         <div class="field">
                             <label for="name" class="label">Namn</label>
                             <div class="control">
-                                <input id="name" class="input" type="text" name="name" placeholder="Namn" required />
+                                <input id="name" class="input" type="text" name="name" placeholder="Namn" value="{{ $user->name }}" required />
                             </div>
                             @error( 'name' )
                                 <span class="has-text-danger" role="alert">
@@ -38,7 +40,7 @@
                 @endif
 
                 <h2 class="title is-5">Byt lösenord</h2>
-                <form class="" action="{{ '/user/' . $user->id }}" method="post">
+                <form class="" action="{{ route( 'users.update', $user->id ) }}" method="post">
                     @csrf
                     @method( 'PATCH' )
                     <input type="hidden" name="type" value="security">

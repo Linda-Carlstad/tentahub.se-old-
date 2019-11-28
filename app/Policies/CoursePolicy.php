@@ -43,7 +43,7 @@ class CoursePolicy
      */
     public function create(User $user, Association $association)
     {
-        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association === $association )
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association_id === $association->id )
         {
             return true;
         }
@@ -59,7 +59,7 @@ class CoursePolicy
      */
     public function update(User $user, Course $course)
     {
-        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course->id === $course->id )
         {
             return true;
         }
@@ -75,7 +75,7 @@ class CoursePolicy
      */
     public function delete(User $user, Course $course)
     {
-        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course->id === $course->id )
         {
             return true;
         }
@@ -91,7 +91,7 @@ class CoursePolicy
      */
     public function restore(User $user, Course $course)
     {
-        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course === $course )
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course->id === $course->id )
         {
             return true;
         }
