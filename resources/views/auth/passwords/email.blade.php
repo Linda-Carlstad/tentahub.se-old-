@@ -26,7 +26,7 @@
                             <button class="button is-primary" type="submit">Skicka</button>
                         </div>
                         <div class="control">
-                            <button class="button is-light" href="{{ url()->previous() }}">Avbryt</button>
+                            <a class="button is-light" href="{{ url()->previous() }}">Avbryt</a>
                         </div>
                     </div>
                     <a class="is-link" href="{{ route( 'login-form' ) }}">Logga in istället?</a>
@@ -34,7 +34,7 @@
             </div>
             <div class="column is-half is-widescreen level-item has-text-centered">
                 <figure class="image">
-                    <img src="https://via.placeholder.com/400x400.png/09f/fff" />
+                    <img src="{{ asset( '/img/logo.png' ) }}" />
                 </figure>
             </div>
         </div>

@@ -49,14 +49,14 @@
                             <button class="button is-primary" type="submit">Återställ lösenordet</button>
                         </div>
                         <div class="control">
-                            <button class="button is-light" href="{{ route( 'dashboard' ) }}">Avbryt</button>
+                            <a class="button is-light" href="{{ url()->previous() }}">Avbryt</a>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="column is-half is-widescreen level-item has-text-centered">
                 <figure class="image">
-                    <img src="https://via.placeholder.com/400x400.png/09f/fff" />
+                    <img src="{{ asset( '/img/logo.png' ) }}" />
                 </figure>
             </div>
         </div>

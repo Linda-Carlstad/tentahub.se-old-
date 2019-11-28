@@ -34,8 +34,8 @@
                     </div>
                     <div class="field">
                         <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox">
+                            <label class="checkbox" for="remember_token">
+                                <input type="checkbox" name="remember_token" id="remember_token">
                                 Kom ihåg mig!
                             </label>
                         </div>
@@ -45,7 +45,7 @@
                             <button class="button is-primary" type="submit">Logga in</button>
                         </div>
                         <div class="control">
-                            <a class="button is-light" href="{{ route( 'dashboard' )  }}">Avbryt</a>
+                            <a class="button is-light" href="{{ route( 'dashboard' ) }}">Avbryt</a>
                         </div>
                     </div>
                     <a class="is-link" href="{{ route( 'password.request' ) }}">Glömt ditt lösenord?</a>
@@ -53,7 +53,7 @@
             </div>
             <div class="column is-half is-widescreen level-item has-text-centered">
                 <figure class="image">
-                    <img src="https://via.placeholder.com/400x400.png/09f/fff" />
+                    <img src="{{ asset( '/img/logo.png' ) }}" />
                 </figure>
             </div>
         </div>
