@@ -38,6 +38,7 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $this->authorize( 'create', Auth::user() );
         $universities = University::all();
 
         return view( 'courses.create' )->with( 'universities', $universities );
@@ -51,6 +52,9 @@ class CourseController extends Controller
      */
     public function store( Request $request )
     {
+        $ascociation = Association::findOrFail( $request->association_id );
+        $this->authorize( 'create', Auth::user(), $ascociation );
+
         $course = Course::store( $request );
 
         if( $course )
@@ -84,6 +88,8 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $course );
+
         $associations = Association::all();
         $universities = University::all();
 
@@ -99,6 +105,9 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $course = Course::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $course );
+
         $course = Course::updateAttributes( $request, $id );
 
         if( $course )
@@ -118,6 +127,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $course );
 
         $course->delete();
         return redirect()->back()->with( 'success', 'Kurs borttagen, ohh, scary...' );

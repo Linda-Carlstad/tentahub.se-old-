@@ -19,8 +19,8 @@ class CreateUniversitiesTable extends Migration
             $table->string('nickname');
             $table->string('city');
             $table->string('country');
-            $table->longText('description');
-            $table->string('url');
+            $table->longText('description')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

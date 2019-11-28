@@ -46,8 +46,8 @@ class Course extends Model
             'name'           => 'required|string',
             'code'           => 'required|string',
             'association_id' => 'required|integer',
-            'url'            => 'string',
-            'description'    => 'string',
+            'url'            => 'nullable|string',
+            'description'    => 'nullable|string',
             'points'         => 'required|numeric',
         ] );
     }

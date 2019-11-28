@@ -50,8 +50,8 @@ class Association extends Model
             [
                 'name'          => 'required|string',
                 'university_id' => 'required|integer',
-                'url'           => 'string',
-                'description'   => 'string'
+                'url'           => 'nullable|string',
+                'description'   => 'nullable|string'
             ] );
     }
 }

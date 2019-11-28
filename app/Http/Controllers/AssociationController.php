@@ -38,6 +38,7 @@ class AssociationController extends Controller
      */
     public function create()
     {
+        $this->authorize( 'create', Auth::user(), Auth::user()->university );
         $universities = University::all();
 
         return view( 'associations.create' )->with( 'universities', $universities );
@@ -51,6 +52,9 @@ class AssociationController extends Controller
      */
     public function store( Request $request )
     {
+        $university = University::findOrFail( $request->university_id );
+        $this->authorize( 'create', Auth::user(), $university );
+
         $association = Association::store( $request );
 
         if( $association )
@@ -84,6 +88,8 @@ class AssociationController extends Controller
     public function edit($id)
     {
         $association = Association::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $association );
+
         $universities = University::all();
 
         return view( 'associations.edit' )->with( 'association', $association )->with( 'universities', $universities );;
@@ -98,6 +104,10 @@ class AssociationController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $association = Association::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $association );
+
         $association = Association::updateAttributes( $request, $id );
 
         if( $association )
@@ -117,6 +127,7 @@ class AssociationController extends Controller
     public function destroy($id)
     {
         $association = Association::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $association );
 
         $association->delete();
         return redirect()->back()->with( 'success', 'Föreningen borttagen, ohh, scary...' );
