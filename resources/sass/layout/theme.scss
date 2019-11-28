@@ -1,0 +1,38 @@
+:root {
+    --color-scheme-background: #333;
+    --color-scheme-background-light: #333;
+    --color-scheme-text-color: #FFF;
+    --color-scheme-text-color-invert: #000;
+
+    // Add more global variables
+}
+/*
+** Light-theme : Set variables **
+*/
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-scheme-background: rgba(255,255,255, 1);
+        --color-scheme-background-light: #d9d9d9;
+        --color-scheme-text-color: black;
+        --color-scheme-text-color-invert: white;
+    }
+}
+/*
+** Dark-theme : Set variables **
+*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-scheme-background: #1A1A1A;
+        --color-scheme-background-light: #343434;
+        --color-scheme-text-color: white;
+        --color-scheme-text-color-invert: black;
+    }
+}
+/*
+** Usage of variables **
+*/
+html {
+    background: var(--color-scheme-background);
+    color: var(--color-scheme-text-color);
+
+}
