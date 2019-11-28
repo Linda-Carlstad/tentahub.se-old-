@@ -1,16 +1,30 @@
+body {
+    font-size: 16px;
+}
+
 hr {
     background: $primary-background;
     height: 5px;
 }
 
-p, h1, h2, h3, h4, h5, h6, strong, b, i, .label, .checkbox, .title, .subtitle {
+p, h1, h2, h3, h4, h5, h6, strong, b, i, .title, .subtitle {
     color: var(--color-scheme-text-color);
 }
 
 a {
-    color: $secondary;
+    color: var(--color-scheme-text-color);
+
     &:hover {
-        color: $secondary-dark;
+        color: $primary-dark;
+    }
+
+    &.is-primary
+    {
+        color: $primary;
+
+        &:hover {
+            color: $primary-dark;
+        }
     }
 }
 

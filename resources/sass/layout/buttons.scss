@@ -1,9 +1,9 @@
 .button.is-primary {
-    background: $secondary;
+    background: $primary;
     transition-duration: .2s;
 
     &:hover {
-        background: $secondary-dark;
+        background: $primary-dark;
         transition-duration: .2s;
     }
 }

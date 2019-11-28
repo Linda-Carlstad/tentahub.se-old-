@@ -1,3 +1,7 @@
+.label, .checkbox {
+    color: var(--color-scheme-text-color) !important;
+}
+
 .textarea, .input, .select > select {
     border-radius: 0;
     border: 0;

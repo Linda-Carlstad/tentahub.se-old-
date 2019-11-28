@@ -14152,8 +14152,12 @@ html {
   color: var(--color-scheme-text-color);
 }
 
+body {
+  font-size: 16px;
+}
+
 hr {
-  background: linear-gradient(170deg, #7d012b, #3867D6);
+  background: linear-gradient(170deg, #ff3f34, #f7b731);
   height: 5px;
 }
 
@@ -14167,19 +14171,25 @@ h6,
 strong,
 b,
 i,
-.label,
-.checkbox,
 .title,
 .subtitle {
   color: var(--color-scheme-text-color);
 }
 
 a {
-  color: #3867D6;
+  color: var(--color-scheme-text-color);
 }
 
 a:hover {
-  color: #2550b6;
+  color: #ff0f01;
+}
+
+a.is-primary {
+  color: #ff3f34;
+}
+
+a.is-primary:hover {
+  color: #ff0f01;
 }
 
 .card {
@@ -14209,6 +14219,11 @@ a:hover {
   padding: 5rem 1.5rem;
 }
 
+.label,
+.checkbox {
+  color: var(--color-scheme-text-color) !important;
+}
+
 .textarea,
 .input,
 .select > select {
@@ -14216,7 +14231,7 @@ a:hover {
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid #7d012b;
+  border-bottom: 1px solid #ff3f34;
   box-shadow: none;
   color: var(--color-scheme-text-color);
 }
@@ -14228,7 +14243,7 @@ a:hover {
 .select > select:focus,
 .select > select:hover {
   box-shadow: none;
-  border-bottom: 1px solid #4a011a;
+  border-bottom: 1px solid #ff0f01;
 }
 
 .textarea::-webkit-input-placeholder, .input::-webkit-input-placeholder, .select > select::-webkit-input-placeholder {
@@ -14284,7 +14299,7 @@ a:hover {
 }
 
 .navbar {
-  background: linear-gradient(170deg, #7d012b, #3867D6);
+  background: linear-gradient(170deg, #ff3f34, #f7b731);
 }
 
 .navbar a.navbar-burger {
@@ -14292,7 +14307,7 @@ a:hover {
 }
 
 .navbar a.navbar-burger:hover {
-  color: #7d012b;
+  color: #ff3f34;
 }
 
 .navbar a.navbar-link {
@@ -14305,7 +14320,7 @@ a:hover {
 }
 
 .navbar a.navbar-link:not(.is-arrowless)::after {
-  border-color: #7d012b;
+  border-color: #ff3f34;
 }
 
 .navbar a.navbar-item {
@@ -14337,7 +14352,7 @@ a:hover {
 .navbar .navbar-item.has-dropdown .navbar-dropdown {
   border-top-color: var(--color-scheme-background-alt);
   background-color: var(--color-scheme-background);
-  border-top: 2px solid linear-gradient(170deg, #7d012b, #3867D6);
+  border-top: 2px solid linear-gradient(170deg, #ff3f34, #f7b731);
 }
 
 .navbar .navbar-item.has-dropdown .navbar-dropdown a.navbar-item {
@@ -14349,13 +14364,13 @@ a:hover {
 }
 
 .button.is-primary {
-  background: #3867D6;
+  background: #ff3f34;
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
 }
 
 .button.is-primary:hover {
-  background: #2550b6;
+  background: #ff0f01;
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
 }
