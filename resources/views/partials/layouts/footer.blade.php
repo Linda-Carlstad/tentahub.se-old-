@@ -71,7 +71,7 @@
         </div>
     </div>
     <hr>
-    <div class="content has-text-centered">
+    <div class="content legal has-text-centered">
         <p>
             <strong>Tentahub</strong> by <a href="https://lindacarlstad.se">Linda Carlstad</a>.
             The source code is licensed

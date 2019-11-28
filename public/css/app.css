@@ -14298,6 +14298,14 @@ a.is-primary:hover {
   padding: 3rem;
 }
 
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .legal a {
+  color: #ff3f34;
+}
+
 .navbar {
   background: linear-gradient(170deg, #ff3f34, #f7b731);
 }
