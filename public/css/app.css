@@ -14104,9 +14104,109 @@ label {
   font-family: "Noto Sans", sans-serif;
 }
 
+:root {
+  --color-scheme-background: #333;
+  --color-scheme-background-light: #333;
+  --color-scheme-background-diff: #333;
+  --color-scheme-text-color: white;
+  --color-scheme-text-color-diff: #404040;
+  --color-scheme-text-color-invert: #000;
+}
+
+/*
+** Light-theme : Set variables **
+*/
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-scheme-background: #fff;
+    --color-scheme-background-alt: #efefef;
+    --color-scheme-background-diff: #dbdbdb;
+    --color-scheme-text-color: #000;
+    --color-scheme-text-color-diff: #404040;
+    --color-scheme-text-color-invert: #fff;
+  }
+}
+
+/*
+** Dark-theme : Set variables **
+*/
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-scheme-background: #1A1A1A;
+    --color-scheme-background-alt: #343434;
+    --color-scheme-background-diff: #474747;
+    --color-scheme-text-color: #fff;
+    --color-scheme-text-color-diff: #bfbfbf;
+    --color-scheme-text-color-invert: #000;
+  }
+}
+
+/*
+** Usage of variables **
+*/
+
+html {
+  background: var(--color-scheme-background);
+  color: var(--color-scheme-text-color);
+}
+
 hr {
-  background: linear-gradient(170deg, #660023, #3867D6);
+  background: linear-gradient(170deg, #7d012b, #3867D6);
   height: 5px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b,
+i,
+.label,
+.checkbox,
+.title,
+.subtitle {
+  color: var(--color-scheme-text-color);
+}
+
+a {
+  color: #3867D6;
+}
+
+a:hover {
+  color: #2550b6;
+}
+
+.card {
+  background-color: var(--color-scheme-background-alt);
+}
+
+.card-footer {
+  border-top-color: var(--color-scheme-text-color-diff);
+}
+
+.card-footer-item {
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.card-footer-item:hover {
+  background-color: var(--color-scheme-background-diff);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.card-footer-item:not(:last-child) {
+  border-right-color: var(--color-scheme-text-color-diff);
+}
+
+.section {
+  padding: 5rem 1.5rem;
 }
 
 .textarea,
@@ -14116,8 +14216,9 @@ hr {
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid #660023;
+  border-bottom: 1px solid #7d012b;
   box-shadow: none;
+  color: var(--color-scheme-text-color);
 }
 
 .textarea:focus,
@@ -14127,15 +14228,63 @@ hr {
 .select > select:focus,
 .select > select:hover {
   box-shadow: none;
-  border-bottom: 1px solid #330012;
+  border-bottom: 1px solid #4a011a;
+}
+
+.textarea::-webkit-input-placeholder, .input::-webkit-input-placeholder, .select > select::-webkit-input-placeholder {
+  color: var(--color-scheme-text-color-diff) !important;
+}
+
+.textarea::-moz-placeholder, .input::-moz-placeholder, .select > select::-moz-placeholder {
+  color: var(--color-scheme-text-color-diff) !important;
+}
+
+.textarea:-ms-input-placeholder, .input:-ms-input-placeholder, .select > select:-ms-input-placeholder {
+  color: var(--color-scheme-text-color-diff) !important;
+}
+
+.textarea::-ms-input-placeholder, .input::-ms-input-placeholder, .select > select::-ms-input-placeholder {
+  color: var(--color-scheme-text-color-diff) !important;
+}
+
+.textarea::placeholder,
+.input::placeholder,
+.select > select::placeholder {
+  color: var(--color-scheme-text-color-diff) !important;
+}
+
+.file-cta,
+.file-name {
+  background-color: var(--color-scheme-background-alt);
+  border: 1px solid var(--color-scheme-background-diff);
+  color: var(--color-scheme-text-color);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.file-cta:hover,
+.file-name:hover {
+  border: 1px solid var(--color-scheme-text-color);
+}
+
+.file-cta:hover {
+  background-color: var(--color-scheme-background-diff);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.file-label:hover .file-cta {
+  border: 1px solid var(--color-scheme-text-color) !important;
 }
 
 .footer {
-  padding: 2.5rem;
+  border-top: 10px solid var(--color-scheme-background-diff);
+  background-color: var(--color-scheme-background-alt);
+  padding: 3rem;
 }
 
 .navbar {
-  background: linear-gradient(170deg, #660023, #3867D6);
+  background: linear-gradient(170deg, #7d012b, #3867D6);
 }
 
 .navbar a.navbar-burger {
@@ -14143,7 +14292,7 @@ hr {
 }
 
 .navbar a.navbar-burger:hover {
-  color: #660023;
+  color: #7d012b;
 }
 
 .navbar a.navbar-link {
@@ -14151,46 +14300,64 @@ hr {
 }
 
 .navbar a.navbar-link:hover {
-  background-color: white;
+  background-color: var(--color-scheme-background);
   cursor: pointer;
 }
 
 .navbar a.navbar-link:not(.is-arrowless)::after {
-  border-color: #660023;
+  border-color: #7d012b;
 }
 
 .navbar a.navbar-item {
   color: white;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
 }
 
 .navbar a.navbar-item:hover {
-  background-color: white;
-  color: #4d4d4d;
+  background-color: var(--color-scheme-background);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  color: var(--color-scheme-text-color);
+}
+
+.navbar .navbar-item.has-dropdown:hover {
+  background-color: var(--color-scheme-background);
 }
 
 .navbar .navbar-item.has-dropdown:hover a.navbar-link {
-  background-color: linear-gradient(170deg, #660023, #3867D6);
-  color: #4d4d4d;
+  background-color: var(--color-scheme-background);
+  color: var(--color-scheme-text-color);
+}
+
+.navbar .navbar-item.has-dropdown:hover a.navbar-link:hover {
+  background-color: var(--color-scheme-background-alt);
 }
 
 .navbar .navbar-item.has-dropdown .navbar-dropdown {
-  border-top: 2px solid linear-gradient(170deg, #660023, #3867D6);
+  border-top-color: var(--color-scheme-background-alt);
+  background-color: var(--color-scheme-background);
+  border-top: 2px solid linear-gradient(170deg, #7d012b, #3867D6);
 }
 
 .navbar .navbar-item.has-dropdown .navbar-dropdown a.navbar-item {
-  color: #4d4d4d;
+  color: var(--color-scheme-text-color);
+}
+
+.navbar .navbar-item.has-dropdown .navbar-dropdown a.navbar-item:hover {
+  background-color: var(--color-scheme-background-alt);
 }
 
 .button.is-primary {
   background: #3867D6;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
 }
 
 .button.is-primary:hover {
   background: #2550b6;
-}
-
-.section {
-  padding: 5rem 1.5rem;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
 }
 
 .notification {

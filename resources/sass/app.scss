@@ -8,14 +8,13 @@
 @import 'general/typography';
 @import 'general/layout';
 @import 'general/gradients';
+@import "general/theme";
 
 //Layout
-@import "layout/theme";
 @import "layout/common";
 @import "layout/forms";
 @import "layout/footer";
 @import "layout/navbar";
 @import "layout/buttons";
-@import "layout/section";
 @import "layout/flash-messages";
 

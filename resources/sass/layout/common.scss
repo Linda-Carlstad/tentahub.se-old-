@@ -3,6 +3,40 @@ hr {
     height: 5px;
 }
 
-p, h1, h2, h3, h4, h5, h6, .title, .subtitle {
+p, h1, h2, h3, h4, h5, h6, strong, b, i, .label, .checkbox, .title, .subtitle {
     color: var(--color-scheme-text-color);
+}
+
+a {
+    color: $secondary;
+    &:hover {
+        color: $secondary-dark;
+    }
+}
+
+// Card
+.card {
+    background-color: var(--color-scheme-background-alt);
+
+    &-footer {
+        border-top-color: var(--color-scheme-text-color-diff);
+
+        &-item {
+            transition-duration: .2s;
+
+            &:hover {
+                background-color: var(--color-scheme-background-diff);
+                transition-duration: .2s;
+            }
+
+            &:not(:last-child) {
+                border-right-color: var(--color-scheme-text-color-diff);
+            }
+        }
+    }
+}
+
+// Section
+.section {
+    padding: 5rem 1.5rem;
 }

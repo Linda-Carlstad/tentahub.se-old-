@@ -1,6 +1,6 @@
 .footer
 {
-    border-top: 10px solid grey;
-    background-color: var( --color-scheme-background-light );
+    border-top: 10px solid var(--color-scheme-background-diff);
+    background-color: var(--color-scheme-background-alt);
     padding: 3rem;
 }
