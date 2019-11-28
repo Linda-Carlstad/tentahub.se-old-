@@ -16,7 +16,7 @@ class CourseController extends Controller
     {
         $this->middleware( 'verified' )->except( 'index', 'show' );
         $this->middleware( 'valid_user' )->except( 'index', 'show' );
-        $this->middleware( 'admin' )->except( 'index', 'show' );
+        $this->middleware( 'moderator' )->except( 'index', 'show' );
     }
 
     /**
@@ -38,7 +38,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $this->authorize( 'create', Auth::user() );
+        $this->authorize( 'create', Auth::user(), Auth::user()->association );
         $universities = University::all();
 
         return view( 'courses.create' )->with( 'universities', $universities );
