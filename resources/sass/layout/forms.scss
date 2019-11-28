@@ -5,9 +5,40 @@
     background: transparent;
     border-bottom: 1px solid $primary;
     box-shadow: none;
+    color: var(--color-scheme-text-color);
     &:focus, &:hover {
         -webkit-box-shadow: none;
         box-shadow: none;
         border-bottom: 1px solid $primary-dark;
+    }
+
+    &::placeholder {
+        color: var(--color-scheme-text-color-diff) !important;
+    }
+}
+
+.file-cta, .file-name {
+    background-color: var(--color-scheme-background-alt);
+    border: 1px solid var(--color-scheme-background-diff);
+    color: var(--color-scheme-text-color);
+    transition-duration: .2s;
+
+    &:hover {
+        border: 1px solid var(--color-scheme-text-color);
+    }
+}
+
+.file-cta {
+    &:hover {
+        background-color: var(--color-scheme-background-diff);
+        transition-duration: .2s;
+    }
+}
+
+.file-label {
+    &:hover {
+        .file-cta {
+            border: 1px solid var(--color-scheme-text-color) !important;
+        }
     }
 }

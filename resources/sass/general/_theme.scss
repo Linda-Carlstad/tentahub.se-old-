@@ -1,0 +1,43 @@
+:root {
+    --color-scheme-background: #333;
+    --color-scheme-background-light: #333;
+    --color-scheme-background-diff: #333;
+    --color-scheme-text-color: white;
+    --color-scheme-text-color-diff: #404040;
+    --color-scheme-text-color-invert: #000;
+
+    // Add more global variables
+}
+/*
+** Light-theme : Set variables **
+*/
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-scheme-background: #fff;
+        --color-scheme-background-alt: #efefef;
+        --color-scheme-background-diff: #dbdbdb;
+        --color-scheme-text-color: #000;
+        --color-scheme-text-color-diff: #404040;
+        --color-scheme-text-color-invert: #fff;
+    }
+}
+/*
+** Dark-theme : Set variables **
+*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-scheme-background: #1A1A1A;
+        --color-scheme-background-alt: #343434;
+        --color-scheme-background-diff: #474747;
+        --color-scheme-text-color: #fff;
+        --color-scheme-text-color-diff: #bfbfbf;
+        --color-scheme-text-color-invert: #000;
+    }
+}
+/*
+** Usage of variables **
+*/
+html {
+    background: var(--color-scheme-background);
+    color: var(--color-scheme-text-color);
+}

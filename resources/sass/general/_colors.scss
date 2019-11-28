@@ -2,14 +2,12 @@
 $primary: #f79d00;
 $secondary: #64f38c;
 
-$primary: #660023;
+$primary: #7d012b;
 $primary-dark: darken( $primary, 10% );
 $secondary: #3867D6;
 $secondary-dark: darken( $secondary, 10% );
 
-$dark: #121212;
-$dark-placeholder: #4a4a4a;
-$dark-text: #FFF;
+
 
 $blue: #3490dc;
 $indigo: #6574cd;
@@ -21,3 +19,20 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+
+// Dark mode
+$dark-bg: #1a1a1a;
+$dark-bg-alt: #343434;
+$dark-bg-diff: #474747;
+$dark-text: #fff;
+$dark-text-diff: #bfbfbf;
+$dark-text-invert: #000;
+
+// Light mode
+$light-bg: #fff;
+$light-bg-alt: #efefef;
+$light-bg-diff: #dbdbdb;
+$light-text: #000;
+$light-text-diff: #404040;
+$light-text-invert: #fff;

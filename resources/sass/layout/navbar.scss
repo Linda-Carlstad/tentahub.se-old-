@@ -13,7 +13,7 @@
         color: white;
 
         &:hover {
-            background-color: white;
+            background-color: var(--color-scheme-background);
             cursor: pointer;
         }
 
@@ -24,25 +24,37 @@
 
     a.navbar-item  {
         color: white;
+        transition-duration: .2s;
 
         &:hover {
-            background-color: white;
-            color: darken( grey, 20% );
+            background-color: var(--color-scheme-background);
+            transition-duration: .2s;
+            color: var(--color-scheme-text-color);
         }
     }
 
     .navbar-item.has-dropdown {
         &:hover {
+            background-color: var(--color-scheme-background);
             a.navbar-link {
-                background-color: $primary-background;
-                color: darken( grey, 20% );
+                background-color: var(--color-scheme-background);
+                color: var(--color-scheme-text-color);
+
+                &:hover {
+                    background-color: var(--color-scheme-background-alt);
+                }
             }
         }
 
         .navbar-dropdown {
+            border-top-color: var(--color-scheme-background-alt);
+            background-color: var(--color-scheme-background);
             border-top: 2px solid $primary-background;
             a.navbar-item {
-                color: darken( grey, 20% );
+                color: var(--color-scheme-text-color);
+                &:hover {
+                    background-color: var(--color-scheme-background-alt);
+                }
             }
         }
     }
