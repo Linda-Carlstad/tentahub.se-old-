@@ -2,3 +2,7 @@ hr {
     background: $primary-background;
     height: 5px;
 }
+
+p, h1, h2, h3, h4, h5, h6, .title, .subtitle {
+    color: var(--color-scheme-text-color);
+}
