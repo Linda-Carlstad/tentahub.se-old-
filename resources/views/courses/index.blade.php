@@ -6,7 +6,7 @@
         <h1 class="title">Kurser</h1>
         <p>Se alla kurser nedan</p>
         @auth
-            @if( Auth::user()->role >= 'moderator' )
+            @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' || Auth::user()->role === 'moderator' )
                 <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>
             @endif
         @endauth
@@ -34,7 +34,7 @@
                         Läs mer
                     </a>
                     @auth
-                        @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association === $course->association )
+                        @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
                             <a href="{{ route( 'courses.edit', $course->id ) }}" class="card-footer-item">
                                 Redigera
                             </a>

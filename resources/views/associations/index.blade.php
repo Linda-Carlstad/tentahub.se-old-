@@ -28,7 +28,7 @@
                         Läs mer
                     </a>
                     @auth
-                        @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association === $association )
+                        @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->id === $association->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $association->id )
                             <a href="{{ route( 'associations.edit', $association->id ) }}" class="card-footer-item">
                                 Redigera
                             </a>
