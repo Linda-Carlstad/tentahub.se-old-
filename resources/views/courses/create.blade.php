@@ -42,8 +42,7 @@
                         </span>
                     @enderror
                 </div>
-                @dd( Auth::user()->role > 'admin' )
-                @if( Auth::user()->role >= 'admin' )
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin'  )
                     <div class="field">
                         <label for="association_id" class="label">Förening *</label>
                         <div class="control">
