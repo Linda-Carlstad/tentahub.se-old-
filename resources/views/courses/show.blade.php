@@ -21,19 +21,19 @@
                     @endforeach
                 </ul>
                 <br>
-                @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->exam->univerity == $course )
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
                     <a class="button is-primary" href="{{ route( 'exams.create' ) }}">Lägg till tenta</a>
                 @endif
             @else
                 <h3 class="subtitle">Inga tentor har lagts till på den här kursen, vill du lägga till en?</h3>
                 @auth
-                    @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->exam->univerity == $course )
+                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
                         <a class="button is-primary" href="{{ route( 'exams.create' ) }}">Lägg till tenta</a>
                     @endif
                 @endauth
             @endif
             @auth
-                @if( Auth::user()->role === 'super' || Auth::user()->role >= 'moderator' && Auth::user()->association == $course->association )
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
                     <hr>
                     <h3 class="subtitle is-4">Ändra uppgifter</h3>
                     <a class="button is-primary" href="{{ route( 'courses.edit', $course->id ) }}">Ändra uppggifter</a>
