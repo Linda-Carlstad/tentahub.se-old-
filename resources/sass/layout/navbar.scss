@@ -18,7 +18,7 @@
         }
 
         &:not(.is-arrowless)::after {
-            border-color: $primary;
+            border-color: var(--color-scheme-text-color);
         }
     }
 

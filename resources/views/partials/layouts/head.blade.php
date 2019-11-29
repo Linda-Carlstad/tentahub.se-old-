@@ -33,10 +33,10 @@
         window.cookieconsent.initialise({
             "palette": {
                 "popup": {
-                    "background": "#343a40"
+                    "background": "#1a1a1a"
                 },
                 "button": {
-                    "background": "#660023",
+                    "background": "#ff3f34",
                     "color": "#fff"
                 }
             },

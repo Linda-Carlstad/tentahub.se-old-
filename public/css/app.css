@@ -14152,10 +14152,6 @@ html {
   color: var(--color-scheme-text-color);
 }
 
-body {
-  font-size: 16px;
-}
-
 hr {
   background: linear-gradient(170deg, #ff3f34, #f7b731);
   height: 5px;
@@ -14328,7 +14324,7 @@ a.is-primary:hover {
 }
 
 .navbar a.navbar-link:not(.is-arrowless)::after {
-  border-color: #ff3f34;
+  border-color: var(--color-scheme-text-color);
 }
 
 .navbar a.navbar-item {
