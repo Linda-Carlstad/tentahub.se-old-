@@ -37,6 +37,9 @@
             <a class="navbar-item" href="{{ route( 'courses.index' ) }}">
                 Kurser
             </a>
+            <a class="navbar-item" href="{{ route( 'exams.index' ) }}">
+                Tentor
+            </a>
         </div>
         <div class="navbar-end">
             {{-- Right side of the navbar --}}
