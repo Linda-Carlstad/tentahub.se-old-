@@ -55,7 +55,10 @@
         {
             if( token )
             {
-                document.getElementById( 'recaptcha' ).value = token;
+                if( document.getElementById( 'recaptcha' ) )
+                {
+                    document.getElementById( 'recaptcha' ).value = token;
+                }
             }
         });
     });
