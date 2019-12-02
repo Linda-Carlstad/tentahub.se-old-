@@ -18,7 +18,9 @@ class CreateExamsTable extends Migration
             $table->integer('course_id');
             $table->string('file_name');
             $table->string('name');
-            $table->bigInteger('views')->nullable();
+            $table->string( 'path' );
+            $table->bigInteger('views')->default( 0 );
+            $table->bigInteger('downloads')->default( 0 );
             $table->decimal('rating')->nullable();
             $table->string('grade')->nullable();
             $table->decimal('points')->nullable();
