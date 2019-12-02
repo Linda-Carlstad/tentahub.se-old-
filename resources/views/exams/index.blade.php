@@ -13,15 +13,41 @@
                 @else
                     <div class="list is-hoverable">
                         @foreach( $exams as $exam )
-                            <p class="list-item">
-                                <a href="{{ route( 'exams.show', $exam->id ) }}">
-                                    {{ $exam->name }}
+                            <div class="list-item">
+                                <p class="exam">
+                                    <a href="{{ route( 'exams.show', $exam->id ) }}">
+                                        {{ $exam->name }}
+                                    </a>
+                                    -
+                                    <a href="{{ route( 'exams.download', $exam->id ) }}">
+                                        Ladda ner
+                                    </a>
+                                </p>
+                                <br>
+                                <a href="{{ route( 'courses.show', $exam->course->id ) }}">
+                                    {{ $exam->course->name }} ({{ $exam->course->code }})
+                                </a>
+                                <br>
+                                <a href="{{ route( 'associations.show', $exam->course->association->id ) }}">
+                                    {{ $exam->course->association->name }}
                                 </a>
                                 -
-                                <a href="{{ route( 'exams.download', $exam->id ) }}">
-                                    Ladda ner
+                                <a href="{{ route( 'universities.show', $exam->course->association->university->id ) }}">
+                                    {{ $exam->course->association->university->name }}
                                 </a>
-                            </p>
+                                @auth
+                                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
+                                        <hr>
+                                        <form class="form" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
+                                            @csrf
+                                            @method( 'DELETE' )
+                                            <button class="button is-link" type="submit">
+                                                Ta bort
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
                         @endforeach
                     </div>
                 @endif

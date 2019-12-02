@@ -10,7 +10,7 @@
 @import 'general/gradients';
 @import "general/theme";
 
-//Layout
+// Layout
 @import "layout/common";
 @import "layout/forms";
 @import "layout/footer";
@@ -18,3 +18,5 @@
 @import "layout/buttons";
 @import "layout/flash-messages";
 
+// Exams
+@import "exams/general";

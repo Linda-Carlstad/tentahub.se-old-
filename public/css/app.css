@@ -14391,3 +14391,7 @@ a.is-primary:hover {
   margin-top: 2rem;
 }
 
+.list-item .exam a {
+  font-size: 1.5rem;
+}
+
