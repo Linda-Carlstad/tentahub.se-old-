@@ -20,9 +20,11 @@
                     @endforeach
                 </ul>
                 <br>
-                @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
-                    <a class="button is-primary" href="{{ route( 'associations.create' ) }}">Lägg till förening</a>
-                @endif
+                @auth
+                    @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
+                        <a class="button is-primary" href="{{ route( 'associations.create' ) }}">Lägg till förening</a>
+                    @endif
+                @endauth
             @else
                 <h3 class="subtitle">Inga föreningar har lagts till på det här universitetet, vill du lägga till en ny?</h3>
                 @auth
