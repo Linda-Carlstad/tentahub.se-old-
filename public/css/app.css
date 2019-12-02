@@ -14211,6 +14211,14 @@ a.is-primary:hover {
   border-right-color: var(--color-scheme-text-color-diff);
 }
 
+.list {
+  background-color: var(--color-scheme-background-diff);
+}
+
+.list-item:not(a) {
+  color: var(--color-scheme-text-color);
+}
+
 .section {
   padding: 5rem 1.5rem;
 }

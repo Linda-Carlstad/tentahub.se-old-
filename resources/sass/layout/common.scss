@@ -46,6 +46,16 @@ a {
     }
 }
 
+.list {
+    background-color: var(--color-scheme-background-diff);
+
+    &-item {
+        &:not(a) {
+            color: var( --color-scheme-text-color );
+        }
+    }
+}
+
 // Section
 .section {
     padding: 5rem 1.5rem;
