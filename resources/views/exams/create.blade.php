@@ -8,6 +8,7 @@
                 <h1 class="title">Ladda upp tenta</h1>
                 <form class="form-group" action="{{ route( 'exams.store' ) }}" enctype="multipart/form-data" method="POST">
                     @csrf
+                    <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
                     <div class="field">
                         <label class="label" for="name">Namn</label>
                         <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name">

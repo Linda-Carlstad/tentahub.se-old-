@@ -13,7 +13,7 @@
 <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 <!-- Scripts -->
-<script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script defer src="{{ mix('js/app.js') }}"></script>
 
@@ -46,5 +46,17 @@
                 "link": "Läs mer"
             }
         })
+    });
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'homepage' } ).then( function( token )
+        {
+            if( token )
+            {
+                document.getElementById( 'recaptcha' ).value = token;
+            }
+        });
     });
 </script>

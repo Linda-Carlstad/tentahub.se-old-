@@ -14,9 +14,9 @@ class ExamController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show', 'create' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show', 'create' );
-        $this->middleware( 'moderator' )->except( 'index', 'show', 'create' );
+        $this->middleware( 'verified' )->except( 'index', 'show', 'create', 'store' );
+        $this->middleware( 'valid_user' )->except( 'index', 'show', 'create', 'store'  );
+        $this->middleware( 'moderator' )->except( 'index', 'show', 'create', 'store'  );
     }
 
     /**
@@ -56,7 +56,31 @@ class ExamController extends Controller
             'grade' => 'required|string',
             'points' => 'required|integer',
             'exam' => 'required|mimetypes:application/pdf',
+            'recaptcha' => 'required'
         ] );
+
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = [
+            'secret'   => env( 'GOOGLE_RECAPTCHA_SECRET' ),
+            'response' => $request->recaptcha
+        ];
+
+        $options = [
+            'http' => [
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'method'  => 'POST',
+                'content' => http_build_query( $data )
+            ]
+        ];
+
+        $context = stream_context_create( $options );
+        $result = file_get_contents( $url, false, $context );
+        $json = json_decode( $result );
+
+        if( $json->success != true )
+        {
+            return back()->with( 'error', 'Capatcha fel!' );
+        }
 
         $course = Course::findOrFail( $request->course_id );
 
