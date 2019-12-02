@@ -14,9 +14,9 @@ class ExamController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show' );
-        $this->middleware( 'moderator' )->except( 'index', 'show' );
+        $this->middleware( 'verified' )->except( 'index', 'show', 'create' );
+        $this->middleware( 'valid_user' )->except( 'index', 'show', 'create' );
+        $this->middleware( 'moderator' )->except( 'index', 'show', 'create' );
     }
 
     /**
