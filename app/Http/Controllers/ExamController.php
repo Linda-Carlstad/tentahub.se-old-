@@ -7,11 +7,18 @@ use App\Exam;
 use App\University;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
 
 class ExamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( 'verified' )->except( 'index', 'show' );
+        $this->middleware( 'valid_user' )->except( 'index', 'show' );
+        $this->middleware( 'moderator' )->except( 'index', 'show' );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -125,6 +132,10 @@ class ExamController extends Controller
      */
     public function destroy($id)
     {
-        abort( 403 );
+        $exam = Exam::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $exam );
+
+        $exam->delete();
+        return redirect()->back()->with( 'success', 'Tenta borttagen, waow...' );
     }
 }
