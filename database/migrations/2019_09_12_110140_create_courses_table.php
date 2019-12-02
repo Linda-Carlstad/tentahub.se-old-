@@ -17,7 +17,7 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('association_id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->longText( 'description' )->nullable();
             $table->decimal( 'points', 8, 1 );
             $table->string( 'url' )->nullable();
