@@ -15,7 +15,7 @@
                         @foreach( $exams as $exam )
                             <div class="list-item">
                                 <p class="exam">
-                                    <a href="{{ route( 'exams.show', $exam->id ) }}">
+                                    <a target="_blank" href="{{ route( 'exams.show', $exam->id ) }}">
                                         {{ $exam->name }}
                                     </a>
                                     -

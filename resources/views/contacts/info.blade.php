@@ -70,11 +70,12 @@
                             </label>
                         </div>
                     </div>
-                    <p>
+                    <small>
                         Denna webbplats är skyddad av reCAPTCHA och Googles
                         <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
                         <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
-                    </p>
+                    </small>
+                    <br>
                     <br>
                     <div class="field is-grouped">
                         <div class="control">

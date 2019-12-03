@@ -6,7 +6,7 @@
         <h1 class="title is-1">Integritetspolicy</h1>
         <hr>
         <h3 class="subtitle is-4">Varför ska jag läsa denna policy?</h3>
-        <p>Denna policy beskriver hur vi på Linda Carlstad samlar in, använder och skyddar dina personuppgifter.</p>
+        <p>Denna policy beskriver hur vi på {{ env( 'APP_NAME' ) }} samlar in, använder och skyddar dina personuppgifter.</p>
         <hr>
         <h3 class="subtitle is-4">Vilken information samlar ni in om mig?</h3>
         <p>Vi samlar in information som hjälper oss att tillhandahålla en tjänst till dig, det inkluderar:
