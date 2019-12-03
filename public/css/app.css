@@ -14156,6 +14156,10 @@ html {
   text-decoration: underline;
 }
 
+.has-text-theme {
+  color: var(--color-scheme-text-color);
+}
+
 hr {
   background: linear-gradient(170deg, #ff3f34, #f7b731);
   height: 5px;

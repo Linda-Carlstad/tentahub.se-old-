@@ -11,7 +11,7 @@
         <h3 class="subtitle is-4">Vilken information samlar ni in om mig?</h3>
         <p>Vi samlar in information som hjälper oss att tillhandahålla en tjänst till dig, det inkluderar:
         </p>
-        <ul class="has-text-white has-text-weight-bold">
+        <ul class="has-text-theme has-text-weight-bold">
             <li>Email</li>
             <li>Namn</li>
             <li>Kontaktuppgifter</li>
@@ -55,7 +55,7 @@
         <h3 class="subtitle is-4">Hur du kan kontakta oss</h3>
         <p>Om du har några frågor angående denna policy eller hur vi använder din information, eller dina rättigheter så kan du kontakta oss på följande adress: </p>
         <br>
-        <address class="has-text-white">
+        <address class="has-text-theme">
             <strong>KONTAKTPERSON</strong>
             <br>
             Linda Carlstad
