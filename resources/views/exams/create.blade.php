@@ -70,12 +70,21 @@
                         </label>
                     </div>
                     <br>
-                    <small>
-                        Denna webbplats är skyddad av reCAPTCHA och Googles
-                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
-                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
-                    </small>
-                    <br>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox" for="check">
+                                <input type="checkbox" name="check" id="check" required>
+                                Jag godkänner att mina uppgifter kommer att hanteras enligt detta <a target="_blank" class="has-text-underline" href="{{ route( 'policy' ) }}">avtal</a>.
+                            </label>
+                            <hr>
+                            <small>
+                                När du laddar upp en tentamen så godkänner du att all information kopplad till den tentamen lagras hos oss.
+                                Denna webbplats är skyddad av reCAPTCHA, Googles
+                                <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
+                                <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
+                            </small>
+                        </div>
+                    </div>
                     <br>
                     <div class="field is-grouped">
                         <div class="control">

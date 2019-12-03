@@ -56,7 +56,8 @@ class ExamController extends Controller
             'grade' => 'required|string',
             'points' => 'required|integer',
             'exam' => 'required|mimetypes:application/pdf',
-            'recaptcha' => 'required'
+            'recaptcha' => 'required',
+            'check' => 'required'
         ] );
 
         $url = 'https://www.google.com/recaptcha/api/siteverify';
