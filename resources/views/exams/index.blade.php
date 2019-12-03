@@ -38,7 +38,7 @@
                                 @auth
                                     @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
                                         <hr>
-                                        <form class="form" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
+                                        <form onsubmit="return confirm('Vill du verkligen ta bort den här tentan?');" class="form" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
                                             @csrf
                                             @method( 'DELETE' )
                                             <button class="button is-link" type="submit">
