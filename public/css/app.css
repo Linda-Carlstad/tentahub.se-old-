@@ -14152,6 +14152,10 @@ html {
   color: var(--color-scheme-text-color);
 }
 
+.has-text-underline {
+  text-decoration: underline;
+}
+
 hr {
   background: linear-gradient(170deg, #ff3f34, #f7b731);
   height: 5px;
@@ -14188,29 +14192,6 @@ a.is-primary:hover {
   color: #ff0f01;
 }
 
-.card {
-  background-color: var(--color-scheme-background-alt);
-}
-
-.card-footer {
-  border-top-color: var(--color-scheme-text-color-diff);
-}
-
-.card-footer-item {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-}
-
-.card-footer-item:hover {
-  background-color: var(--color-scheme-background-diff);
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-}
-
-.card-footer-item:not(:last-child) {
-  border-right-color: var(--color-scheme-text-color-diff);
-}
-
 .list {
   background-color: var(--color-scheme-background-diff);
 }
@@ -14221,6 +14202,10 @@ a.is-primary:hover {
 
 .section {
   padding: 5rem 1.5rem;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }
 
 .label,
@@ -14385,6 +14370,29 @@ a.is-primary:hover {
   background: #ff0f01;
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
+}
+
+.card {
+  background-color: var(--color-scheme-background-alt);
+}
+
+.card-footer {
+  border-top-color: var(--color-scheme-text-color-diff);
+}
+
+.card-footer-item {
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.card-footer-item:hover {
+  background-color: var(--color-scheme-background-diff);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.card-footer-item:not(:last-child) {
+  border-right-color: var(--color-scheme-text-color-diff);
 }
 
 .notification {

@@ -9,6 +9,7 @@
 @import 'general/layout';
 @import 'general/gradients';
 @import "general/theme";
+@import "general/helpers";
 
 // Layout
 @import "layout/common";
@@ -16,6 +17,7 @@
 @import "layout/footer";
 @import "layout/navbar";
 @import "layout/buttons";
+@import "layout/card";
 @import "layout/flash-messages";
 
 // Exams

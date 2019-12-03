@@ -24,28 +24,6 @@ a {
     }
 }
 
-// Card
-.card {
-    background-color: var(--color-scheme-background-alt);
-
-    &-footer {
-        border-top-color: var(--color-scheme-text-color-diff);
-
-        &-item {
-            transition-duration: .2s;
-
-            &:hover {
-                background-color: var(--color-scheme-background-diff);
-                transition-duration: .2s;
-            }
-
-            &:not(:last-child) {
-                border-right-color: var(--color-scheme-text-color-diff);
-            }
-        }
-    }
-}
-
 .list {
     background-color: var(--color-scheme-background-diff);
 
