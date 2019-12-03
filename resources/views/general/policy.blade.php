@@ -11,7 +11,7 @@
         <h3 class="subtitle is-4">Vilken information samlar ni in om mig?</h3>
         <p>Vi samlar in information som hjälper oss att tillhandahålla en tjänst till dig, det inkluderar:
         </p>
-        <ul>
+        <ul class="has-text-white has-text-weight-bold">
             <li>Email</li>
             <li>Namn</li>
             <li>Kontaktuppgifter</li>
@@ -55,7 +55,7 @@
         <h3 class="subtitle is-4">Hur du kan kontakta oss</h3>
         <p>Om du har några frågor angående denna policy eller hur vi använder din information, eller dina rättigheter så kan du kontakta oss på följande adress: </p>
         <br>
-        <address>
+        <address class="has-text-white">
             <strong>KONTAKTPERSON</strong>
             <br>
             Linda Carlstad
@@ -64,7 +64,7 @@
             <br>
             651 68 Karlstad
             <br>
-            E-mail: support@lindacarlstad.se
+            E-mail: <a href="mailto:{{ env( 'MAIL_TO_ADDRESS_SUPPORT' ) }}">{{ env( 'MAIL_TO_ADDRESS_SUPPORT' ) }}</a>
         </address>
     </section>
 
