@@ -86,3 +86,5 @@ Route::resources(
     'users' => 'UserController',
     'supers' => 'SuperController',
 ] );
+
+Route::get( 'exams/{exam}/download', 'ExamController@download' )->name( 'exams.download' );

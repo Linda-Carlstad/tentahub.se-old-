@@ -65,7 +65,11 @@ class ExamPolicy
      */
     public function delete(User $user, Exam $exam)
     {
-        //
+        if( $user->role === 'super' || $user->role >= 'moderator' && $user->association->course->id === $exam->course->id )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**

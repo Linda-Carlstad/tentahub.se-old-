@@ -9,12 +9,16 @@ $( document ).on( 'click', '.notification > button.delete', function()
     } );
 } );
 
-const fileInput = document.querySelector( '#file-upload input[type=file]' );
-fileInput.onchange = () =>
+if( document.querySelector( '#file-upload input[type=file]' ) )
 {
-    if( fileInput.files.length > 0 )
+    const fileInput = document.querySelector( '#file-upload input[type=file]' );
+
+    fileInput.onchange = () =>
     {
-        const fileName = document.querySelector( '#file-upload .file-name' );
-        fileName.textContent = fileInput.files[ 0 ].name;
-    }
-};
+        if( fileInput.files.length > 0 )
+        {
+            const fileName = document.querySelector( '#file-upload .file-name' );
+            fileName.textContent = fileInput.files[ 0 ].name;
+        }
+    };
+}

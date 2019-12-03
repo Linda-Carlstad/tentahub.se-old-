@@ -9,29 +9,40 @@
             <p>{{ $course->description }}</p>
             <a target="_blank" href="{{ $course->url }}">{{ $course->url }}</a>
             <hr>
-            @if( $exams->isNotEmpty() )
-                <h3 class="subtitle is-3">Tentor:</h3>
-                <ul>
+            <h3 class="subtitle is-3">Tentor:</h3>
+            @if( $exams->isEmpty() )
+                <p>Inga tentor att visa. Lägg till en!</p>
+                <br>
+            @else
+                <div class="list is-hoverable">
                     @foreach( $exams as $exam )
-                        <li>
+                        <div class="list-item">
                             <a href="{{ route( 'exams.show', $exam->id ) }}">
                                 {{ $exam->name }}
                             </a>
-                        </li>
+                            -
+                            <a href="{{ route( 'exams.download', $exam->id ) }}">
+                                Ladda ner
+                            </a>
+                            @auth
+                                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
+                                    <hr>
+                                    <form class="form" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
+                                        @csrf
+                                        @method( 'DELETE' )
+                                        <button class="button is-link" type="submit">
+                                            Ta bort
+                                        </button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
                     @endforeach
-                </ul>
-                <br>
-                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
-                    <a class="button is-primary" href="{{ route( 'exams.create' ) }}">Lägg till tenta</a>
-                @endif
-            @else
-                <h3 class="subtitle">Inga tentor har lagts till på den här kursen, vill du lägga till en?</h3>
-                @auth
-                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
-                        <a class="button is-primary" href="{{ route( 'exams.create' ) }}">Lägg till tenta</a>
-                    @endif
-                @endauth
+                </div>
             @endif
+            <a class="button is-primary" href="{{ route( 'exams.create' ) }}">
+                Lägg till tenta
+            </a>
             @auth
                 @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
                     <hr>
