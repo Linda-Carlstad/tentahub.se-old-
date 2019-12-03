@@ -25,12 +25,36 @@ class SendContactRequest extends Controller
             'subject' => 'required|string',
             'text' => 'required',
             'type' => 'required|string',
-            'policy' => 'required|accepted'
+            'policy' => 'required|accepted',
+            'recaptcha' => 'required'
         ] );
 
         if( !$request->policy )
         {
             return redirect()->back()->with( 'error', 'Ni måste godkänna avtalet, vänligen försök igen.' );
+        }
+
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = [
+            'secret'   => env( 'GOOGLE_RECAPTCHA_SECRET' ),
+            'response' => $request->recaptcha
+        ];
+
+        $options = [
+            'http' => [
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'method'  => 'POST',
+                'content' => http_build_query( $data )
+            ]
+        ];
+
+        $context = stream_context_create( $options );
+        $result = file_get_contents( $url, false, $context );
+        $json = json_decode( $result );
+
+        if( $json->success != true )
+        {
+            return redirect()->back()->with( 'error', 'Capatcha fel!' );
         }
 
         switch( $request->type )

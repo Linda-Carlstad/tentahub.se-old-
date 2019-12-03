@@ -1,41 +1,91 @@
 @extends('layouts.app')
-@section('title', 'Kontakt')
+@section('title', 'Kontakta supporten')
 
 @section('content')
 
-    <div class="text-center">
-        <h2>Kontakta supporten</h2>
-        <p>
-            Support kontaktformulär :)
-        </p>
-    </div>
-    <form class="" action="/contact" method="post">
-        @csrf
-        <input type="hidden" name="type" value="support">
-        <div class="form-group">
-            <label for="name">Namn</label>
-            <input class="form-control" type="text" name="name" placeholder="Namn">
+    <section class="section">
+        <div class="columns">
+            <div class="column is-half is-widescreen">
+                <h1 class="title">Kontakta oss</h1>
+                <p>
+                    Supportformulär :)
+                </p>
+                <hr>
+                <form class="{{ route( 'contact' ) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="type" value="info">
+                    <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
+
+                    <div class="field">
+                        <label for="name" class="label">Namn</label>
+                        <div class="control">
+                            <input id="name" class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" placeholder="Namn" name="name" value="{{ old( 'name' ) }}" required autofocus>
+                            @error( 'email' )
+                            <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="email" class="label">E-postadress</label>
+                        <div class="control">
+                            <input id="email" class="input {{ $errors->has('email') ? ' is-danger' : '' }}" type="email" placeholder="E-postadress" name="email" value="{{ old( 'email' ) }}" required>
+                            @error( 'email' )
+                            <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="subject" class="label">Ämne</label>
+                        <div class="control">
+                            <input id="subject" class="input {{ $errors->has('subject') ? ' is-danger' : '' }}" type="text" placeholder="Ämne" name="subject" value="{{ old( 'subject' ) }}" required>
+                            @error( 'subject' )
+                            <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="text" class="label">Meddelande</label>
+                        <div class="control">
+                            <textarea id="text" class="input {{ $errors->has('text') ? ' is-danger' : '' }}" placeholder="Meddelande" name="text" value="{{ old( 'text' ) }}" required></textarea>
+                            @error( 'text' )
+                            <span class="has-text-danger" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox" for="remember_token">
+                                <input type="checkbox" name="remember_token" id="remember_token">
+                                Jag samtycker till att mina uppgifter lagras och behandlas enligt följande
+                                <a class="has-text-underline" href="{{ route( 'policy' ) }}" target="_blank">avtal</a>.
+                            </label>
+                        </div>
+                    </div>
+                    <p>
+                        Denna webbplats är skyddad av reCAPTCHA och Googles
+                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
+                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
+                    </p>
+                    <br>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Skicka</button>
+                        </div>
+                        <div class="control">
+                            <a class="button is-light" href="{{ url()->previous() }}">Avbryt</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="subject">Ämne</label>
-            <input class="form-control" type="text" name="subject" placeholder="Ämne">
-        </div>
-        <div class="form-group">
-            <label for="text">Meddelande</label>
-            <textarea class="form-control" type="text" name="text" placeholder="Meddelande" rows="5"></textarea>
-        </div>
-        <div class="form-group ml-4">
-            <input class="form-check-input" type="checkbox" name="policy" required>
-            <label class="form-check-label" for="policy">
-                Jag samtycker till att mina uppgifter lagras och behandlas enligt följande
-                <a href="{{ route( 'policy' ) }}" target="_blank">avtal</a>.
-            </label>
-        </div>
-        <button type="submit" class="btn btn-red btn-expand">Skicka</button>
-    </form>
+    </section>
 
 @endsection

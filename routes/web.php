@@ -43,7 +43,7 @@ Route::get( 'hur-funkar-' . strtolower( env( 'APP_NAME' ) ), function()
     return view( 'general.how-to-use' );
 } )->name( 'how-to-use' );
 
-Route::post( '/contact', 'SendContactRequest' );
+Route::post( '/contact', 'SendContactRequest' )->name( 'contact' );
 
 Route::get('/linda','FileUploadController@index')->name( 'linda' );
 

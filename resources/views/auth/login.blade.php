@@ -40,6 +40,13 @@
                             </label>
                         </div>
                     </div>
+                    <small>
+                        Denna webbplats är skyddad av reCAPTCHA och Googles
+                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
+                        <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
+                    </small>
+                    <br>
+                    <br>
                     <div class="field is-grouped">
                         <div class="control">
                             <button class="button is-primary" type="submit">Logga in</button>
@@ -48,7 +55,7 @@
                             <a class="button is-light" href="{{ route( 'dashboard' ) }}">Avbryt</a>
                         </div>
                     </div>
-                    <a class="is-link" href="{{ route( 'password.request' ) }}">Glömt ditt lösenord?</a>
+                    <a class="has-text-underline" href="{{ route( 'password.request' ) }}">Glömt ditt lösenord?</a>
                 </form>
             </div>
             <div class="column is-half is-widescreen level-item has-text-centered">
