@@ -9,16 +9,17 @@
             <p>Inga tentor att visa. Lägg till en!</p>
             <br>
         @endif
-        <div class="columns level is-multiline">
-            @if( !$exams->isEmpty() )
+        @if( !$exams->isEmpty() )
+            <div class="columns level is-multiline">
                 @foreach( $exams as $exam )
                     <div class="column is-half is-widescreen">
                         <div class="list is-hoverable">
                             <div class="list-item">
+                                <h4 class="title is-4">{{ $exam->name }}</h4>
                                 <div class="field is-grouped">
                                     <p class="control">
                                         <a class="button is-primary" target="_blank" href="{{ route( 'exams.show', $exam->id ) }}">
-                                            {{ $exam->name }}
+                                            Visa
                                         </a>
                                     </p>
                                     <p class="control">
@@ -32,10 +33,19 @@
                                     -
                                     Betyg: {{ $exam->grade }}
                                 </p>
-                                <br>
-                                <a href="{{ route( 'courses.show', $exam->course->id ) }}">
+                                <hr>
+                                Kurs:
+                                <a class="has-text-underline" href="{{ route( 'courses.show', $exam->course->id ) }}">
                                     {{ $exam->course->name }} ({{ $exam->course->code }})
                                 </a>
+                                <br>
+                                Förening:
+                                <a href="{{ route( 'universities.show', $exam->course->association->university->id ) }}">
+                                    {{ $exam->course->association->university->name }}
+                                </a>
+                                (<a href="{{ route( 'associations.show', $exam->course->association->id ) }}">
+                                    {{ $exam->course->association->name }}
+                                </a>)
                                 @auth
                                     @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
                                         <hr>
@@ -59,8 +69,8 @@
                         </div>
                     </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
         <a class="button is-primary" href="{{ route( 'exams.create' ) }}">
             Lägg till tenta
         </a>

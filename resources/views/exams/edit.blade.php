@@ -7,7 +7,7 @@
             <div class="column is-half is-widescreen">
                 <h1 class="title">Redigera tenta {{ $exam->name }}</h1>
                 <hr>
-                <form class="form-group" action="{{ route( 'exams.store' ) }}" enctype="multipart/form-data" method="POST">
+                <form class="form-group" action="{{ route( 'exams.update', $exam->id ) }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method( 'patch' )
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="points">Poäng</label>
-                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" name="points" value="{{ $exam->points }}" required>
+                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ $exam->points }}" required>
                         @error( 'points' )
                         <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -55,22 +55,7 @@
                             </select>
                         </div>
                     </div>
-                    <div id="file-upload" class="file has-name">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="exam" accept="application/pdf" required>
-                            <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Choose a file…
-                            </span>
-                        </span>
-                            <span class="file-name">
-                            {{ $exam->file_name }}
-                        </span>
-                        </label>
-                    </div>
+                    <p>Det går inte att byta fil. För att göra det måste ni ta ladda upp tentan på nytt.</p>
                     <hr>
                     <div class="field">
                         <div class="control">
@@ -91,6 +76,17 @@
                             <a href="{{ url()->previous() }}" class="button is-link is-light">Avbryt</a>
                         </div>
                     </div>
+                </form>
+                <hr>
+                <form onsubmit="return confirm('Vill du verkligen ta bort den här tentan?');" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
+                    @csrf
+                    @method( 'delete' )
+                    <h2 class="title is-3">Ta bort tenta</h2>
+                    <p>Denna åtgärd är permanent.</p>
+                    <button type="submit" class="button is-primary">
+                        Ta bort
+                    </button>
+                </form>
             </div>
         </div>
     </section>

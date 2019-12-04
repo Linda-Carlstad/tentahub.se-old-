@@ -22,15 +22,24 @@ class Exam extends Model
         return $this->belongsTo('App\Course');
     }
 
+    public static function updateAttributes( Request $request, $id )
+    {
+        Exam::validate( $request );
+        $exam = Exam::findOrFail( $id );
+        $exam->update( $request->except( '_token', '_method', 'recaptcha' ) );
+
+        return $exam;
+    }
+
+
     public static function validate( Request $request )
     {
         return $request->validate( [
             'name' => 'required|string',
             'grade' => 'required|string',
-            'points' => 'required|integer',
-            'exam' => 'required|mimetypes:application/pdf',
+            'points' => 'required|numeric',
+            'exam' => 'mimetypes:application/pdf',
             'recaptcha' => 'required',
-            'check' => 'required'
         ] );
     }
 }

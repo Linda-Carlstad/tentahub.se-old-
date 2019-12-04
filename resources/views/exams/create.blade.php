@@ -6,12 +6,12 @@
         <div class="coulmns">
             <div class="column is-half is-widescreen">
                 <h1 class="title">Ladda upp tenta</h1>
-                <form class="form-group" action="{{ route( 'exams.store' ) }}" enctype="multipart/form-data" method="POST">
+                <form class="form-group" action="{{ route( 'exams.store' ) }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
                     <div class="field">
                         <label class="label" for="name">Namn</label>
-                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ old( $exam->name ) }}" required autofocus>
+                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ old( 'name' ) }}" required autofocus>
                         @error( 'name' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -20,7 +20,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="grade">Betyg</label>
-                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ $exam->grade }}" required>
+                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ old( 'grade' ) }}" required>
                         @error( 'grade' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -29,7 +29,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="points">Poäng</label>
-                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" name="points" value="{{ $exam->points }}" required>
+                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ old( 'points' ) }}" required>
                         @error( 'points' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -61,11 +61,11 @@
                                 <i class="fas fa-upload"></i>
                             </span>
                             <span class="file-label">
-                                Choose a file…
+                                Välj en fil...
                             </span>
                         </span>
                             <span class="file-name">
-                            No file uploaded
+                            Ingen fil uppladdad
                         </span>
                         </label>
                     </div>
