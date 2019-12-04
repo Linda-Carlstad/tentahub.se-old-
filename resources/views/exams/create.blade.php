@@ -11,27 +11,27 @@
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
                     <div class="field">
                         <label class="label" for="name">Namn</label>
-                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name">
+                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ old( $exam->name ) }}" required autofocus>
                         @error( 'name' )
-                        <span class="has-text-danger" role="alert">
+                            <span class="has-text-danger" role="alert">
                                 {{ $message }}
                             </span>
                         @enderror
                     </div>
                     <div class="field">
                         <label class="label" for="grade">Betyg</label>
-                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade">
+                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ $exam->grade }}" required>
                         @error( 'grade' )
-                        <span class="has-text-danger" role="alert">
+                            <span class="has-text-danger" role="alert">
                                 {{ $message }}
                             </span>
                         @enderror
                     </div>
                     <div class="field">
                         <label class="label" for="points">Poäng</label>
-                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" name="points">
+                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" name="points" value="{{ $exam->points }}" required>
                         @error( 'points' )
-                        <span class="has-text-danger" role="alert">
+                            <span class="has-text-danger" role="alert">
                                 {{ $message }}
                             </span>
                         @enderror
