@@ -1,0 +1,98 @@
+@extends( 'layouts.app' )
+@section( 'title', 'Redigera tenta ' . $exam->name )
+@section( 'content' )
+
+    <section class="section exam">
+        <div class="columns">
+            <div class="column is-half is-widescreen">
+                <h1 class="title">Redigera tenta {{ $exam->name }}</h1>
+                <hr>
+                <form class="form-group" action="{{ route( 'exams.store' ) }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    @method( 'patch' )
+                    <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
+                    <div class="field">
+                        <label class="label" for="name">Namn</label>
+                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ $exam->name }}" required autofocus>
+                        @error( 'name' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label" for="grade">Betyg</label>
+                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ $exam->grade }}" required>
+                        @error( 'grade' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label" for="points">Poäng</label>
+                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" name="points" value="{{ $exam->points }}" required>
+                        @error( 'points' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label" for="course_id">Kurs</label>
+                        <div class="select {{ $errors->has('association_id') ? ' is-danger' : '' }}">
+                            <select id="course_id" name="course_id" required>
+                                <option selected disabled>Välj kurs...</option>
+                                @foreach( $universities as $university )
+                                    @foreach( $university->associations as $association )
+                                        @foreach( $association->courses as $course )
+                                            <option value="{{ $course->id }}" {{ $exam->course->id == $course->id ? 'selected' : '' }}>
+                                                {{ $course->name }} - {{ $course->code }} ({{ $university->name }} - {{ $association->name  }})
+                                            </option>
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div id="file-upload" class="file has-name">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="exam" accept="application/pdf" required>
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file…
+                            </span>
+                        </span>
+                            <span class="file-name">
+                            {{ $exam->file_name }}
+                        </span>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="field">
+                        <div class="control">
+                            <small>
+                                När du uppdaterar en tentamen så godkänner du att all information kopplad till den tentamen lagras hos oss.
+                                Denna webbplats är skyddad av reCAPTCHA, Googles
+                                <a target="_blank" class="has-text-underline" href="https://policies.google.com/privacy">sekretesspolicy</a> och
+                                <a target="_blank" class="has-text-underline" href="https://policies.google.com/terms">användarvillkor</a> gäller.
+                            </small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Uppdatera</button>
+                        </div>
+                        <div class="control">
+                            <a href="{{ url()->previous() }}" class="button is-link is-light">Avbryt</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+@endsection

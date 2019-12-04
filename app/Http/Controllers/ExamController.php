@@ -51,15 +51,6 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
-            'name' => 'required|string',
-            'grade' => 'required|string',
-            'points' => 'required|integer',
-            'exam' => 'required|mimetypes:application/pdf',
-            'recaptcha' => 'required',
-            'check' => 'required'
-        ] );
-
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = [
             'secret'   => env( 'GOOGLE_RECAPTCHA_SECRET' ),
@@ -83,22 +74,29 @@ class ExamController extends Controller
             return back()->with( 'error', 'Capatcha fel!' );
         }
 
-        $course = Course::findOrFail( $request->course_id );
+        $result = Exam::validate( $request );
 
-        $path = Storage::putFile(
-            'exams/' . str_replace( ' ', '-', $course->code ), new File($request->exam)
-        );
+        if( $result )
+        {
+            $course = Course::findOrFail( $request->course_id );
 
-        Exam::create( [
-            'name' => $request->name,
-            'grade' => $request->grade,
-            'points' => $request->points,
-            'file_name' => $request->exam->getClientOriginalName(),
-            'course_id' => $request->course_id,
-            'path' => $path
-        ] );
+            $path = Storage::putFile(
+                'exams/' . str_replace( ' ', '-', $course->code ), new File($request->exam)
+            );
 
-        return redirect()->route( 'exams.index' )->with( 'success', 'Ny tenta uppladdad! Yay.' );
+            Exam::create( [
+                'name' => $request->name,
+                'grade' => $request->grade,
+                'points' => $request->points,
+                'file_name' => $request->exam->getClientOriginalName(),
+                'course_id' => $request->course_id,
+                'path' => $path
+            ] );
+
+            return redirect()->route( 'exams.index' )->with( 'success', 'Ny tenta uppladdad! Yay.' );
+        }
+
+        return redirect()->back()->with( 'errors', $result );
     }
 
     /**
@@ -108,6 +106,13 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        $exam = Exam::findOrFail( $id );
+
+        return view( 'exams.show' )->with( 'exam', $exam );
+    }
+
+    public function view( $id )
     {
         $exam = Exam::findOrFail( $id );
 
@@ -134,7 +139,10 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
-        abort( 404 );
+        $exam = Exam::findOrFail( $id );
+        $universities = University::all();
+
+        return view( 'exams.edit' )->with( 'exam', $exam )->with( 'universities', $universities );
     }
 
     /**
@@ -146,7 +154,17 @@ class ExamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort( 403 );
+        $exam = Exam::findOrFail( $id );
+        $this->authorize( 'update', Auth::user(), $exam );
+
+        $exam = Exam::updateAttributes( $request, $id );
+
+        if( $exam )
+        {
+            return redirect()->route( 'exams.show', $exam->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
+        }
+
+        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
     }
 
     /**
