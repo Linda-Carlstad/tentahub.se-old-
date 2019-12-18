@@ -10,7 +10,7 @@
             <p>
                 Tentahub är ett initiativ av Linda Carlstad.
                 Det för att underlätta för alla studenter.
-                Ya
+                Yafdd
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
