@@ -8,7 +8,7 @@
             <p>Vi finns för dig</p>
             <hr>
             <p>
-                Tentahub är ett initiativ av Linda Carlstad.ccccc
+                Tentahub är ett initiativ av Linda Carlstad.cccccdd
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
