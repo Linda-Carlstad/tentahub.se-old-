@@ -15,7 +15,7 @@
                 <hr class="">
                 <p>Nedan hittar du tillgängliga föreningar.</p>
 
-
+                
                 <h4 class="text-center">Antal: {{ $total }}</h4>
         <table class="table table-hover">
             <thead class="thead-dark">

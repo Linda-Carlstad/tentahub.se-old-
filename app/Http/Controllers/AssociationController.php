@@ -26,6 +26,7 @@ class AssociationController extends Controller
      */
     public function index()
     {
+        $total = Association::all()->count();
         $associations = Association::orderBy( 'name', 'asc' )->get();
 
         return view( 'associations.index' )->with( 'associations', $associations );
