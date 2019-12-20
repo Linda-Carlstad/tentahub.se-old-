@@ -33,6 +33,12 @@ class AssociationController extends Controller
         return view( 'general.welcome' )->with( 'associations', $associations );
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     public function index()
     {
         $total = Association::all()->count();
