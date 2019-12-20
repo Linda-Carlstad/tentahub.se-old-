@@ -9,8 +9,7 @@
             <hr>
             <p>
                 Tentahub är ett initiativ av Linda Carlstad.
-                Det för att underlätta för alla studenter.
-                Yafdddddd
+                Det för att underlätta för alla studenter undet tentaperioder.
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
