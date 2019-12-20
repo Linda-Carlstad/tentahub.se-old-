@@ -30,9 +30,6 @@
                     <tr>
                         <td>{{ $association->name }}</td>
                         <td>
-                            <a href="{{ url( 'song/' . $song->id . '/edit') }}" class="btn btn-link">
-                                Redigera
-                            </a>
                         </td>
                     </tr>
 
