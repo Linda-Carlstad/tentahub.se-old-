@@ -11,10 +11,9 @@
 |
 */
 
-Route::get( '/', 'AssociationController@welcome' )->name( 'dashboard' );
-/*
+
 Route::get( '/', 'ShowDashboard' )->name( 'dashboard' );
-*/
+
 Route::get( 'kontakt', function()
 {
     return view( 'contacts.info' );
