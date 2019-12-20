@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($associations as $association)
                     <tr>
-                        <td>{{ $$association->name }}</td>
+                        <td>{{ $association->name }}</td>
                         <td>
                             <a href="{{ url( 'song/' . $song->id . '/edit') }}" class="btn btn-link">
                                 Redigera

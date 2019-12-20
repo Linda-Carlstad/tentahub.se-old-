@@ -11,8 +11,10 @@
 |
 */
 
+Route::get( '/', 'AssociationController@index' )->name( 'dashboard' );
+/*
 Route::get( '/', 'ShowDashboard' )->name( 'dashboard' );
-
+*/
 Route::get( 'kontakt', function()
 {
     return view( 'contacts.info' );
