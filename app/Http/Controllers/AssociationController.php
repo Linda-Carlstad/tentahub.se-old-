@@ -24,6 +24,15 @@ class AssociationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function welcome()
+    {
+        $total = Association::all()->count();
+        $associations = Association::orderBy( 'name', 'asc' )->get();
+
+        return view( 'general.welcome' )->with( 'associations', $associations );
+    }
+
     public function index()
     {
         $total = Association::all()->count();
