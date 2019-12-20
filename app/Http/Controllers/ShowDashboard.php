@@ -23,9 +23,6 @@ class ShowDashboard extends Controller
             return view('dashboard.index')->with('user', $user);
         }
 
-        $total = Association::all()->count();
-        $associations = Association::orderBy( 'name', 'asc' )->get();
-
         return view( 'general.welcome' );
     }
 }

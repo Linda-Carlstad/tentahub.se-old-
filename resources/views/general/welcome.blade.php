@@ -12,35 +12,6 @@
                     by <a href="https://lindacarlstad.se">LINDA Carlstad</a>
                 </h2>
                 <p class="">Här kan du ladda ner tentasvar och dela med dig anonymt av dina egna svar</p>
-                <hr class="">
-                <p>Nedan hittar du tillgängliga föreningar.</p>
-
-                
-                <h4 class="text-center">Antal: {{ $total }}</h4>
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Namn</th>
-                    <th>Melodi</th>
-                    <th>#</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($associations as $association)
-                    <tr>
-                        <td>{{ $association->name }}</td>
-                        <td>
-                        </td>
-                    </tr>
-
-                @endforeach
-            </tbody>
-        </table>
-                <!--
-                <a class="button is-primary is-medium" href="#">Linda Carlstad</a>
-                <a class="button is-primary is-medium" href="#" role="button">Mexika</a>
-                <a class="button is-primary is-medium" href="#" role="button">Seke</a>
-                -->
             </div>
         </div>
     </section>
