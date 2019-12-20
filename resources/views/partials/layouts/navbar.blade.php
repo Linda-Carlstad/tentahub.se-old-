@@ -14,9 +14,6 @@
     <div id="navbarMain" class="navbar-menu">
         <div class="navbar-start">
             {{-- Left side of the navbar --}}
-            <a class="navbar-item" href="{{ route( 'linda' ) }}">
-                Linda
-            </a>
             @guest
                 <a class="navbar-item" href="{{ route( 'about' ) }}">
                     Om oss
