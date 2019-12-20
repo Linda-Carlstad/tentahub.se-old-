@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Association;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,7 @@ class ShowDashboard extends Controller
             $user = User::findOrFail( Auth::id() );
             return view('dashboard.index')->with('user', $user);
         }
-
-        return view( 'general.welcome' );
+        $total = Association::all()->count();
+        return view( 'general.welcome' )->with('total', $total);
     }
 }

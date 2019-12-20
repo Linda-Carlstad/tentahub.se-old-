@@ -12,6 +12,8 @@
                     by <a href="https://lindacarlstad.se">LINDA Carlstad</a>
                 </h2>
                 <p class="">Här kan du ladda ner tentasvar och dela med dig anonymt av dina egna svar</p>
+                <p class="text-center">Antal föreningar: {{ $total }}</p>
+            </div>
             </div>
         </div>
     </section>
