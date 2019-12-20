@@ -11,7 +11,7 @@
 |
 */
 
-Route::get( '/', 'AssociationController@welcome' );
+Route::get( '/', 'AssociationController@welcome' )->name( 'dashboard' );
 /*
 Route::get( '/', 'ShowDashboard' )->name( 'dashboard' );
 */
