@@ -15,9 +15,9 @@
                         @foreach( $exams as $exam )
                             <div class="list-item">
                                 <p class="exam">
-                                    <a target="_blank" href="{{ route( 'exams.show', $exam->id ) }}">
+                                    <p>
                                         {{ $exam->name }}
-                                    </a>
+                                    </p>
                                     -
                                     <a href="{{ route( 'exams.download', $exam->id ) }}">
                                         Ladda ner
