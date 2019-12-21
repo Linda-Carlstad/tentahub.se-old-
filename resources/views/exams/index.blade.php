@@ -15,9 +15,9 @@
                         @foreach( $exams as $exam )
                             <div class="list-item">
                                 <p class="exam">
-                                    <p>
+                                    <strong>
                                         {{ $exam->name }}
-                                    </p>
+                                    </strong>
                                     -
                                     <a href="{{ route( 'exams.download', $exam->id ) }}">
                                         Ladda ner
