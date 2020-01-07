@@ -44,7 +44,8 @@
                 "message": "Den här webbplatsen använder kakor för att du ska få den bästa upplevelsen på vår hemsida.",
                 "dismiss": "Uppfattat!",
                 "link": "Läs mer"
-            }
+            },
+            "position": "top"
         })
     });
 </script>
