@@ -21,7 +21,8 @@ class UniversitiesTableSeeder extends Seeder
             'url' => 'https://kau.se',
            'created_at' => now(),
            'updated_at' => now(),
+            'slug' => 'karlstad-university'
         ]);
-        $university = factory( University::class, 100 )->create();
+        $university = factory( University::class, 5 )->create();
     }
 }
