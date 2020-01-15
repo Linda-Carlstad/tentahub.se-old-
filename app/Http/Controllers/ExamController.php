@@ -69,7 +69,6 @@ class ExamController extends Controller
         $result = file_get_contents( $url, false, $context );
         $json = json_decode( $result );
 
-        $json->success = true;
         if( $json->success != true )
         {
             return back()->with( 'error', 'Capatcha fel!' );
