@@ -21,6 +21,7 @@ class CreateUniversitiesTable extends Migration
             $table->string('country');
             $table->longText('description')->nullable();
             $table->string('url')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

@@ -15,16 +15,24 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('course_id');
-            $table->date( 'date' );
+            $table->date( 'date' )->nullable();
             $table->string('file_name');
             $table->string('name');
             $table->string( 'path' );
+            $table->string('type');
             $table->bigInteger('views')->default( 0 );
             $table->bigInteger('downloads')->default( 0 );
             $table->decimal('rating')->nullable();
             $table->string('grade')->nullable();
             $table->decimal('points', 5, 1)->nullable();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
+                ->onDelete('cascade');
+
+            $table->ipAddress( 'created_from' );
+            $table->ipAddress( 'changed_from' )->nullable();
             $table->timestamps();
         });
     }

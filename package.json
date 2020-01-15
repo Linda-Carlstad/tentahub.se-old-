@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "bulma": "^0.8.0",
-        "bulma-tooltip": "^3.0.2"
+        "bulma-accordion": "^2.0.1",
+        "bulma-tooltip": "^3.0.2",
+        "flatpickr": "^4.6.3"
     }
 }
