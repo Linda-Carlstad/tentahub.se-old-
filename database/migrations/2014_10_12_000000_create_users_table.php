@@ -15,14 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('association_id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('valid')->default( false );
             $table->enum('role', ['super', 'admin', 'moderator'])->default( 'moderator' );
-            $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('association_id');
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }
