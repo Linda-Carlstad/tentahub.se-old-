@@ -17,7 +17,7 @@
                 <h3 class="subtitle is-3">Kurser:</h3>
                 <ul>
                     @foreach( $courses as $course )
-                        <li>
+                        <li>-
                             <a href="{{ route( 'courses.show', $course->id ) }}">
                                 {{ $course->name }}
                             </a>
