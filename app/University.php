@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class University extends Model
 {
@@ -11,7 +13,13 @@ class University extends Model
 
     protected $fillable =
     [
-        'name', 'nickname', 'city', 'country', 'description', 'url'
+        'name',
+        'nickname',
+        'city',
+        'country',
+        'description',
+        'url',
+        'slug'
     ];
 
 
@@ -23,6 +31,29 @@ class University extends Model
     public function courses()
     {
         return $this->hasManyThrough( 'App\Course', 'App\Association' );
+    }
+
+    use HasSlug;
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingSeparator( '-' );
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     public static function store( Request $request )
@@ -50,8 +81,8 @@ class University extends Model
             'nickname'    => 'required|string|max:20',
             'city'        => 'required|string',
             'country'     => 'required|string',
-            'description' => 'string',
-            'url'         => 'string'
+            'description' => 'nullable|string',
+            'url'         => 'nullable|string'
         ] );
     }
 }
