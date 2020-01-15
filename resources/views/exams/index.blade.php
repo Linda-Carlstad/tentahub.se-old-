@@ -50,27 +50,6 @@
                                         </a>
                                     </p>
                                 </div>
-                                <p class="exam">
-                                    <strong>
-                                        {{ $exam->name }}
-                                    </strong>
-                                    -
-                                    <a href="{{ route( 'exams.download', $exam->id ) }}">
-                                        Ladda ner
-                                    </a>
-                                </p>
-                                <br>
-                                <a href="{{ route( 'courses.show', $exam->course->id ) }}">
-                                    {{ $exam->course->name }} ({{ $exam->course->code }})
-                                </a>
-                                <br>
-                                <a href="{{ route( 'associations.show', $exam->course->association->id ) }}">
-                                    {{ $exam->course->association->name }}
-                                </a>
-                                -
-                                <a href="{{ route( 'universities.show', $exam->course->association->university->id ) }}">
-                                    {{ $exam->course->association->university->name }}
-                                </a>
                                 @auth
                                     @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
                                         <hr>
