@@ -16,8 +16,12 @@
         <li>Universitet: {{ $user->association->university->name }}</li>
     </ul>
     <hr>
-    <h4>Kurser: {{ $user->association->courses->count() }}</h4>
-    <h4>Tentor: {{ $user->association->exams->count() }}</h4>
+    @if( $user->association->courses )
+        <h4>Kurser: {{ $user->association->courses->count() }}</h4>
+    @endif
+    @if( $user->association->exams )
+        <h4>Tentor: {{ $user->association->exams->count() }}</h4>
+    @endif
 
 
 @endsection
