@@ -29,7 +29,7 @@
                                 <select id="university_id" name="university_id">
                                     <option selected disabled>Välj universitet...</option>
                                     @foreach( $universities as $university )
-                                        <option value="{{ $university->id }}" {{ Auth::user()->association->university->id == $university->id ? 'selected' : '' }}>{{ $university->name }}</option>
+                                        <option value="{{ $university->id }}" {{ $association->university_id === $university->id ? 'selected' : '' }}>{{ $university->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,7 +46,7 @@
                 <div class="field">
                     <label for="url" class="label">Webbsida</label>
                     <div class="control">
-                        <input id="url" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="url" type="text" required value="{{ $association->url }}">
+                        <input id="url" class="input {{ $errors->has('url') ? ' is-danger' : '' }}" name="url" type="text" value="{{ $association->url }}">
                     </div>
                     @error( 'url' )
                         <span class="has-text-danger" role="alert">
@@ -57,7 +57,7 @@
                 <div class="field">
                     <label for="description" class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="1" name="description" type="text">{{ $association->description }}</textarea>
+                        <textarea id="description" class="textarea {{ $errors->has('description') ? ' is-danger' : '' }}" rows="2" name="description" type="text">{{ $association->description }}</textarea>
                     </div>
                     @error( 'description' )
                         <span class="has-text-danger" role="alert">
@@ -74,6 +74,18 @@
                     </div>
                 </div>
             </form>
+            @if( Auth::user()->role === 'super' )
+                <hr>
+                <form onSubmit="return confirm('Är su säker på att du vill ta bort {{ $association->name }}? Denna åtgärd är permanent.');" action="{{ route( 'associations.destroy', $association->id ) }}" method="post">
+                    @csrf
+                    {{ method_field( 'delete' ) }}
+                    <h4>Ta bort {{ $association->name }}?</h4>
+                    <p>Denna åtgärd är permanent.</p>
+                    <button type="submit" class="button is-primary">
+                        Ta bort
+                    </button>
+                </form>
+            @endif
         </div>
     </section>
 

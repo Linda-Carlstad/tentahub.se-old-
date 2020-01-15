@@ -1,4 +1,5 @@
-'use strict';
+import flatpickr from "flatpickr";
+const Swedish = require( 'flatpickr/dist/l10n/sv.js' ).default.sv;
 
 $( document ).on( 'click', '.notification > button.delete', function()
 {
@@ -9,16 +10,53 @@ $( document ).on( 'click', '.notification > button.delete', function()
     } );
 } );
 
-if( document.querySelector( '#file-upload input[type=file]' ) )
+if( document.querySelector( 'input[type=file]' ) )
 {
-    const fileInput = document.querySelector( '#file-upload input[type=file]' );
 
-    fileInput.onchange = () =>
+    let fileInputManual, fileInputAutomatic, fileInput;
+
+    if( document.querySelector( '#file-upload-manual input[type=file]' ) )
     {
-        if( fileInput.files.length > 0 )
+        fileInputManual = document.querySelector( '#file-upload-manual input[type=file]' );
+        fileInputManual.onchange = () =>
         {
-            const fileName = document.querySelector( '#file-upload .file-name' );
-            fileName.textContent = fileInput.files[ 0 ].name;
-        }
-    };
+            console.log( fileInputManual );
+            if( fileInputManual.files.length > 0 )
+            {
+                const fileName = document.querySelector( '#file-upload-manual .file-name' );
+                fileName.textContent = fileInputManual.files[ 0 ].name;
+            }
+        };
+    }
+    if( document.querySelector( '#file-upload-automatic input[type=file]' ) )
+    {
+        fileInputAutomatic = document.querySelector( '#file-upload-automatic input[type=file]' );
+        fileInputAutomatic.onchange = () =>
+        {
+            if( fileInputAutomatic.files.length > 0 )
+            {
+                const fileName = document.querySelector( '#file-upload-automatic .file-name' );
+                fileName.textContent = fileInputAutomatic.files[ 0 ].name;
+            }
+        };
+    }
+    if( document.querySelector( '#file-upload input[type=file]' ) )
+    {
+        fileInput = document.querySelector( '#file-upload input[type=file]' );
+        fileInput.onchange = () =>
+        {
+            if( fileInput.files.length > 0 )
+            {
+                const fileName = document.querySelector( '#file-upload .file-name' );
+                fileName.textContent = fileInput.files[ 0 ].name;
+            }
+        };
+    }
 }
+
+flatpickr( '#date',
+{
+    dateFormat: "Y-m-d",
+    weekNumbers: true,
+    locale: Swedish
+} );

@@ -12,6 +12,15 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
-        $courses = factory( Course::class, 100 )->create();
+        DB::table('courses')->insert([
+            'name' => 'Anskaffning av it-system',
+            'association_id' => 1,
+            'code' => 'ISGA03',
+            'points' => 12,
+            'url' => null,
+            'description' => null,
+            'slug' => 'anskaffning-av-it-system'
+        ]);
+        $courses = factory( Course::class, 5 )->create();
     }
 }

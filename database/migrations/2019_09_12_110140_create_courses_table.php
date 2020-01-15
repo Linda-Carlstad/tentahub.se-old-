@@ -15,12 +15,16 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('association_id');
             $table->string('name');
             $table->string('code')->unique();
             $table->longText( 'description' )->nullable();
             $table->decimal( 'points', 8, 1 );
             $table->string( 'url' )->nullable();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('association_id');
+            $table->foreign('association_id')
+                ->references('id')->on('associations')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

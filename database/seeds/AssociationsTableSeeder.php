@@ -19,7 +19,8 @@ class AssociationsTableSeeder extends Seeder
            'description' => 'Linjeförening för datavetare',
            'created_at' => now(),
            'updated_at' => now(),
+           'slug' => 'linda-carlstad'
         ]);
-        $associations = factory( Association::class, 100 )->create();
+        $associations = factory( Association::class, 5 )->create();
     }
 }

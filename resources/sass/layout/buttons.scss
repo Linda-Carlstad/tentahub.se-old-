@@ -1,9 +1,25 @@
-.button.is-primary {
-    background: $primary;
+.button {
     transition-duration: .2s;
 
     &:hover {
-        background: $primary-dark;
         transition-duration: .2s;
+    }
+}
+
+.button.is-primary {
+    background: $primary;
+
+    &:hover {
+        background: $primary-dark;
+    }
+}
+
+.button.is-text {
+    color: var(--color-scheme-text-color);
+    background: none;
+
+    &:hover {
+        background: none;
+        color: $primary-dark;
     }
 }

@@ -13,7 +13,7 @@
 <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script defer src="{{ mix('js/app.js') }}"></script>
 
@@ -51,14 +51,29 @@
 </script>
 <script src="https://www.google.com/recaptcha/api.js?render={{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}"></script>
 <script>
+    // Manual exam upload
     grecaptcha.ready(function() {
-        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'homepage' } ).then( function( token )
+        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'examManual' } ).then( function( token )
         {
             if( token )
             {
-                if( document.getElementById( 'recaptcha' ) )
+                if( document.getElementById( 'recaptcha-manual' ) )
                 {
-                    document.getElementById( 'recaptcha' ).value = token;
+                    document.getElementById( 'recaptcha-manual' ).value = token;
+                }
+            }
+        });
+    });
+
+    // Automatic exam upload
+    grecaptcha.ready(function() {
+        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'examAutomatic' } ).then( function( token )
+        {
+            if( token )
+            {
+                if( document.getElementById( 'recaptcha-automatic' ) )
+                {
+                    document.getElementById( 'recaptcha-automatic' ).value = token;
                 }
             }
         });

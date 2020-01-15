@@ -4,14 +4,12 @@
     @include( 'partials.layouts.head' )
 </head>
 <body>
-    <div id="app">
-        @include( 'partials.layouts.navbar' )
+    @include( 'partials.layouts.navbar' )
 
-        <main class="container">
-            @include( 'partials.layouts.flash-messages' )
-            @yield( 'content' )
-        </main>
-        @include( 'partials.layouts.footer' )
-    </div>
+    <main class="container">
+        @include( 'partials.layouts.flash-messages' )
+        @yield( 'content' )
+    </main>
+    @include( 'partials.layouts.footer' )
 </body>
 </html>

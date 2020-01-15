@@ -9,6 +9,7 @@ use App\Exam;
 use App\University;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -55,14 +56,14 @@ class CourseController extends Controller
         $ascociation = Association::findOrFail( $request->association_id );
         $this->authorize( 'create', Auth::user(), $ascociation );
 
-        $course = Course::store( $request );
-
-        if( $course )
+        $result = Course::store( $request );
+        if( $result )
         {
-            return redirect()->route( 'courses.show', $course->id )->with( 'success', 'Ny kurs tillagd, bra jobbat!' );
+            $course = $result[ 2 ];
+            return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
+        return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
     }
 
     /**
@@ -108,14 +109,15 @@ class CourseController extends Controller
         $course = Course::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $course );
 
-        $course = Course::updateAttributes( $request, $id );
+        $result = Course::updateAttributes( $request, $id );
 
-        if( $course )
+        if( $result )
         {
-            return redirect()->route( 'courses.show', $course->id )->with( 'success', 'Ändring av uppgifterna lyckades, yay!' );
+            $course = $result[ 2 ];
+            return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
+        return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
     }
 
     /**
@@ -130,6 +132,7 @@ class CourseController extends Controller
         $this->authorize( 'delete', Auth::user(), $course );
 
         $course->delete();
-        return redirect()->back()->with( 'success', 'Kurs borttagen, ohh, scary...' );
+
+        return redirect()->route( 'courses.index' )->with( 'success', 'Kurs borttagen, ohh, scary...' );
     }
 }

@@ -18,6 +18,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        'App\Events\Exams\ExamDeleted' => [
+            'App\Events\Exams\DeleteExamFile',
+        ],
+        'App\Events\Courses\CourseCreated' => [
+            'App\Events\Courses\AddCourseDirectoryToStorage',
+        ],
     ];
 
     /**
