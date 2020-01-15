@@ -22,7 +22,7 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -34,7 +34,7 @@ class ExamController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -47,7 +47,7 @@ class ExamController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -69,34 +69,35 @@ class ExamController extends Controller
         $result = file_get_contents( $url, false, $context );
         $json = json_decode( $result );
 
+        $json->success = true;
         if( $json->success != true )
         {
             return back()->with( 'error', 'Capatcha fel!' );
         }
 
-        $result = Exam::validate( $request );
-
-        if( $result )
+        if( $request->type === 'manual' )
         {
-            $course = Course::findOrFail( $request->course_id );
-
-            $path = Storage::putFile(
-                'exams/' . str_replace( ' ', '-', $course->code ), new File($request->exam)
-            );
-
-            Exam::create( [
-                'name' => $request->name,
-                'grade' => $request->grade,
-                'points' => $request->points,
-                'file_name' => $request->exam->getClientOriginalName(),
-                'course_id' => $request->course_id,
-                'path' => $path
-            ] );
-
-            return redirect()->route( 'exams.index' )->with( 'success', 'Ny tenta uppladdad! Yay.' );
+            $result = Exam::validate( $request );
+            if( $result )
+            {
+                $result = Exam::store( $request );
+                return redirect()->route( 'exams.index' )->with( $result[ 0 ], $result[ 1 ] );
+            }
+            return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'errors', $result );
+        if( $request->type === 'automatic' )
+        {
+            $result = Exam::automaticStore( $request );
+            if( $result[ 0 ] === 'success' )
+            {
+                return redirect()->route('exams.index')->with( $result[0], $result[1] );
+            }
+
+            return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
+        }
+
+        return redirect()->back()->with( 'error', 'Något gick fel, men vi vet inte vad. Försök igen.' );
     }
 
     /**
@@ -115,7 +116,6 @@ class ExamController extends Controller
     public function view( $id )
     {
         $exam = Exam::findOrFail( $id );
-
         $exam->views += 1;
         $exam->save();
 
@@ -135,7 +135,7 @@ class ExamController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -150,28 +150,28 @@ class ExamController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $exam = Exam::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $exam );
 
-        $exam = Exam::updateAttributes( $request, $id );
+        $result = Exam::updateAttributes( $request, $id );
 
-        if( $exam )
+        if( $result )
         {
-            return redirect()->route( 'exams.show', $exam->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
+            return redirect()->route( 'exams.show', $exam->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
+        return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
