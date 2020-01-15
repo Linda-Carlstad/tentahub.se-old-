@@ -11,9 +11,13 @@
                     @csrf
                     @method( 'patch' )
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
+                    <input type="hidden" id="created_from" name="created_from" value="{{ $exam->created_from }}">
+                    <input type="hidden" id="changed_from" name="changed_from" value="{{ Request::ip() }}">
+                    <input type="hidden" id="type" name="type" value="{{ $exam->type }}">
+
                     <div class="field">
-                        <label class="label" for="name">Namn</label>
-                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ $exam->name }}" required autofocus>
+                        <label class="label" for="name">Namn *</label>
+                        <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}" type="text" id="name" name="name" value="{{ $exam->name }}" required>
                         @error( 'name' )
                         <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -21,25 +25,7 @@
                         @enderror
                     </div>
                     <div class="field">
-                        <label class="label" for="grade">Betyg</label>
-                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ $exam->grade }}" required>
-                        @error( 'grade' )
-                        <span class="has-text-danger" role="alert">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="field">
-                        <label class="label" for="points">Poäng</label>
-                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ $exam->points }}" required>
-                        @error( 'points' )
-                        <span class="has-text-danger" role="alert">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="field">
-                        <label class="label" for="course_id">Kurs</label>
+                        <label class="label" for="course_id">Kurs *</label>
                         <div class="select {{ $errors->has('association_id') ? ' is-danger' : '' }}">
                             <select id="course_id" name="course_id" required>
                                 <option selected disabled>Välj kurs...</option>
@@ -54,6 +40,33 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="date">Datum</label>
+                        <input class="input {{ $errors->has('date') ? 'is-danger' : '' }}" type="text" id="date" name="date" value="{{ $exam->date }}">
+                        @error( 'points' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label" for="grade">Betyg</label>
+                        <input class="input {{ $errors->has('grade') ? ' is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ $exam->grade }}">
+                        @error( 'grade' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label class="label" for="points">Poäng</label>
+                        <input class="input {{ $errors->has('points') ? ' is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ $exam->points }}">
+                        @error( 'points' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                     <p>Det går inte att byta fil. För att göra det måste ni ta ladda upp tentan på nytt.</p>
                     <hr>
