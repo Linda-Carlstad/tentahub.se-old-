@@ -19,13 +19,15 @@ class AssociationController extends Controller
         $this->middleware( 'admin' )->only( 'create', 'store', 'destroy' );
     }
 
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
+        $total = Association::all()->count();
         $associations = Association::orderBy( 'name', 'asc' )->get();
 
         return view( 'associations.index' )->with( 'associations', $associations );

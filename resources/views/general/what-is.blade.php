@@ -8,11 +8,8 @@
             <p>Vi finns för dig</p>
             <hr>
             <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random text.
-                It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-                looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
-                and going through the cites of the word in classical literature, discovered the undoubtable source.
+                Tentahub är ett initiativ av Linda Carlstad.
+                Det för att underlätta för alla studenter under tentaperioder.
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
