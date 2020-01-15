@@ -12,7 +12,7 @@
                 <h3 class="subtitle is-3">Föreningar:</h3>
                 <ul>
                     @foreach( $associations as $association )
-                        <li>
+                        <li>-
                             <a href="{{ route( 'associations.show', $association->id ) }}">
                                 {{ $association->name }}
                             </a>
