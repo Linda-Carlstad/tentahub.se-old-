@@ -120,6 +120,6 @@ class UniversityController extends Controller
         $university = University::findOrFail( $id );
 
         $university->delete();
-        return redirect()->back()->with( 'success', 'Universitet borttaget, ohh, scary...' );
+        return redirect( 'universities' )->with( 'success', 'Universitet borttaget, ohh, scary...' );
     }
 }
