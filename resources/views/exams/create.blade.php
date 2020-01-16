@@ -66,7 +66,7 @@
                     <input type="hidden" id="created_from-manual" name="created_from" value="{{ Request::ip() }}">
                     <input type="hidden" name="type" value="manual">
                     <div class="field">
-                        <label class="label" for="name">Namn</label>
+                        <label class="label" for="name">Namn *</label>
                         <input class="input {{ $errors->has('name') ? 'is-danger' : '' }}" type="text" id="name" name="name" value="{{ old( 'name' ) }}" required autofocus>
                         @error( 'name' )
                             <span class="has-text-danger" role="alert">
@@ -75,7 +75,7 @@
                         @enderror
                     </div>
                     <div class="field">
-                        <label class="label" for="course_id">Kurs</label>
+                        <label class="label" for="course_id">Kurs *</label>
                         <div class="select {{ $errors->has('association_id') ? 'is-danger' : '' }}">
                             <select id="course_id" name="course_id">
                                 <option selected disabled>Välj kurs...</option>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="field has-file">
-                        <label class="label">Tentamen</label>
+                        <label class="label">Tentamen *</label>
                         <div id="file-upload-manual" class="file has-name">
                             <label class="file-label">
                                 <input class="file-input" type="file" name="exam" accept="application/pdf" required>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="date">Datum</label>
-                        <input class="input {{ $errors->has('date') ? 'is-danger' : '' }}" type="text" id="date" name="date" value="{{ old( 'date' ) }}" required>
+                        <input class="input {{ $errors->has('date') ? 'is-danger' : '' }}" type="text" id="date" name="date" value="{{ old( 'date' ) }}">
                         @error( 'points' )
                         <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -121,7 +121,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="grade">Betyg</label>
-                        <input class="input {{ $errors->has('grade') ? 'is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ old( 'grade' ) }}" required>
+                        <input class="input {{ $errors->has('grade') ? 'is-danger' : '' }}" type="text" id="grade" name="grade" value="{{ old( 'grade' ) }}">
                         @error( 'grade' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
@@ -130,7 +130,7 @@
                     </div>
                     <div class="field">
                         <label class="label" for="points">Poäng</label>
-                        <input class="input {{ $errors->has('points') ? 'is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ old( 'points' ) }}" required>
+                        <input class="input {{ $errors->has('points') ? 'is-danger' : '' }}" type="number" id="points" step=".5" name="points" value="{{ old( 'points' ) }}">
                         @error( 'points' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
