@@ -15277,6 +15277,24 @@ a.is-primary:hover {
   margin-top: 2rem;
 }
 
+.notification > .delete {
+  max-width: 40px !important;
+  min-width: 40px !important;
+  max-height: 40px !important;
+  min-height: 40px !important;
+}
+
+.notification > .delete::before {
+  width: 5px;
+  height: 50%;
+}
+
+.notification > .delete::after {
+  width: 50%;
+  height: 5px;
+}
+
 .list-item .exam {
   font-size: 1.5rem;
 }
+
