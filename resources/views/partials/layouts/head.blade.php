@@ -14,7 +14,7 @@
 
 <!-- Scripts -->
 <script defer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script defer src="https://kit.fontawesome.com/b63a56719c.js" crossorigin="anonymous"></script>
 <script defer src="{{ mix('js/app.js') }}"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
