@@ -15221,6 +15221,12 @@ a.is-primary:hover {
   background-color: var(--color-scheme-background-alt);
 }
 
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: var(--color-scheme-background);
+  }
+}
+
 .button {
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
