@@ -61,7 +61,7 @@ class Exam extends Model
 
     public static function updateAttributes( Request $request, $id )
     {
-        $result = Exam::validate( $request );
+        $result = Verification::run( $request, 'exam' );
 
         if( $result )
         {
@@ -130,21 +130,6 @@ class Exam extends Model
         ] );
 
         return [ 'success', 'Tenta uppladdad, bra jobbat.' ];
-    }
-
-    public static function validate( Request $request )
-    {
-        return $request->validate( [
-            'name' => 'required|string',
-            'grade' => 'nullable|string',
-            'points' => 'nullable|numeric',
-            'exam' => 'mimetypes:application/pdf',
-            'recaptcha' => 'required',
-            'type' => 'required|string',
-            'date' => 'nullable|string',
-            'created_from' => 'required|ip',
-            'changed_from' => 'nullable|ip'
-        ] );
     }
 
     public static function getCourse( $code )

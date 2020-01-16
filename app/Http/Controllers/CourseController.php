@@ -23,7 +23,7 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -35,7 +35,7 @@ class CourseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -49,15 +49,15 @@ class CourseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store( Request $request )
     {
-        $ascociation = Association::findOrFail( $request->association_id );
-        $this->authorize( 'create', Auth::user(), $ascociation );
+        $association = Association::findOrFail( $request->association_id );
+        $this->authorize( 'create', Auth::user(), $association );
 
         $result = Course::store( $request );
-        if( $result )
+        if( $result[ 0 ] === 'success' )
         {
             $course = $result[ 2 ];
             return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
@@ -70,7 +70,7 @@ class CourseController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show( $id )
     {
@@ -84,7 +84,7 @@ class CourseController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -102,16 +102,16 @@ class CourseController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $course = Course::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $course );
 
-        $result = Course::updateAttributes( $request, $id );
+        $result = Course::updateAttributes( $request, $course );
 
-        if( $result )
+        if( $result[ 0 ] === 'success' )
         {
             $course = $result[ 2 ];
             return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
@@ -124,7 +124,7 @@ class CourseController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

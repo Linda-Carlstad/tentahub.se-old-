@@ -66,72 +66,55 @@ class User extends Authenticatable
 
     public static function updateInfo( Request $request, User $user )
     {
+        $result = Verification::run( $request, 'user new' );
+        if( $result )
+        {
+            $user->name = $request->name;
+            $user->save();
 
-        User::validateInfo( $request, $user );
-
-        $user->name = $request->name;
-        $user->save();
-
-        return true;
+            return [ 'success', 'Användare uppdaterad.' ];
+        }
+        return [ 'error', 'Något gick fel, försök igen.' ];
     }
 
     public static function updateSecurity( Request $request, User $user )
     {
-        User::validateSecurity( $request, $user );
-
-        if( Hash::check( $request->password, $user->password ) )
+        $result = Verification::run( $request, 'user security' );
+        if( $result )
         {
-            $user->password = Hash::make( $request->newPassword );
-            $user->valid = true;
-            $user->save();
+            if( Hash::check( $request->password, $user->password ) )
+            {
+                $user->password = Hash::make( $request->newPassword );
+                $user->valid = true;
+                $user->save();
+
+                return [ 'success', 'Säkerhetsinformation uppdaterad, nice!' ];
+            }
+            return [ 'error', 'Lösenordet är felaktigt. Dubbelkolla informationen och försök igen.' ];
         }
-
-        return true;
-    }
-
-    public static function validateInfo( Request $request )
-    {
-        $request->validate( [
-            'name'           => 'required|string',
-            'email'          => 'required|email',
-            'association_id' => 'required|integer',
-        ] );
-    }
-
-    public static function validateSecurity( Request $request )
-    {
-        $request->validate( [
-            'password'        => 'required',
-            'newPassword'     => 'required|min:6|different:password',
-            'confirmPassword' => 'required|same:newPassword',
-        ] );
-    }
-
-    public static function validateNewUser( Request $request )
-    {
-        $request->validate( [
-            'name'           => 'required',
-            'role'           => 'required|in:super,admin,moderator',
-            'email'          => 'required|email',
-            'association_id' => 'required|integer',
-        ] );
+        return [ 'error', 'Något gick fel, försök igen.' ];
     }
 
     public static function createNew( Request $request )
     {
         $randomString = md5( uniqid( time(), true ) );
 
-        User::validateNewUser( $request );
+        $result = Verification::run( $request, 'user new' );
+        if( $result )
+        {
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make( $randomString );
+            $user->role = $request->role;
+            $user->association_id = $request->association_id;
+            $user->save();
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make( $randomString );
-        $user->role = $request->role;
-        $user->association_id = $request->association_id;
-        $user->save();
+            Mail::to( $user->email )
+                ->send( new NewUser( $user, $randomString ) );
 
-        Mail::to( $user->email )
-            ->send( new NewUser( $user, $randomString ) );
+            return [ 'success', 'Ny användare skapad, bra jobbat!' ];
+        }
+        return [ 'error', 'Något gick fel, försök igen.' ];
     }
 }

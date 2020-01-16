@@ -19,7 +19,7 @@ class UniversityController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class UniversityController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -43,16 +43,17 @@ class UniversityController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store( Request $request )
     {
         $this->authorize( 'create', Auth::user() );
-        $university = University::store( $request );
+        $result = University::store( $request );
 
-        if( $university )
+        if( $result[ 0 ] === 'success' )
         {
-            return redirect()->route( 'universities.show', $university->id )->with( 'success', 'Nytt universitet tillagt, bra jobbat!' );
+            $university = $result[ 2 ];
+            return redirect()->route( 'universities.show', $university->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
@@ -62,7 +63,7 @@ class UniversityController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show( $id )
     {
@@ -76,7 +77,7 @@ class UniversityController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -91,28 +92,28 @@ class UniversityController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
         $university = University::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $university );
 
-        $university = University::updateAttributes( $request, $id );
+        $result = University::updateAttributes( $request, $university );
 
-        if( $university )
+        if( $result[ 0 ] === 'success' )
         {
-            return redirect()->route( 'universities.show', $university->id )->with( 'success', 'Ändring av uppgifterna lyckades, yay!' );
+            return redirect()->route( 'universities.show', $university->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
+        return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {

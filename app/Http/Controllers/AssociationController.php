@@ -22,7 +22,7 @@ class AssociationController extends Controller
      /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
     public function index()
@@ -36,7 +36,7 @@ class AssociationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -50,28 +50,29 @@ class AssociationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store( Request $request )
     {
         $university = University::findOrFail( $request->university_id );
         $this->authorize( 'create', Auth::user(), $university );
 
-        $association = Association::store( $request );
+        $result = Association::store( $request );
 
-        if( $association )
+        if( $result[ 0 ] === 'success' )
         {
-            return redirect()->route( 'associations.show', $association->id )->with( 'success', 'Ny förening tillagd, va nice!' );
+            $association = $result[ 2 ];
+            return redirect()->route( 'associations.show', $association->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
-        return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
+        return redirect()->back()->with( 'error', '' );
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show( $id )
     {
@@ -85,7 +86,7 @@ class AssociationController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -94,7 +95,7 @@ class AssociationController extends Controller
 
         $universities = University::all();
 
-        return view( 'associations.edit' )->with( 'association', $association )->with( 'universities', $universities );;
+        return view( 'associations.edit' )->with( 'association', $association )->with( 'universities', $universities );
     }
 
     /**
@@ -102,19 +103,19 @@ class AssociationController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-
         $association = Association::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $association );
 
-        $association = Association::updateAttributes( $request, $id );
+        $result = Association::updateAttributes( $request, $association );
 
-        if( $association )
+        if( $result[ 0 ] === 'success' )
         {
-            return redirect()->route( 'associations.show', $association->id )->with( 'success', 'Ändring av uppgifterna lyckades, yippie!' );
+            $association = $result[ 2 ];
+            return redirect()->route( 'associations.show', $association->id )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
@@ -124,7 +125,7 @@ class AssociationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

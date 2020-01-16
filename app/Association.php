@@ -59,29 +59,23 @@ class Association extends Model
 
     public static function store( Request $request )
     {
-        Association::validate( $request );
-        $association = Association::create( $request->except( '_token' ) );
-
-        return $association;
+        $result = Verification::run( $request, 'association' );
+        if( $result )
+        {
+            $association = Association::create( $request->except( '_token' ) );
+            return [ 'success', 'Ny förening tillagd, va nice!', $association];
+        }
+        return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
     }
 
-    public static function updateAttributes( Request $request, $id )
+    public static function updateAttributes( Request $request, Association $association )
     {
-        Association::validate( $request );
-        $association = Association::findOrFail( $id );
-        $association->update( $request->except( '_token', '_method' ) );
-
-        return $association;
-    }
-
-    public static function validate( Request $request )
-    {
-        $request->validate(
-        [
-            'name'          => 'required|string',
-            'university_id' => 'required|integer',
-            'url'           => 'nullable|string',
-            'description'   => 'nullable|string'
-        ] );
+        $result = Verification::run( $request, 'association' );
+        if( $result )
+        {
+            $association->update( $request->except( '_token', '_method' ) );
+            return [ 'success', 'Ändring av uppgifterna lyckades, yippie!', $association];
+        }
+        return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
     }
 }

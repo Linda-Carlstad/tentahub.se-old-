@@ -58,31 +58,24 @@ class University extends Model
 
     public static function store( Request $request )
     {
-        University::validate( $request );
-        $university = University::create( $request->except( '_token' ) );
-
-        return $university;
+        $result = Verification::run( $request, 'university' );
+        if( $result )
+        {
+            $university = University::create( $request->except( '_token' ) );
+            return [ 'success', 'Nytt universitet tillagt, bra jobbat!', $university ];
+        }
+        return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
     }
 
-    public static function updateAttributes( Request $request, $id )
+    public static function updateAttributes( Request $request, University $university )
     {
-        University::validate( $request );
-        $university = University::findOrFail( $id );
-        $university->update( $request->except( '_token' ) );
+        $result = Verification::run( $request, 'university' );
+        if( $result )
+        {
+            $university->update( $request->except( '_token', '_method' ) );
+            return [ 'success', 'Ändring av uppgifterna lyckades, yay!' ];
+        }
 
-        return $university;
-    }
-
-    public static function validate( Request $request )
-    {
-        $request->validate(
-        [
-            'name'        => 'required|string',
-            'nickname'    => 'required|string|max:20',
-            'city'        => 'required|string',
-            'country'     => 'required|string',
-            'description' => 'nullable|string',
-            'url'         => 'nullable|string'
-        ] );
+        return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
     }
 }
