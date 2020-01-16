@@ -15211,7 +15211,6 @@ a.is-primary:hover {
 .navbar .navbar-item.has-dropdown .navbar-dropdown {
   border-top-color: var(--color-scheme-background-alt);
   background-color: var(--color-scheme-background);
-  border-top: 2px solid linear-gradient(170deg, #ff3f34, #f7b731);
 }
 
 .navbar .navbar-item.has-dropdown .navbar-dropdown a.navbar-item {
@@ -15280,3 +15279,4 @@ a.is-primary:hover {
 .list-item .exam {
   font-size: 1.5rem;
 }
+

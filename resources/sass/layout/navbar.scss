@@ -49,7 +49,6 @@
         .navbar-dropdown {
             border-top-color: var(--color-scheme-background-alt);
             background-color: var(--color-scheme-background);
-            border-top: 2px solid $primary-background;
             a.navbar-item {
                 color: var(--color-scheme-text-color);
                 &:hover {
