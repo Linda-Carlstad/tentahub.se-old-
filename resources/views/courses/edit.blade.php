@@ -10,7 +10,7 @@
             <form class="" method="POST" action="{{ route( 'courses.update', $course->id ) }}">
                 @csrf
                 {{ method_field( 'patch' ) }}
-                <input type="hidden" name="course_code" value="{{ $course->code }}">
+                <input type="hidden" name="id" value="{{ $course->id }}">
                 <div class="field">
                     <label for="name" class="label">Namn *</label>
                     <div class="control">
