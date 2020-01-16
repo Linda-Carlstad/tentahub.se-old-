@@ -38,6 +38,7 @@
                 Tentor
             </a>
         </div>
+        <hr class="is-hidden-desktop is-marginless">
         <div class="navbar-end">
             {{-- Right side of the navbar --}}
             @guest
@@ -71,6 +72,7 @@
                     </div>
                 </div>
             @endguest
+            <hr class="is-hidden-desktop is-marginless">
         </div>
     </div>
 </nav>
