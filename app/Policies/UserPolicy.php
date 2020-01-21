@@ -16,9 +16,13 @@ class UserPolicy
      * @param  \App\User  $model
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user)
     {
-        return $user->id == $model->id;
+        if( $user->role === 'admin' || $user->role === 'super' )
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -29,13 +33,13 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if( $user->role >= 'admin' )
+        if( $user->role === 'admin' || $user->role === 'super' )
         {
             return true;
         }
         return false;
     }
-    
+
     /**
      * Determine whether the user can create models.
      *
@@ -44,11 +48,28 @@ class UserPolicy
      */
     public function store(User $user)
     {
-        if( $user->role >= 'admin' )
+        if( $user->role === 'admin' || $user->role === 'super' )
         {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\User  $user
+     * @param  \App\User  $model
+     * @return mixed
+     */
+    public function edit(User $user, User $model)
+    {
+        if( $user->role === 'admin' || $user->role === 'super' )
+        {
+            return true;
+        }
+
+        return $user->id == $model->id;
     }
 
     /**
@@ -60,6 +81,11 @@ class UserPolicy
      */
     public function update( User $user, User $model )
     {
+        if( $user->role === 'super' )
+        {
+            return true;
+        }
+
         return $user->id == $model->id;
     }
 
@@ -72,7 +98,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->id == $model->id;
+        if( $user->role === 'super' )
+        {
+            return true;
+        }
     }
 
     /**
