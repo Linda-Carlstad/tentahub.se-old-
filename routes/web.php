@@ -68,7 +68,7 @@ Route::get('email/skicka-igen', 'Auth\VerificationController@resend')->name('ver
 
 Route::group( [ 'middleware' => 'verified' ], function()
 {
-    Route::get( 'profil/inställningar', 'UserController@edit' )->name( 'profile.settings' );
+    Route::get( 'profil/inställningar', 'UserController@settings' )->name( 'profile.settings' );
     Route::match( [ 'put', 'patch' ], '/user/{id}', 'UserController@update' );
 
     Route::group( [ 'middleware' => 'valid_user' ], function()
