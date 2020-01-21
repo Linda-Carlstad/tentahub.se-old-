@@ -26,14 +26,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function index()
     {
-        $user = User::findOrFail( Auth::user()->id );
-        $this->authorize( 'view', Auth::user(), $user );
+        $users = User::all();
+        $this->authorize( 'view', Auth::user() );
 
-        return view( 'users.index' )->with( 'user', $user );;
+        return view( 'users.index' )->with( 'users', $users );;
     }
 
     /**
