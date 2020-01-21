@@ -128,6 +128,18 @@ class UserController extends Controller
     public function destroy( $id )
     {
         abort( '403' );
+    /**
+     * Display the current logged in user.
+     *
+     * @return Factory|View
+     * @throws AuthorizationException
+     */
+    public function profile()
+    {
+        $user = Auth::user();
+        $this->authorize( 'view', Auth::user() );
+        return view( 'users.profile' )->with( 'user', $user );
+    }
 
     /**
      * Show the update form for the current logged in user.

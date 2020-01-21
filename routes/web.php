@@ -73,7 +73,7 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
     Route::group( [ 'middleware' => 'valid_user' ], function()
     {
-        Route::get( 'profil', 'UserController@index' )->name( 'profile' );
+        Route::get( 'profil', 'UserController@profile' )->name( 'profile' );
     } );
 } );
 
