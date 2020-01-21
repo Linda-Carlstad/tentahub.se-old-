@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use View;
-use Session;
-
 use App\User;
 use App\University;
-use App\Association;
-use App\Http\Controllers\Controller;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware( 'verified' );
-        $this->middleware( 'valid_user' )->except( 'edit', 'update' );
-        $this->middleware( 'admin' )->only( 'create', 'store', 'show', 'destroy' );
+        $this->middleware( 'valid_user' )->except( 'settings', 'update' );
+        $this->middleware( 'admin' )->only( 'create', 'store', 'edit', 'show', 'destroy' );
     }
 
     /**
@@ -40,22 +39,34 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function create()
     {
-        abort( '404' );
+        $user = Auth::user();
+        $this->authorize( 'create', $user );
+
+        $universities = University::with( 'associations' )->get();
+
+        return view( 'users.create' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     * @throws AuthorizationException
      */
     public function store(Request $request)
     {
-        abort( '403' );
+        $user = Auth::user();
+        $this->authorize( 'store', $user );
+
+        User::createNew( $request );
+
+        return redirect( 'users' )->with( 'success', 'Ny användare skapad!' );
     }
 
     /**
@@ -88,15 +99,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update( Request $request, $id )
     {
         $user = User::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $user );
-        $result = false;
 
         switch( $request->type )
         {
@@ -105,10 +116,18 @@ class UserController extends Controller
                 {
                     $result = User::updateInfo( $request, $user );
                 }
+                else
+                {
+                    $result = false;
+                }
                 break;
 
             case 'security':
                 $result = User::updateSecurity( $request, $user );
+                break;
+
+            case 'admin':
+                $result = User::updateAdmin( $request, $user );
                 break;
 
             default:
@@ -126,12 +145,19 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse|Redirector
+     * @throws AuthorizationException
      */
     public function destroy( $id )
     {
-        abort( '403' );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'delete', Auth::user(), $user );
+        $user->delete();
+
+        return redirect( 'users' )->with( 'success', 'Användare borttagen.' );
+    }
+
     /**
      * Display the current logged in user.
      *
