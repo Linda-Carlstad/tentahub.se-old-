@@ -79,13 +79,11 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
 Route::resources(
 [
-    'admins' => 'AdminController',
     'associations' => 'AssociationController',
     'courses' => 'CourseController',
     'exams' => 'ExamController',
     'universities' => 'UniversityController',
     'users' => 'UserController',
-    'supers' => 'SuperController',
 ] );
 
 Route::get( 'exams/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
