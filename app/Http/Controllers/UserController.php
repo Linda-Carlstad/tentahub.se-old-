@@ -73,13 +73,16 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Factory|View
+     * @throws AuthorizationException
      */
-    public function edit( Request $request )
+    public function edit( $id )
     {
-        $user = User::findOrFail( Auth::user()->id );
-        return view( 'users.edit' )->with( 'user', $user );
+        $user = User::findOrFail( $id );
+        $this->authorize( 'edit', Auth::user(), $user );
+        $universities = University::with( 'associations' )->get();
+        return view( 'users.edit' )->with( 'user', $user )->with( 'universities', $universities );
     }
 
     /**
