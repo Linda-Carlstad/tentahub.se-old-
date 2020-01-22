@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class SendContactRequest extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function __invoke( Request $request )
     {
