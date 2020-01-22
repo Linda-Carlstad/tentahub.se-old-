@@ -11,7 +11,7 @@
                     Supportformulär :)
                 </p>
                 <hr>
-                <form class="{{ route( 'contact' ) }}" method="post">
+                <form action="{{ route( 'contact' ) }}" method="post">
                     @csrf
                     <input type="hidden" name="type" value="info">
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
