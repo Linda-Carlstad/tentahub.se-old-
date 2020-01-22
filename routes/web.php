@@ -44,7 +44,7 @@ Route::get( 'hur-funkar-' . strtolower( env( 'APP_NAME' ) ), function()
     return view( 'general.how-to-use' );
 } )->name( 'how-to-use' );
 
-Route::post( '/contact', 'SendContactRequest' )->name( 'contact' );
+Route::post( '/kontakt-email', 'SendContactRequest' )->name( 'contact' );
 
 Route::get('/linda','FileUploadController@index')->name( 'linda' );
 
@@ -63,7 +63,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 // Email Verification Routes...
 Route::get('email/verifiera', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/verifiera/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify'); // v6.x
+Route::get('email/verifiera/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/skicka-igen', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::group( [ 'middleware' => 'verified' ], function()
@@ -90,8 +90,3 @@ Route::resources(
 
 Route::get( 'exams/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
 
-Route::get('email', function () {
-    $user = App\User::find(1);
-
-    return new App\Mail\NewUser($user, 'hello');
-});
