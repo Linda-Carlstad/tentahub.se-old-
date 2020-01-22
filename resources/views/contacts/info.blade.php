@@ -8,8 +8,8 @@
             <div class="column is-half is-widescreen">
                 <h1 class="title">Kontakta oss</h1>
                 <p>
-                    Du är självklart välkommen att ringa till oss eller så kan du använda dig av
-                    formuläret nedan för att komma i kontakt med oss
+                    Du är självklart välkommen att använda dig av
+                    formuläret nedan för att komma i kontakt med oss.
                 </p>
                 <hr>
                 <form action="{{ route( 'contact' ) }}" method="post">
@@ -53,7 +53,7 @@
                     <div class="field">
                         <label for="text" class="label">Meddelande</label>
                         <div class="control">
-                            <textarea id="text" class="input {{ $errors->has('text') ? ' is-danger' : '' }}" placeholder="Meddelande" name="text" value="{{ old( 'text' ) }}" required></textarea>
+                            <textarea id="text" class="textarea{{ $errors->has('text') ? ' is-danger' : '' }}" rows="2" placeholder="Meddelande" name="text" required>{{ old( 'text' ) }}</textarea>
                             @error( 'text' )
                             <span class="has-text-danger" role="alert">
                                     {{ $message }}
