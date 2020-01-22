@@ -89,3 +89,9 @@ Route::resources(
 ] );
 
 Route::get( 'exams/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
+
+Route::get('email', function () {
+    $user = App\User::find(1);
+
+    return new App\Mail\NewUser($user, 'hello');
+});
