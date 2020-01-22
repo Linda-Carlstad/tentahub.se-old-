@@ -62,8 +62,8 @@
                     </div>
                     <div class="field">
                         <div class="control">
-                            <label class="checkbox" for="remember_token">
-                                <input type="checkbox" name="remember_token" id="remember_token">
+                            <label class="checkbox" for="policy">
+                                <input type="checkbox" name="policy" id="policy">
                                 Jag samtycker till att mina uppgifter lagras och behandlas enligt följande
                                 <a class="has-text-underline" href="{{ route( 'policy' ) }}" target="_blank">avtal</a>.
                             </label>
