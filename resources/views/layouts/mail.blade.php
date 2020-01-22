@@ -86,20 +86,20 @@
     <body>
         <div class="wrapper">
             <header>
-                <h1>Tentahub</h1>
-                <p>Din personliga central för gamla tentor</p>
+                <h1>{{ env( 'APP_NAME' ) }}</h1>
+                <p>{{ env( 'APP_SLOGAN' ) }}</p>
             </header>
 
             <div class="main">
-                @yield( 'content' )
+                <div class="container">
+                    @yield( 'content' )
             </div>
 
             <footer>
-                <hr>
-                <h3>Tentahub</h3>
-                <a href="https://tentahub.se">https://tentahub.com</a>
+                <h3>{{ env( 'APP_NAME' ) }}</h3>
+                <a href="{{ env( 'APP_URL' ) }}">{{ env( 'APP_URL' ) }}</a>
                 <br>
-                <a href="mailto:info@lindacarlstad.se">info@lindacarlstad.se</a>
+                <a href="mailto:{{ env('MAIL_TO_ADDRESS') }}">{{ env('MAIL_TO_ADDRESS') }}</a>
             </footer>
         </div>
     </body>
