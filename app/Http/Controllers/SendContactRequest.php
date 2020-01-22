@@ -69,10 +69,11 @@ class SendContactRequest extends Controller
                 Mail::to( 'info@lindacarlstad.se' )
                     ->send( new Info( $request ) );
                 break;
+
             default:
                 return redirect()->back()->with( 'error', 'Något gick fel, vänligen försök igen.' );
                 break;
         }
-        return redirect()->back()->with( 'success', 'Ditt meddelande har skickats.' );
+        return redirect()->back()->with( 'success', 'Ditt meddelande har skickats. Vi kommer att kontakta dig så snart som möjligt.' );
     }
 }
