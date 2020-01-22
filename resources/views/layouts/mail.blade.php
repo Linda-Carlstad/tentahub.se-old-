@@ -3,6 +3,41 @@
     <head>
         <meta charset="utf-8">
         <style>
+            :root {
+                --color-scheme-background: #333;
+                --color-scheme-background-light: #333;
+                --color-scheme-background-diff: #333;
+                --color-scheme-text-color: white;
+                --color-scheme-text-color-diff: #404040;
+                --color-scheme-text-color-invert: #000;
+
+            }
+            /*
+            ** Light-theme : Set variables **
+            */
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --color-scheme-background: #fff;
+                    --color-scheme-background-alt: #efefef;
+                    --color-scheme-background-diff: #dbdbdb;
+                    --color-scheme-text-color: #000;
+                    --color-scheme-text-color-diff: #404040;
+                    --color-scheme-text-color-invert: #fff;
+                }
+            }
+            /*
+            ** Dark-theme : Set variables **
+            */
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-scheme-background: #1A1A1A;
+                    --color-scheme-background-alt: #343434;
+                    --color-scheme-background-diff: #474747;
+                    --color-scheme-text-color: #fff;
+                    --color-scheme-text-color-diff: #bfbfbf;
+                    --color-scheme-text-color-invert: #000;
+                }
+            }
             @font-face
             {
                 font-family: 'Comfortaa', 'Raleway', sans-serif !important;
