@@ -6,10 +6,15 @@ use App\Course;
 use App\Exam;
 use App\University;
 use App\Verification;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\File;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ExamController extends Controller
 {
@@ -23,7 +28,7 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -35,7 +40,7 @@ class ExamController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -47,10 +52,10 @@ class ExamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
         $result = Verification::run( $request, 'recapctha' );
         if( !$result )
@@ -87,9 +92,9 @@ class ExamController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
-    public function show($id)
+    public function show( $id )
     {
         $exam = Exam::findOrFail( $id );
 
@@ -118,7 +123,7 @@ class ExamController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit($id)
     {
@@ -131,11 +136,12 @@ class ExamController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id )
     {
         $exam = Exam::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $exam );
@@ -153,10 +159,11 @@ class ExamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
         $exam = Exam::findOrFail( $id );
         $this->authorize( 'delete', Auth::user(), $exam );

@@ -149,7 +149,8 @@ class Exam extends Model
         $university = University::findOrFail( $association->university_id );
 
         $exam = Storage::putFileAs(
-            'exams/' . $university->slug . '/' . $association->slug . '/' . $course->code, new File( $request->exam ), $temp . '-' . $request->exam->getClientOriginalName()
+            'exams/' . $university->slug . '/' . $association->slug . '/' . $course->code,
+            new File( $request->exam ), $request->exam->getClientOriginalName() . '-' .  $temp
         );
 
         return $exam;
