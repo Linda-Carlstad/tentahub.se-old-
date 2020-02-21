@@ -14,9 +14,9 @@ class AddUniversityReferenceToCourses extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('university_id')->nullable();
             $table->foreign('university_id')
-                ->references('id')->on('associations')
+                ->references('id')->on('universities')
                 ->onDelete('cascade');
         });
     }
