@@ -1,82 +1,97 @@
-@section('title', 'Inställningar')
+@section('title', 'Uppdatera ' . $user->name ? $user->name : $user->id )
 @extends('layouts.app')
 @section('content')
 
     <section class="section">
         <div class="columns level">
             <div class="column is-half is-widescreen level-item">
-                <h1 class="title">Inställningar</h1>
-
-                @if( $user->valid )
-                    <h2 class="title is-5">Byt namn</h2>
-                    <form class="" action="{{ route( 'users.update', $user->id ) }}" method="post">
-                        @csrf
-                        @method( 'PATCH' )
-                        <input type="hidden" name="type" value="info">
-                        <input type="hidden" name="email" value="{{ $user->email }}">
-                        <input type="hidden" name="association_id" value="{{ $user->association->id }}">
-
-                        <div class="field">
-                            <label for="name" class="label">Namn</label>
-                            <div class="control">
-                                <input id="name" class="input" type="text" name="name" placeholder="Namn" value="{{ $user->name }}" required />
-                            </div>
-                            @error( 'name' )
-                                <span class="has-text-danger" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <button class="button is-link">Ändra</button>
-                            </div>
-                            <div class="control">
-                                <a href="{{ url()->previous() }}" class="button is-link is-light">Avbryt</a>
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                @endif
-
-                <h2 class="title is-5">Byt lösenord</h2>
+                <h1 class="title">Uppdatera användaren: {{ $user->name ? $user->name : $user->id }}</h1>
+                <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
+                <hr>
                 <form class="" action="{{ route( 'users.update', $user->id ) }}" method="post">
                     @csrf
                     @method( 'PATCH' )
-                    <input type="hidden" name="type" value="security">
+                    <input type="hidden" name="type" value="admin">
+                    <input type="hidden" name="email" value="{{ $user->email }}">
+                    <input type="hidden" name="association_id" value="{{ $user->association->id }}">
 
                     <div class="field">
-                        <label for="password" class="label">Lösenord</label>
+                        <label for="name" class="label">Namn *</label>
                         <div class="control">
-                            <input id="password" class="input {{ $errors->has('password') ? ' is-danger' : '' }}" type="password" name="password" placeholder="Lösenord" required>
+                            <input id="name" class="input" type="text" name="name" placeholder="Namn" value="{{ $user->name }}" required />
                         </div>
-                        @error( 'password' )
+                        @error( 'name' )
                         <span class="has-text-danger" role="alert">
-                        {{ $message }}
-                    </span>
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
                     <div class="field">
-                        <label for="newPassword" class="label">Nytt lösenord</label>
+                        <label for="email" class="label">Email *</label>
                         <div class="control">
-                            <input id="newPassword" class="input {{ $errors->has('newPassword') ? ' is-danger' : '' }}" type="password" name="newPassword" placeholder="Nytt lösenord" required>
+                            <input id="email" class="input" type="text" name="email" placeholder="Namn" value="{{ $user->email }}" required />
                         </div>
-                        @error( 'newPassword' )
+                        @error( 'email' )
                         <span class="has-text-danger" role="alert">
-                        {{ $message }}
-                    </span>
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
                     <div class="field">
-                        <label for="confirmPassword" class="label">Bekräfta lösenord</label>
                         <div class="control">
-                            <input id="confirmPassword" class="input {{ $errors->has('confirmPassword') ? ' is-danger' : '' }}" type="password" name="confirmPassword" placeholder="Bekräfta lösenord" required>
+                            <label class="checkbox" for="valid">
+                                <input type="checkbox" name="valid" id="valid" value="1" {{ $user->valid === 1 ? 'checked' : '' }}>
+                                Aktiverad profil
+                            </label>
                         </div>
-                        @error( 'confirmPassword' )
+                        @error( 'valid' )
+                        <span class="has-text-danger" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label for="role" class="label">Roll *</label>
+                        <div class="control">
+                            <div class="select {{ $errors->has('role') ? 'is-danger' : '' }}">
+                                <select id="role" name="role" required>
+                                    <option {{ $user->role === 'moderator' ? 'selected' : '' }} value="moderator">Moderator</option>
+                                    @if( Auth::user()->role === 'super' )
+                                        <option {{ $user->role === 'admin' ? 'selected' : '' }} value="admin">Admin</option>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        @error( 'role' )
                             <span class="has-text-danger" role="alert">
                                 {{ $message }}
                             </span>
                         @enderror
+                    </div>
+                    <div class="field">
+                        <label for="association_id" class="label">Förening *</label>
+                        <div class="control">
+                            <div class="select {{ $errors->has('association_id') ? 'is-danger' : '' }}">
+                                <select id="association_id" name="association_id" required>
+                                    @if( Auth::user()->role === 'super' )
+
+                                        <option selected disabled>Välj förening...</option>
+                                        @foreach( $universities as $university )
+                                            @if( !$university->associations->isEmpty() )
+                                                <option disabled>- {{ $university->name }}</option>
+                                            @endif
+                                            @foreach( $university->associations as $association )
+                                                <option {{ $user->association_id == $association->id ? 'selected' : '' }} value="{{ $association->id }}">{{ $association->name }}</option>
+                                            @endforeach
+                                        @endforeach
+                                    @else
+                                        @foreach( Auth::user()->association->university->associations as $association )
+                                            <option {{ old( 'association_id' ) === $association->id ? 'selected' : '' }}  value="{{ $association->id }}">{{ $association->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="field is-grouped">
                         <div class="control">
@@ -88,17 +103,7 @@
                     </div>
                 </form>
             </div>
-            <div class="column is-half is-widescreen level-item">
-
-            </div>
         </div>
     </section>
-    <hr>
-    <section class="column has-text-centered">
-        <p>
-            Vill du byta email?
-            <br>
-            <a href="{{ route( 'contacts.support' ) }}">Kontakta supporten här</a>
-        </p>
-    </section>
+
 @endsection

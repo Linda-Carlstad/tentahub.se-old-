@@ -95,6 +95,24 @@ class User extends Authenticatable
         return [ 'error', 'Något gick fel, försök igen.' ];
     }
 
+    public static function updateAdmin( Request $request, User $user )
+    {
+
+        $result = Verification::run( $request, 'user new' );
+
+        if( $result )
+        {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->valid = $request->valid;
+            $user->association_id = $request->association_id;
+            $user->save();
+            return [ 'success', 'Användare uppdaterad, bra jobbat!' ];
+        }
+        return [ 'error', 'Något gick fel, försök igen.' ];
+    }
+
     public static function createNew( Request $request )
     {
         $randomString = md5( uniqid( time(), true ) );

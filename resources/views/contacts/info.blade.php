@@ -8,11 +8,11 @@
             <div class="column is-half is-widescreen">
                 <h1 class="title">Kontakta oss</h1>
                 <p>
-                    Du är självklart välkommen att ringa till oss eller så kan du använda dig av
-                    formuläret nedan för att komma i kontakt med oss
+                    Du är självklart välkommen att använda dig av
+                    formuläret nedan för att komma i kontakt med oss.
                 </p>
                 <hr>
-                <form class="{{ route( 'contact' ) }}" method="post">
+                <form action="{{ route( 'contact' ) }}" method="post">
                     @csrf
                     <input type="hidden" name="type" value="info">
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
@@ -53,7 +53,7 @@
                     <div class="field">
                         <label for="text" class="label">Meddelande</label>
                         <div class="control">
-                            <textarea id="text" class="input {{ $errors->has('text') ? ' is-danger' : '' }}" placeholder="Meddelande" name="text" value="{{ old( 'text' ) }}" required></textarea>
+                            <textarea id="text" class="textarea{{ $errors->has('text') ? ' is-danger' : '' }}" rows="2" placeholder="Meddelande" name="text" required>{{ old( 'text' ) }}</textarea>
                             @error( 'text' )
                             <span class="has-text-danger" role="alert">
                                     {{ $message }}
@@ -63,8 +63,8 @@
                     </div>
                     <div class="field">
                         <div class="control">
-                            <label class="checkbox" for="remember_token">
-                                <input type="checkbox" name="remember_token" id="remember_token">
+                            <label class="checkbox" for="policy">
+                                <input type="checkbox" name="policy" id="policy">
                                 Jag samtycker till att mina uppgifter lagras och behandlas enligt följande
                                 <a class="has-text-underline" href="{{ route( 'policy' ) }}" target="_blank">avtal</a>.
                             </label>

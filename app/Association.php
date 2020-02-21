@@ -21,11 +21,18 @@ class Association extends Model
         'slug'
     ];
 
+    public function users()
+    {
+        return $this->hasMany( 'App\User' );
+    }
+
     public function university()
     {
         return $this->belongsTo( 'App\University' );
     }
-    public function courses(){
+
+    public function courses()
+    {
         return $this->hasMany( 'App\Course' );
     }
 
