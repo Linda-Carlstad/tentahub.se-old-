@@ -70,8 +70,10 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="university_id" value="{{ Auth::user()->university->id }}">
                 @else
                     <input type="hidden" name="association_id" value="{{ Auth::user()->association->id }}">
+                    <input type="hidden" name="university_id" value="{{ Auth::user()->university->id }}">
                 @endif
                 <div class="field">
                     <label for="url" class="label">Länk</label>
