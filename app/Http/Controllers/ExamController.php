@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Exam;
 use App\University;
+use App\Verification;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,32 +52,15 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $data = [
-            'secret'   => env( 'GOOGLE_RECAPTCHA_SECRET' ),
-            'response' => $request->recaptcha
-        ];
-
-        $options = [
-            'http' => [
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'method'  => 'POST',
-                'content' => http_build_query( $data )
-            ]
-        ];
-
-        $context = stream_context_create( $options );
-        $result = file_get_contents( $url, false, $context );
-        $json = json_decode( $result );
-
-        if( $json->success != true )
+        $result = Verification::run( $request, 'recapctha' );
+        if( !$result )
         {
             return back()->with( 'error', 'Capatcha fel!' );
         }
 
         if( $request->type === 'manual' )
         {
-            $result = Exam::validate( $request );
+            $result = Verification::run( $request, 'exam' );
             if( $result )
             {
                 $result = Exam::store( $request );
@@ -90,7 +74,7 @@ class ExamController extends Controller
             $result = Exam::automaticStore( $request );
             if( $result[ 0 ] === 'success' )
             {
-                return redirect()->route('exams.index')->with( $result[0], $result[1] );
+                return redirect()->route('exams.index')->with( $result[ 0 ], $result[ 1 ] );
             }
 
             return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
@@ -158,7 +142,7 @@ class ExamController extends Controller
 
         $result = Exam::updateAttributes( $request, $id );
 
-        if( $result )
+        if( $result[ 0 ] === 'success' )
         {
             return redirect()->route( 'exams.show', $exam->id )->with( $result[ 0 ], $result[ 1 ] );
         }

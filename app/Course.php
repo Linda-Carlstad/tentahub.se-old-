@@ -61,7 +61,7 @@ class Course extends Model
 
     public static function store( Request $request )
     {
-        $result = Course::validate( $request );
+        $result = Verification::run( $request, 'course' );
         if( $result )
         {
             $course = Course::create( $request->except( '_token' ) );
@@ -71,28 +71,15 @@ class Course extends Model
         return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
     }
 
-    public static function updateAttributes( Request $request, $id )
+    public static function updateAttributes( Request $request, Course $course )
     {
-        $result = Course::validate( $request );
+        $result = Verification::run( $request, 'course' );
         if( $result )
         {
-            $course = Course::findOrFail( $id );
             $course->update( $request->except( '_token', '_method' ) );
             return [ 'success', 'Ändring av uppgifterna lyckades, yay!', $course ];
         }
 
         return [ 'error', 'Något gick fel i maskineriet, testa igen!' ];
-    }
-
-    public static function validate( Request $request )
-    {
-        return $request->validate( [
-            'name'           => 'required|string',
-            'code'           => 'required|string|unique:courses,code,' . $request->course_code,
-            'association_id' => 'required|integer',
-            'url'            => 'nullable|string',
-            'description'    => 'nullable|string',
-            'points'         => 'required|numeric',
-        ] );
     }
 }

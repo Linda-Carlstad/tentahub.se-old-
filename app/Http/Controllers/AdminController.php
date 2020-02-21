@@ -71,9 +71,13 @@ class AdminController extends Controller
         $user = User::findOrFail( Auth::user()->id );
         $this->authorize( 'store', $user );
 
-        User::createNew( $request );
+        $result = User::createNew( $request );
+        if( $result[ 0 ] === 'success' )
+        {
+            return redirect('profil')->with( $result[ 0 ], $result[ 1 ] );
+        }
 
-        return redirect( 'profil' )->with( 'success', 'Ny användare skapad!' );
+        return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
     }
 
     /**
@@ -112,12 +116,11 @@ class AdminController extends Controller
         $user = User::findOrFail( $id );
         $this->authorize( 'update', Auth::user(), $user );
 
-        $result = false;
         $result = User::updateInfo( $request, $user );
 
-        if( $result )
+        if( $result[ 0 ] === 'success' )
         {
-            return redirect()->back()->with( 'success', 'Användare uppdaterad.' );
+            return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
         }
         return redirect()->back()->with( 'error', 'Något gick fel.' );
 
