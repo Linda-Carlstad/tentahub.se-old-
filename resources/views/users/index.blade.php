@@ -1,27 +1,51 @@
-@section('title', 'Profil')
+@section('title', 'Alla användare')
 @extends('layouts.app')
-
 @section('content')
 
-    <section class="hero is-fullwidth has-text-centered">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">Hejsan, {{ $user->name }}</h1>
-                <h3 class="subtitle">Här är din profil, ta en titt!</h3>
-            </div>
-        </div>
-    </section>
-    <hr>
     <section class="section">
-        <h4 class="title is-3">Förening: <a href="{{ route( 'associations.show', $user->association->id ) }}">{{ $user->association->name }}</a></h4>
-        <h4 class="subtitle is-5">Tillhör universitet: <a href="{{ route( 'universities.show', $user->association->university->id ) }}">{{ $user->association->university->name }}</a></h4>
-        <p><b>Statistik om din föreing:</b></p>
-        <p>Kurser: {{ $user->association->courses->count() }}</p>
-        <p>Tentor: {{ $user->association->exams->count() }}</p>
+        <h1 class="title">Användare</h1>
+        <p>Se alla användare nedan</p>
+        @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' || Auth::user()->role === 'moderator' )
+            <a class="button is-primary" href="{{ route( 'users.create' ) }}">Lägg till användare</a>
+        @endif
         <hr>
-        <h2 class="title is-3">Redigera din profil</h2>
-        <p>Vill du redigera din profil, klicka nedan.</p>
-        <a class="button is-primary" href="{{ route( 'profile.settings' ) }}">Inställningar</a>
+        @if( $users->isEmpty() )
+            <p>Inga användare att visa!</p>
+            <hr>
+        @else
+            <div class="columns">
+                <div class="column is-3 level-item has-text-centered">
+                    <h4 class="title is-4">Namn</h4>
+                </div>
+                <div class="column is-3 level-item has-text-centered">
+                    <h4 class="title is-4">Roll</h4>
+                </div>
+                <div class="column is-3 level-item has-text-centered">
+                    <h4 class="title is-4">E-post</h4>
+                </div>
+                <div class="column is-3 level-item has-text-centered">
+                    <h4 class="title is-4">#</h4>
+                </div>
+            </div>
+            <div class="columns level is-multiline">
+                @foreach( $users as $user )
+                    <div class="column is-3 level-item has-text-centered">
+                        <p>{{ $user->name }}</p>
+                    </div>
+                    <div class="column is-3 level-item has-text-centered">
+                        <p>{{ $user->role }}</p>
+                    </div>
+                    <div class="column is-3 level-item has-text-centered">
+                        <p>{{ $user->email }}</p>
+                    </div>
+                    <div class="column is-3 level-item has-text-centered">
+                        <a class="button is-primary" href="{{ route( 'users.show', $user->id ) }}">Visa</a> <a class="button is-secondary" href="{{ route( 'users.edit', $user->id ) }}">Redigera</a>
+                    </div>
+                @endforeach
+            </div>
+
+        @endif
     </section>
+
 
 @endsection

@@ -77,7 +77,7 @@ class User extends Authenticatable
 
     public static function updateSecurity( Request $request, User $user )
     {
-        User::validateSecurity( $request, $user );
+        User::validateSecurity( $request );
 
         if( Hash::check( $request->password, $user->password ) )
         {
@@ -85,6 +85,21 @@ class User extends Authenticatable
             $user->valid = true;
             $user->save();
         }
+
+        return true;
+    }
+
+    public static function updateAdmin( Request $request, User $user )
+    {
+
+        User::validateNewUser( $request );
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->valid = $request->valid;
+        $user->association_id = $request->association_id;
+        $user->save();
 
         return true;
     }
