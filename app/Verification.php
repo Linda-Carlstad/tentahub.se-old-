@@ -100,6 +100,7 @@ class Verification extends Model
             'name'           => 'required|string',
             'code'           =>  $request->method() === 'PATCH' ? 'required|string|unique:courses,code,' . $request->id : 'required|string|unique:courses',
             'association_id' => 'required|integer',
+            'university_id'  => 'required|integer',
             'url'            => 'nullable|string',
             'description'    => 'nullable|string',
             'points'         => 'required|numeric',
