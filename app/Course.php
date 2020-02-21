@@ -21,13 +21,18 @@ class Course extends Model
         'points',
         'url',
         'association_id',
-        'slug'
+        'slug',
+        'university_id'
     ];
 
 
     protected $dispatchesEvents = [
         'created' => CourseCreated::class,
     ];
+
+    public function university(){
+        return $this->belongsTo('App\University');
+    }
 
     public function association(){
         return $this->belongsTo('App\Association');
