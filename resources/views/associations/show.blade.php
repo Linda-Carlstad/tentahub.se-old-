@@ -19,7 +19,7 @@
                 <ul>
                     @foreach( $courses as $course )
                         <li>-
-                            @if( $course->university )
+                            @if( $course->university && empty( $course->association ) )
                                 <a href="{{ route( 'courses.partial',
                                             [ $course->university->slug,
                                               $course->slug ] ) }}">
