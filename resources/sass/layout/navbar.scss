@@ -1,6 +1,12 @@
 .navbar {
     background: $primary-background;
 
+    .navbar-brand {
+        a.navbar-item {
+            color: white;
+        }
+    }
+
     a.navbar-burger {
         color: white;
 
@@ -23,7 +29,7 @@
     }
 
     a.navbar-item  {
-        color: white;
+        color: var(--color-scheme-text-color);
         transition-duration: .2s;
 
         &:hover {

@@ -15161,6 +15161,10 @@ a.is-primary:hover {
   background: linear-gradient(170deg, #ff3f34, #f7b731);
 }
 
+.navbar .navbar-brand a.navbar-item {
+  color: white;
+}
+
 .navbar a.navbar-burger {
   color: white;
 }
@@ -15183,7 +15187,7 @@ a.is-primary:hover {
 }
 
 .navbar a.navbar-item {
-  color: white;
+  color: var(--color-scheme-text-color);
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
 }
