@@ -99,8 +99,8 @@ class Verification extends Model
         return $request->validate( [
             'name'           => 'required|string',
             'code'           =>  $request->method() === 'PATCH' ? 'required|string|unique:courses,code,' . $request->id : 'required|string|unique:courses',
-            'association_id' => 'required|integer',
-            'university_id'  => 'required|integer',
+            'association_id' => 'required_without:university_id|integer',
+            'university_id'  => 'required_without:association_id|integer',
             'url'            => 'nullable|string',
             'description'    => 'nullable|string',
             'points'         => 'required|numeric',
