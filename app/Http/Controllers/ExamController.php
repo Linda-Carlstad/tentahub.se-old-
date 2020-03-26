@@ -188,4 +188,20 @@ class ExamController extends Controller
 
         return Storage::download( $exam->path );
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $association
+     * @param $course
+     * @param $exam
+     * @return Factory|View
+     */
+    public function full( $university, $association, $course, $exam )
+    {
+        $exam = Exam::where(  'slug', $exam )->first();
+
+        return view( 'exams.show' )->with( 'exam', $exam );
+    }
 }
