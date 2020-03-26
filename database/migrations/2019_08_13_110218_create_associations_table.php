@@ -19,6 +19,7 @@ class CreateAssociationsTable extends Migration
             $table->string('slug')->unique();
             $table->string('url')->nullable();
             $table->longText('description')->nullable();
+            $table->boolean( 'public' )->default( false );
             $table->unsignedBigInteger('university_id');
             $table->foreign('university_id')
                 ->references('id')->on('universities')
