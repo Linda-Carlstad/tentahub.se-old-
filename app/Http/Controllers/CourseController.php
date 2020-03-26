@@ -19,10 +19,10 @@ class CourseController extends Controller
 {
     public function __construct()
     {
-        $list = [ 'index', 'show', 'partial', 'full' ];
-        $this->middleware( 'verified' )->except( $list );
-        $this->middleware( 'valid_user' )->except( $list );
-        $this->middleware( 'moderator' )->except( $list );
+        $guest = [ 'index', 'show', 'partial', 'full' ];
+        $this->middleware( 'verified' )->except( $guest );
+        $this->middleware( 'valid_user' )->except( $guest );
+        $this->middleware( 'moderator' )->except( $guest );
     }
 
     /**

@@ -16,9 +16,11 @@ class UniversityController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show' );
-        $this->middleware( 'super' )->except( 'index', 'show' );
+        $guest = [ 'index', 'show', 'full' ];
+
+        $this->middleware( 'verified' )->except( $guest );
+        $this->middleware( 'valid_user' )->except( $guest );
+        $this->middleware( 'super' )->except( $guest );
     }
 
     /**

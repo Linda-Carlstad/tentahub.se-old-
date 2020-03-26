@@ -17,10 +17,14 @@ class AssociationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show', 'full' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show'. 'full' );
-        $this->middleware( 'moderator' )->only( 'edit', 'update' );
-        $this->middleware( 'admin' )->only( 'create', 'store', 'destroy' );
+        $guest = [ 'index', 'show', 'full' ];
+        $auth = [ 'edit', 'update' ];
+        $admin = [ 'create', 'store', 'destroy' ];
+
+        $this->middleware( 'verified' )->except( $guest );
+        $this->middleware( 'valid_user' )->except( $guest );
+        $this->middleware( 'moderator' )->only( $auth );
+        $this->middleware( 'admin' )->only( $admin );
     }
 
      /**

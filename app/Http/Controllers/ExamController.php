@@ -12,6 +12,7 @@ use Illuminate\Http\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -20,9 +21,11 @@ class ExamController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show', 'create', 'store', 'download' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show', 'create', 'store', 'download'  );
-        $this->middleware( 'moderator' )->except( 'index', 'show', 'create', 'store', 'download'  );
+        $guest = [ 'index', 'show', 'create', 'store', 'download', '', 'full' ];
+
+        $this->middleware( 'verified' )->except( $guest );
+        $this->middleware( 'valid_user' )->except( $guest );
+        $this->middleware( 'moderator' )->except( $guest );
     }
 
     /**
