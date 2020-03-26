@@ -97,7 +97,7 @@ class AssociationController extends Controller
      */
     public function edit( $slug )
     {
-        $association = Association::where( 'slug', $slug );
+        $association = Association::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $association );
 
         $universities = University::all();
@@ -115,7 +115,7 @@ class AssociationController extends Controller
      */
     public function update( Request $request, $slug )
     {
-        $association = Association::where( 'slug', $slug );
+        $association = Association::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $association );
 
         $result = Association::updateAttributes( $request, $association );
@@ -138,7 +138,7 @@ class AssociationController extends Controller
      */
     public function destroy( $slug )
     {
-        $association = Association::where( 'slug', $slug );
+        $association = Association::where( 'slug', $slug )->first();
         $this->authorize( 'delete', Auth::user(), $association );
 
         $association->delete();

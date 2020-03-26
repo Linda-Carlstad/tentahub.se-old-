@@ -96,14 +96,14 @@ class ExamController extends Controller
      */
     public function show( $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
 
         return view( 'exams.show' )->with( 'exam', $exam );
     }
 
     public function view( $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
         $exam->views += 1;
         $exam->save();
 
@@ -112,7 +112,7 @@ class ExamController extends Controller
 
     public function download( $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
         $exam->downloads += 1;
         $exam->save();
 
@@ -127,7 +127,7 @@ class ExamController extends Controller
      */
     public function edit( $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
         $universities = University::all();
 
         return view( 'exams.edit' )->with( 'exam', $exam )->with( 'universities', $universities );
@@ -143,7 +143,7 @@ class ExamController extends Controller
      */
     public function update( Request $request, $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $exam );
 
         $result = Exam::updateAttributes( $request, $slug );
@@ -165,7 +165,7 @@ class ExamController extends Controller
      */
     public function destroy( $slug )
     {
-        $exam = Exam::where(  'slug', $slug );
+        $exam = Exam::where(  'slug', $slug )->first();
         $this->authorize( 'delete', Auth::user(), $exam );
 
         $exam->delete();

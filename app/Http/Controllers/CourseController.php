@@ -96,7 +96,7 @@ class CourseController extends Controller
      */
     public function edit( $slug )
     {
-        $course = Course::where( 'slug', $slug );
+        $course = Course::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $course );
 
         $associations = Association::all();
@@ -115,7 +115,7 @@ class CourseController extends Controller
      */
     public function update( Request $request, $slug )
     {
-        $course = Course::where( 'slug', $slug );
+        $course = Course::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $course );
 
         $result = Course::updateAttributes( $request, $course );
@@ -138,7 +138,7 @@ class CourseController extends Controller
      */
     public function destroy( $slug )
     {
-        $course = Course::where( 'slug', $slug );
+        $course = Course::where( 'slug', $slug )->first();
         $this->authorize( 'delete', Auth::user(), $course );
 
         $course->delete();

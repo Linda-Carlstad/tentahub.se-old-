@@ -74,7 +74,7 @@ class UniversityController extends Controller
      */
     public function show( $slug )
     {
-        $university = University::where( 'slug', $slug )->with( 'associations' )->get();
+        $university = University::where( 'slug', $slug )->with( 'associations' )->first();
         $associations = $university->associations;
 
         return view( 'universities.show' )->with( 'university', $university )->with( 'associations', $associations );
@@ -89,7 +89,7 @@ class UniversityController extends Controller
      */
     public function edit( $slug )
     {
-        $university = University::where( 'slug', $slug );
+        $university = University::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $university );
 
         return view( 'universities.edit' )->with( 'university', $university );
@@ -105,7 +105,7 @@ class UniversityController extends Controller
      */
     public function update( Request $request, $slug )
     {
-        $university = University::where( 'slug', $slug );
+        $university = University::where( 'slug', $slug )->first();
         $this->authorize( 'update', Auth::user(), $university );
 
         $result = University::updateAttributes( $request, $university );
@@ -128,7 +128,7 @@ class UniversityController extends Controller
     public function destroy( $slug )
     {
         $this->authorize( 'delete', Auth::user() );
-        $university = University::where( 'slug', $slug );
+        $university = University::where( 'slug', $slug )->first();
 
         $university->delete();
         return redirect( 'universities' )->with( 'success', 'Universitet borttaget, ohh, scary...' );
