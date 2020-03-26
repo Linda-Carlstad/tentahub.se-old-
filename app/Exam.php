@@ -46,7 +46,8 @@ class Exam extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
-            ->usingSeparator( '-' );
+            ->usingSeparator( '-' )
+            ->usingLanguage( 'sv' );
     }
 
     /**

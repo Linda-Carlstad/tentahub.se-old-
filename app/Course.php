@@ -49,9 +49,10 @@ class Course extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom( [ 'code', 'name' ] )
             ->saveSlugsTo('slug')
-            ->usingSeparator( '-' );
+            ->usingSeparator( '-' )
+            ->usingLanguage( 'sv' );
     }
 
     /**
