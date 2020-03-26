@@ -33,7 +33,7 @@
                             </a>
                             @auth
                                 @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->id === $association->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $association->id )
-                                    <a href="{{ route( 'associations.edit', $association->id ) }}" class="card-footer-item">
+                                    <a href="{{ route( 'associations.edit', $association->slug ) }}" class="card-footer-item">
                                         Redigera
                                     </a>
                                 @endif

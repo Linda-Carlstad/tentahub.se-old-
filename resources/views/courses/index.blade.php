@@ -20,7 +20,7 @@
                     <div class="column is-half is-widescreen">
                     <div class="card">
                         <div class="card-content">
-                            @if( $course->university )
+                            @if( $course->university && empty( $course->association ) )
                                 <a class="title is-5" href="{{ route( 'courses.partial',
                                                     [ $course->university->slug,
                                                       $course->slug ] ) }}" class="card-footer-item">
@@ -53,23 +53,24 @@
                             </p>
                         </div>
                         <footer class="card-footer">
-                            @if( $course->association )
+
+                            @if( $course->university && empty( $course->association ) )
+                                <a href="{{ route( 'courses.partial',
+                                                    [ $course->university->slug,
+                                                      $course->slug ] ) }}" class="card-footer-item">
+                                    Läs mer
+                                </a>
+                            @else
                                 <a href="{{ route( 'courses.full',
                                                 [ $course->association->university->slug,
                                                   $course->association->slug,
                                                   $course->slug ] ) }}" class="card-footer-item">
                                     Läs mer
                                 </a>
-                            @else
-                                <a href="{{ route( 'courses.partial',
-                                                    [ $course->university->slug,
-                                                      $course->slug ] ) }}" class="card-footer-item">
-                                    Läs mer
-                                </a>
                             @endif
                             @auth
                                 @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
-                                    <a href="{{ route( 'courses.edit', $course->id ) }}" class="card-footer-item">
+                                    <a href="{{ route( 'courses.edit', $course->slug ) }}" class="card-footer-item">
                                         Redigera
                                     </a>
                                 @endif

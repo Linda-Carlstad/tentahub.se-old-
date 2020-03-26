@@ -33,7 +33,7 @@
                             </a>
                             @auth
                                 @if( Auth::user()->role == 'super' )
-                                    <a href="{{ route( 'universities.edit', $university->id ) }}" class="card-footer-item">
+                                    <a href="{{ route( 'universities.edit', $university->slug ) }}" class="card-footer-item">
                                         Redigera
                                     </a>
                                 @endif
