@@ -21,9 +21,13 @@ class CreateCoursesTable extends Migration
             $table->decimal( 'points', 8, 1 );
             $table->string( 'url' )->nullable();
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('association_id');
+            $table->unsignedBigInteger('association_id')->nullable();
             $table->foreign('association_id')
                 ->references('id')->on('associations')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('university_id')->nullable();
+            $table->foreign('university_id')
+                ->references('id')->on('universities')
                 ->onDelete('cascade');
             $table->timestamps();
         });
