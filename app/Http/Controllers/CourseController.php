@@ -90,13 +90,13 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param $slug
      * @return Factory|View
      * @throws AuthorizationException
      */
-    public function edit($id)
+    public function edit( $slug )
     {
-        $course = Course::findOrFail( $id );
+        $course = Course::where( 'slug', $slug );
         $this->authorize( 'update', Auth::user(), $course );
 
         $associations = Association::all();
@@ -109,13 +109,13 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $slug )
     {
-        $course = Course::findOrFail( $id );
+        $course = Course::where( 'slug', $slug );
         $this->authorize( 'update', Auth::user(), $course );
 
         $result = Course::updateAttributes( $request, $course );
@@ -123,7 +123,7 @@ class CourseController extends Controller
         if( $result[ 0 ] === 'success' )
         {
             $course = $result[ 2 ];
-            return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
+            return redirect()->route( 'courses.show', $course->slug )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
@@ -132,13 +132,13 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy( $slug )
     {
-        $course = Course::findOrFail( $id );
+        $course = Course::where( 'slug', $slug );
         $this->authorize( 'delete', Auth::user(), $course );
 
         $course->delete();

@@ -68,7 +68,7 @@ class AssociationController extends Controller
         if( $result[ 0 ] === 'success' )
         {
             $association = $result[ 2 ];
-            return redirect()->route( 'associations.show', $association->id )->with( $result[ 0 ], $result[ 1 ] );
+            return redirect()->route( 'associations.show', $association->slug )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( 'error', '' );
@@ -91,13 +91,13 @@ class AssociationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param $slug
      * @return Factory|View
      * @throws AuthorizationException
      */
-    public function edit($id)
+    public function edit( $slug )
     {
-        $association = Association::findOrFail( $id );
+        $association = Association::where( 'slug', $slug );
         $this->authorize( 'update', Auth::user(), $association );
 
         $universities = University::all();
@@ -109,13 +109,13 @@ class AssociationController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $slug )
     {
-        $association = Association::findOrFail( $id );
+        $association = Association::where( 'slug', $slug );
         $this->authorize( 'update', Auth::user(), $association );
 
         $result = Association::updateAttributes( $request, $association );
@@ -123,7 +123,7 @@ class AssociationController extends Controller
         if( $result[ 0 ] === 'success' )
         {
             $association = $result[ 2 ];
-            return redirect()->route( 'associations.show', $association->id )->with( $result[ 0 ], $result[ 1 ] );
+            return redirect()->route( 'associations.show', $association->slug )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( 'error', 'Något gick fel i maskineriet, testa igen!' );
@@ -132,13 +132,13 @@ class AssociationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy($id)
+    public function destroy( $slug )
     {
-        $association = Association::findOrFail( $id );
+        $association = Association::where( 'slug', $slug );
         $this->authorize( 'delete', Auth::user(), $association );
 
         $association->delete();

@@ -89,16 +89,16 @@ Route::get( 'föreningar/skapa', 'AssociationController@create' )->name( 'associ
 Route::get( 'föreningar/{association}', 'AssociationController@show' )->name( 'associations.show' );
 Route::get( 'föreningar/{association}/redigera', 'AssociationController@edit' )->name( 'associations.edit' );
 Route::post( 'föreningar', 'AssociationController@store' )->name( 'associations.store' );
-Route::match( [ 'put', 'patch' ], 'föreningar/{id}', 'AssociationController@update' )->name( 'associations.update' );
-Route::delete( 'föreningar/{id}', 'AssociationController@destroy' )->name( 'associations.destroy' );
+Route::match( [ 'put', 'patch' ], 'föreningar/{association}', 'AssociationController@update' )->name( 'associations.update' );
+Route::delete( 'föreningar/{association}', 'AssociationController@destroy' )->name( 'associations.destroy' );
 
 Route::get( 'kurser', 'CourseController@index' )->name( 'courses.index' );
 Route::get( 'kurser/skapa', 'CourseController@create' )->name( 'courses.create' );
 Route::get( 'kurser/{course}', 'CourseController@show' )->name( 'courses.show' );
 Route::get( 'kurser/{course}/redigera', 'CourseController@edit' )->name( 'courses.edit' );
 Route::post( 'kurser', 'CourseController@store' )->name( 'courses.store' );
-Route::match( [ 'put', 'patch' ], 'kurser/{id}', 'CourseController@update' )->name( 'courses.update' );
-Route::delete( 'kurser/{id}', 'CourseController@destroy' )->name( 'courses.destroy' );
+Route::match( [ 'put', 'patch' ], 'kurser/{course}', 'CourseController@update' )->name( 'courses.update' );
+Route::delete( 'kurser/{course}', 'CourseController@destroy' )->name( 'courses.destroy' );
 
 
 Route::get( 'tentor', 'ExamController@index' )->name( 'exams.index' );
@@ -107,16 +107,16 @@ Route::get( 'tentor/{exam}', 'ExamController@show' )->name( 'exams.show' );
 Route::get( 'tentor/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
 Route::get( 'tentor/{exam}/redigera', 'ExamController@edit' )->name( 'exams.edit' );
 Route::post( 'tentor', 'ExamController@store' )->name( 'exams.store' );
-Route::match( [ 'put', 'patch' ], 'tentor/{id}', 'ExamController@update' )->name( 'exams.update' );
-Route::delete( 'tentor/{id}', 'ExamController@destroy' )->name( 'exams.destroy' );
+Route::match( [ 'put', 'patch' ], 'tentor/{exam}', 'ExamController@update' )->name( 'exams.update' );
+Route::delete( 'tentor/{exam}', 'ExamController@destroy' )->name( 'exams.destroy' );
 
 Route::get( 'universitet', 'UniversityController@index' )->name( 'universities.index' );
 Route::get( 'universitet/skapa', 'UniversityController@create' )->name( 'universities.create' );
 Route::get( 'universitet/{university}', 'UniversityController@show' )->name( 'universities.show' );
 Route::get( 'universitet/{university}/redigera', 'UniversityController@edit' )->name( 'universities.edit' );
 Route::post( 'universitet', 'UniversityController@store' )->name( 'universities.store' );
-Route::match( [ 'put', 'patch' ], 'universitet/{id}', 'UniversityController@update' )->name( 'universities.update' );
-Route::delete( 'universitet/{id}', 'UniversityController@destroy' )->name( 'universities.destroy' );
+Route::match( [ 'put', 'patch' ], 'universitet/{university}', 'UniversityController@update' )->name( 'universities.update' );
+Route::delete( 'universitet/{university}', 'UniversityController@destroy' )->name( 'universities.destroy' );
 
 
 // Routes using only slugs, placed here to prevent router confusion

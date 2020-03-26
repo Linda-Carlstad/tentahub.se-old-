@@ -91,28 +91,28 @@ class ExamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $slug
      * @return Factory|View
      */
-    public function show( $id )
+    public function show( $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
 
         return view( 'exams.show' )->with( 'exam', $exam );
     }
 
-    public function view( $id )
+    public function view( $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
         $exam->views += 1;
         $exam->save();
 
         return redirect( Storage::url( $exam->path ) );
     }
 
-    public function download( $id )
+    public function download( $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
         $exam->downloads += 1;
         $exam->save();
 
@@ -122,12 +122,12 @@ class ExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param $slug
      * @return Factory|View
      */
-    public function edit($id)
+    public function edit( $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
         $universities = University::all();
 
         return view( 'exams.edit' )->with( 'exam', $exam )->with( 'universities', $universities );
@@ -137,20 +137,20 @@ class ExamController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
         $this->authorize( 'update', Auth::user(), $exam );
 
-        $result = Exam::updateAttributes( $request, $id );
+        $result = Exam::updateAttributes( $request, $slug );
 
         if( $result[ 0 ] === 'success' )
         {
-            return redirect()->route( 'exams.show', $exam->id )->with( $result[ 0 ], $result[ 1 ] );
+            return redirect()->route( 'exams.show', $exam->slug )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
@@ -159,13 +159,13 @@ class ExamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $slug
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy( $id )
+    public function destroy( $slug )
     {
-        $exam = Exam::findOrFail( $id );
+        $exam = Exam::where(  'slug', $slug );
         $this->authorize( 'delete', Auth::user(), $exam );
 
         $exam->delete();
