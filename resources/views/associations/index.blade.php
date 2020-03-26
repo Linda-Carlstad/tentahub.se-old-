@@ -19,12 +19,12 @@
                     <p class="title is-5">
                         {{ $association->name }}
                     </p>
-                    <a href="{{ route( 'universities.show', $association->university->id ) }}" class="link">
+                    <a href="{{ route( 'universities.full', $association->university->slug ) }}" class="link">
                         {{ $association->university->name }}
                     </a>
                 </div>
                 <footer class="card-footer">
-                    <a href="{{ route( 'associations.show', $association->id ) }}" class="card-footer-item">
+                    <a href="{{ route( 'associations.show', $association->slug ) }}" class="card-footer-item">
                         Läs mer
                     </a>
                     @auth
