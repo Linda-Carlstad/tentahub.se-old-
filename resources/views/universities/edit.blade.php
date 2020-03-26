@@ -7,7 +7,7 @@
             <h1 class="title">Ändra uppgifter för {{ $university->name }}</h1>
             <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
             <hr>
-            <form class="" method="POST" action="{{ route( 'universities.update', $university->id ) }}">
+            <form class="" method="POST" action="{{ route( 'universities.update', $university->slug ) }}">
                 @csrf
                 @method( 'PATCH' )
                 <div class="field">

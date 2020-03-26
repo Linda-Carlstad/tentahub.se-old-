@@ -7,7 +7,7 @@
             <h1 class="title">Ändra uppgifter för {{ $association->name }}</h1>
             <p>Alla fält markerade med <strong>*</strong> är obligatoriska</p>
             <hr>
-            <form class="" method="POST" action="{{ route( 'associations.update', $association->id ) }}">
+            <form class="" method="POST" action="{{ route( 'associations.update', $association->slug ) }}">
                 @csrf
                 {{ method_field( 'patch' ) }}
                 <div class="field">

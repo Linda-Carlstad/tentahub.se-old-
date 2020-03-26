@@ -7,7 +7,7 @@
             <div class="column is-half is-widescreen">
                 <h1 class="title">Redigera tenta {{ $exam->name }}</h1>
                 <hr>
-                <form class="form-group" action="{{ route( 'exams.update', $exam->id ) }}" enctype="multipart/form-data" method="POST">
+                <form class="form-group" action="{{ route( 'exams.update', $exam->slug ) }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method( 'patch' )
                     <input type="hidden" id="recaptcha" name="recaptcha" value="{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}">
