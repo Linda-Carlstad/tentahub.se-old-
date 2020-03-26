@@ -11,11 +11,11 @@
             @endif
         @endauth
         <hr>
-        <div class="columns is-multiline">
             @if( $courses->isEmpty() )
                 <p>Inga kurser att visa.</p>
                 <br>
             @else
+            <div class="columns is-multiline">
                 @foreach( $courses as $course )
                     <div class="column is-half is-widescreen">
                     <div class="card">
@@ -76,10 +76,10 @@
                             @endauth
                         </footer>
                     </div>
-                    </div>
+                </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
     </section>
 
 @endsection

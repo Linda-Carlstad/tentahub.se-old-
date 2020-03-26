@@ -11,11 +11,11 @@
             @endif
         @endauth
         <hr>
-        <div class="columns is-multiline">
             @if( $associations->isEmpty() )
                 <p>Inga föreningar att visa.</p>
                 <br>
             @else
+            <div class="columns is-multiline">
                 @foreach( $associations as $association )
                     <div class="column is-half is-widescreen">
                     <div class="card">
@@ -42,8 +42,8 @@
                     </div>
                     </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
     </section>
 
 @endsection
