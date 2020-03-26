@@ -21,7 +21,7 @@
             </a>
         </h4>
         <h4 class="subtitle is-5">Tillhör universitet: <a href="{{ route( 'universities.show', $user->association->university->slug ) }}">{{ $user->association->university->name }}</a></h4>
-        <p><b>Statistik om din föreing:</b></p>
+        <p><b>Statistik om din förening:</b></p>
         <p>Kurser: {{ $user->association->courses->count() }}</p>
         <p>Tentor: {{ $user->association->exams->count() }}</p>
         <hr>
