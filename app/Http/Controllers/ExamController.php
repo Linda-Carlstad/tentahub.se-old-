@@ -104,24 +104,6 @@ class ExamController extends Controller
         return view( 'exams.show' )->with( 'exam', $exam );
     }
 
-    public function view( $slug )
-    {
-        $exam = Exam::where(  'slug', $slug )->first();
-        $exam->views += 1;
-        $exam->save();
-
-        return redirect( Storage::url( $exam->path ) );
-    }
-
-    public function download( $slug )
-    {
-        $exam = Exam::where(  'slug', $slug )->first();
-        $exam->downloads += 1;
-        $exam->save();
-
-        return Storage::download( $exam->path );
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -173,5 +155,37 @@ class ExamController extends Controller
 
         $exam->delete();
         return redirect()->back()->with( 'success', 'Tenta borttagen, waow...' );
+    }
+
+    // Custom actions
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $slug
+     * @return RedirectResponse|Redirector
+     */
+    public function view( $slug )
+    {
+        $exam = Exam::where(  'slug', $slug )->first();
+        $exam->views += 1;
+        $exam->save();
+
+        return redirect( Storage::url( $exam->path ) );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $slug
+     * @return Factory|View
+     */
+    public function download( $slug )
+    {
+        $exam = Exam::where(  'slug', $slug )->first();
+        $exam->downloads += 1;
+        $exam->save();
+
+        return Storage::download( $exam->path );
     }
 }
