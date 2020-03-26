@@ -59,11 +59,6 @@ class User extends Authenticatable
         return $this->belongsTo( 'App\Association' );
     }
 
-    public function university()
-    {
-        return $this->belongsTo( 'App\University' );
-    }
-
     public static function updateInfo( Request $request, User $user )
     {
         $result = Verification::run( $request, 'user new' );
