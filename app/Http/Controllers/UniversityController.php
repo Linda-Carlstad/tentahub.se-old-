@@ -133,4 +133,20 @@ class UniversityController extends Controller
         $university->delete();
         return redirect( 'universities' )->with( 'success', 'Universitet borttaget, ohh, scary...' );
     }
+
+    // Custom actions
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Factory|View
+     */
+    public function full( $university )
+    {
+        $university = University::where( 'slug', $university )->with( 'associations' )->first();
+        $associations = $university->associations;
+
+        return view( 'universities.show' )->with( 'university', $university )->with( 'associations', $associations );
+    }
 }

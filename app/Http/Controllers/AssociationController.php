@@ -144,4 +144,21 @@ class AssociationController extends Controller
         $association->delete();
         return redirect()->back()->with( 'success', 'Föreningen borttagen, ohh, scary...' );
     }
+
+    // Custom actions
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $association
+     * @return Factory|View
+     */
+    public function full( $university, $association )
+    {
+        $association = Association::where( 'slug', $association )->with( 'courses' )->first();
+        $courses = $association->courses;
+
+        return view( 'associations.show' )->with( 'association', $association )->with( 'courses', $courses );
+    }
 }

@@ -145,4 +145,37 @@ class CourseController extends Controller
 
         return redirect()->route( 'courses.index' )->with( 'success', 'Kurs borttagen, ohh, scary...' );
     }
+
+    // Custom actions
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $course
+     * @return Factory|View
+     */
+    public function partial( $university, $course )
+    {
+        $course = Course::where( 'slug', $course )->with( 'exams' )->first();
+        $exams = $course->exams;
+
+        return view( 'courses.show' )->with( 'course', $course )->with( 'exams', $exams );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $association
+     * @param $course
+     * @return Factory|View
+     */
+    public function full( $university, $association, $course )
+    {
+        $course = Course::where( 'slug', $course )->with( 'exams' )->first();
+        $exams = $course->exams;
+
+        return view( 'courses.show' )->with( 'course', $course )->with( 'exams', $exams );
+    }
 }
