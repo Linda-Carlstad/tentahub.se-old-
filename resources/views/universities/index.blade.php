@@ -12,7 +12,7 @@
         @endauth
         <hr>
         <div class="columns is-multiline">
-        @foreach( $universites as $university )
+        @foreach( $universities as $university )
             <div class="column is-half is-widescreen">
             <div class="card">
                 <div class="card-content">
@@ -24,7 +24,7 @@
                     </p>
                 </div>
                 <footer class="card-footer">
-                    <a href="{{ route( 'universities.show', $university->id ) }}" class="card-footer-item">
+                    <a href="{{ route( 'universities.full', $university->slug ) }}" class="card-footer-item">
                         Läs mer
                     </a>
                     @auth

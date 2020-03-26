@@ -46,7 +46,7 @@
                 </div>
                 @if( Auth::user()->role == 'super' || Auth::user()->role == 'admin' )
                     <div class="field">
-                        <label for="association_id" class="label">Förening *</label>
+                        <label for="association_id" class="label">Förening</label>
                         <div class="control">
                             <div class="select {{ $errors->has('association_id') ? ' is-danger' : '' }}">
                                 <select id="association_id" name="association_id">
@@ -70,10 +70,10 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="university_id" value="{{ Auth::user()->university->id }}">
+                    <input type="hidden" name="university_id" value="{{ Auth::user()->association->university->id }}">
                 @else
                     <input type="hidden" name="association_id" value="{{ Auth::user()->association->id }}">
-                    <input type="hidden" name="university_id" value="{{ Auth::user()->university->id }}">
+                    <input type="hidden" name="university_id" value="{{ Auth::user()->association->university->id }}">
                 @endif
                 <div class="field">
                     <label for="url" class="label">Länk</label>

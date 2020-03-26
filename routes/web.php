@@ -34,11 +34,13 @@ Route::get( 'om-oss', function()
     return view( 'general.about' );
 } )->name( 'about' );
 
+// Sets app name in URL
 Route::get( 'vad-är-' . strtolower( env( 'APP_NAME' ) ), function()
 {
     return view( 'general.what-is' );
 } )->name( 'what-is' );
 
+// Sets app name in URL
 Route::get( 'hur-funkar-' . strtolower( env( 'APP_NAME' ) ), function()
 {
     return view( 'general.how-to-use' );
@@ -79,12 +81,47 @@ Route::group( [ 'middleware' => 'verified' ], function()
 
 Route::resources(
 [
-    'associations' => 'AssociationController',
-    'courses' => 'CourseController',
-    'exams' => 'ExamController',
-    'universities' => 'UniversityController',
     'users' => 'UserController',
 ] );
 
-Route::get( 'exams/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
+Route::get( 'föreningar', 'AssociationController@index' )->name( 'associations.index' );
+Route::get( 'föreningar/skapa', 'AssociationController@create' )->name( 'associations.create' );
+Route::get( 'föreningar/{association}', 'AssociationController@show' )->name( 'associations.show' );
+Route::get( 'föreningar/{association}/redigera', 'AssociationController@edit' )->name( 'associations.edit' );
+Route::post( 'föreningar', 'AssociationController@store' )->name( 'associations.store' );
+Route::match( [ 'put', 'patch' ], 'föreningar/{id}', 'AssociationController@update' )->name( 'associations.update' );
+Route::delete( 'föreningar/{id}', 'AssociationController@destroy' )->name( 'associations.destroy' );
 
+Route::get( 'kurser', 'CourseController@index' )->name( 'courses.index' );
+Route::get( 'kurser/skapa', 'CourseController@create' )->name( 'courses.create' );
+Route::get( 'kurser/{course}', 'CourseController@show' )->name( 'courses.show' );
+Route::get( 'kurser/{course}/redigera', 'CourseController@edit' )->name( 'courses.edit' );
+Route::post( 'kurser', 'CourseController@store' )->name( 'courses.store' );
+Route::match( [ 'put', 'patch' ], 'kurser/{id}', 'CourseController@update' )->name( 'courses.update' );
+Route::delete( 'kurser/{id}', 'CourseController@destroy' )->name( 'courses.destroy' );
+
+
+Route::get( 'tentor', 'ExamController@index' )->name( 'exams.index' );
+Route::get( 'tentor/skapa', 'ExamController@create' )->name( 'exams.create' );
+Route::get( 'tentor/{exam}', 'ExamController@show' )->name( 'exams.show' );
+Route::get( 'tentor/{exam}/download', 'ExamController@download' )->name( 'exams.download' );
+Route::get( 'tentor/{exam}/redigera', 'ExamController@edit' )->name( 'exams.edit' );
+Route::post( 'tentor', 'ExamController@store' )->name( 'exams.store' );
+Route::match( [ 'put', 'patch' ], 'tentor/{id}', 'ExamController@update' )->name( 'exams.update' );
+Route::delete( 'tentor/{id}', 'ExamController@destroy' )->name( 'exams.destroy' );
+
+Route::get( 'universitet', 'UniversityController@index' )->name( 'universities.index' );
+Route::get( 'universitet/skapa', 'UniversityController@create' )->name( 'universities.create' );
+Route::get( 'universitet/{university}', 'UniversityController@show' )->name( 'universities.show' );
+Route::get( 'universitet/{university}/redigera', 'UniversityController@edit' )->name( 'universities.edit' );
+Route::post( 'universitet', 'UniversityController@store' )->name( 'universities.store' );
+Route::match( [ 'put', 'patch' ], 'universitet/{id}', 'UniversityController@update' )->name( 'universities.update' );
+Route::delete( 'universitet/{id}', 'UniversityController@destroy' )->name( 'universities.destroy' );
+
+
+// Routes using only slugs, placed here to prevent router confusion
+Route::get( '{university}/{association}', 'AssociationController@full' )->name( 'associations.full' );
+Route::get( '{university}/{course}', 'CourseController@partial' )->name( 'courses.partial' );
+Route::get( '{university}/{association}/{course}', 'CourseController@full' )->name( 'courses.full' );
+Route::get( '{university}/{association}/{course}/{exam}', 'ExamController@full' )->name( 'exams.full' );
+Route::get( '{university}', 'UniversityController@full' )->name( 'universities.full' );

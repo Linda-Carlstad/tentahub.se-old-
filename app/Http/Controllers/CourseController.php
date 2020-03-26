@@ -7,27 +7,32 @@ use App\Course;
 
 use App\Exam;
 use App\University;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show' );
-        $this->middleware( 'moderator' )->except( 'index', 'show' );
+        $list = [ 'index', 'show', 'partial', 'full' ];
+        $this->middleware( 'verified' )->except( $list );
+        $this->middleware( 'valid_user' )->except( $list );
+        $this->middleware( 'moderator' )->except( $list );
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
-        $courses = Course::orderBy( 'name', 'asc' )->get();
+        $courses = Course::orderBy( 'name', 'asc' )->with( [ 'university', 'association', 'association.university'  ] )->get();
 
         return view( 'courses.index' )->with( 'courses', $courses );
     }
@@ -35,12 +40,13 @@ class CourseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function create()
     {
         $this->authorize( 'create', Auth::user(), Auth::user()->association );
-        $universities = University::all();
+        $universities = University::with( 'associations' )->get();
 
         return view( 'courses.create' )->with( 'universities', $universities );
     }
@@ -48,8 +54,9 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store( Request $request )
     {
@@ -60,7 +67,7 @@ class CourseController extends Controller
         if( $result[ 0 ] === 'success' )
         {
             $course = $result[ 2 ];
-            return redirect()->route( 'courses.show', $course->id )->with( $result[ 0 ], $result[ 1 ] );
+            return redirect()->route( 'courses.show', $course->slug )->with( $result[ 0 ], $result[ 1 ] );
         }
 
         return redirect()->back()->with( $result[ 0 ], $result[ 1 ] );
@@ -69,12 +76,12 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $slug
+     * @return Factory|View
      */
-    public function show( $id )
+    public function show( $slug )
     {
-        $course = Course::findOrFail( $id );
+        $course = Course::where( 'slug', $slug )->with( 'exams' )->first();
         $exams = $course->exams;
 
         return view( 'courses.show' )->with( 'course', $course )->with( 'exams', $exams );
@@ -83,8 +90,9 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param int $id
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function edit($id)
     {
@@ -100,9 +108,10 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(Request $request, $id)
     {
@@ -123,8 +132,9 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy($id)
     {
@@ -134,5 +144,38 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route( 'courses.index' )->with( 'success', 'Kurs borttagen, ohh, scary...' );
+    }
+
+    // Custom actions
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $course
+     * @return Factory|View
+     */
+    public function partial( $university, $course )
+    {
+        $course = Course::where( 'slug', $course )->with( 'exams' )->first();
+        $exams = $course->exams;
+
+        return view( 'courses.show' )->with( 'course', $course )->with( 'exams', $exams );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $university
+     * @param $association
+     * @param $course
+     * @return Factory|View
+     */
+    public function full( $university, $association, $course )
+    {
+        $course = Course::where( 'slug', $course )->with( 'exams' )->first();
+        $exams = $course->exams;
+
+        return view( 'courses.show' )->with( 'course', $course )->with( 'exams', $exams );
     }
 }

@@ -10,6 +10,7 @@ $factory->define(Association::class, function (Faker $faker) {
         'university_id' => $faker->numberBetween(1,5),
         'url' => $faker->url,
         'name' => $faker->company,
-        'description' => $faker->text
+        'description' => $faker->text,
+        'public' => true,
     ];
 });

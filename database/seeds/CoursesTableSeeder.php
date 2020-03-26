@@ -21,6 +21,15 @@ class CoursesTableSeeder extends Seeder
             'description' => null,
             'slug' => 'anskaffning-av-it-system'
         ]);
+        DB::table('courses')->insert([
+            'name' => 'Saker som inte finns',
+            'university_id' => 1,
+            'code' => 'SAIF01',
+            'points' => 15,
+            'url' => null,
+            'description' => null,
+            'slug' => 'saif01-saker-som-inte-finns'
+        ]);
         $courses = factory( Course::class, 5 )->create();
     }
 }

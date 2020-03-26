@@ -12,7 +12,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
         DB::table('users')->insert([
            'name' => 'Linda Carlstad info',
            'email' => 'info@lindacarlstad.se',
@@ -24,13 +23,13 @@ class UsersTableSeeder extends Seeder
            'created_at' => now(),
            'updated_at' => now(),
         ]);
-*/
+
         DB::table('users')->insert([
            'name' => 'Linda Carlstad utbildning',
             'email' => 'utbildning@lindacarlstad.se',
             'password' => bcrypt('BytMigSnartLinda'),
             'valid' => true,
-            'association_id' => 102,
+            'association_id' => 1,
             'role' => 'super',
             'email_verified_at' => now(),
             'created_at' => now(),

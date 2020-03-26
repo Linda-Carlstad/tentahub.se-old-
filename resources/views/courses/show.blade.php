@@ -5,7 +5,7 @@
     <section class="section">
         <div class="column is-half is-widescreen">
             <h1 class="title">{{ $course->name }} - {{ $course->code }}</h1>
-            <p>{{ $course->points }}hp</p>
+            <h2 class="subtitle">Poäng: {{ $course->points }}hp</h2>
             <p>{{ $course->description }}</p>
             <a target="_blank" href="{{ $course->url }}">{{ $course->url }}</a>
             <hr>
