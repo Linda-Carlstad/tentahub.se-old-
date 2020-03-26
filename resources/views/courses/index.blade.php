@@ -50,6 +50,8 @@
                                         {{ $course->university->name }}
                                     </a>
                                 @endif
+                                <br>
+                                Tentor: {{ $course->exams->count() }}
                             </p>
                         </div>
                         <footer class="card-footer">

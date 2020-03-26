@@ -18,28 +18,34 @@
             <div class="columns is-multiline">
                 @foreach( $associations as $association )
                     <div class="column is-half is-widescreen">
-                    <div class="card">
-                        <div class="card-content">
-                            <p class="title is-5">
-                                {{ $association->name }}
-                            </p>
-                            <a href="{{ route( 'universities.full', $association->university->slug ) }}" class="link">
-                                {{ $association->university->name }}
-                            </a>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="{{ route( 'associations.show', $association->slug ) }}" class="card-footer-item">
-                                Läs mer
-                            </a>
-                            @auth
-                                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->id === $association->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $association->id )
-                                    <a href="{{ route( 'associations.edit', $association->slug ) }}" class="card-footer-item">
-                                        Redigera
+                        <div class="card">
+                            <div class="card-content">
+                                <a href="{{ route( 'associations.full', [
+                                                        $association->university->slug,
+                                                        $association->slug  ] ) }}" class="title is-5">
+                                    {{ $association->name }}
+                                </a>
+                                <p>
+                                    <a href="{{ route( 'universities.full', $association->university->slug ) }}" class="link">
+                                        {{ $association->university->name }}
                                     </a>
-                                @endif
-                            @endauth
-                        </footer>
-                    </div>
+                                    <br>
+                                    Kurser: {{ $association->courses->count() }}
+                                </p>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="{{ route( 'associations.show', $association->slug ) }}" class="card-footer-item">
+                                    Läs mer
+                                </a>
+                                @auth
+                                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->id === $association->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $association->id )
+                                        <a href="{{ route( 'associations.edit', $association->slug ) }}" class="card-footer-item">
+                                            Redigera
+                                        </a>
+                                    @endif
+                                @endauth
+                            </footer>
+                        </div>
                     </div>
                 @endforeach
             </div>

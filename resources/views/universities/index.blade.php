@@ -20,11 +20,11 @@
                     <div class="column is-half is-widescreen">
                     <div class="card">
                         <div class="card-content">
-                            <p class="title is-5">
+                            <a href="{{ route( 'universities.full', $university->slug ) }}" class="title is-5">
                                 {{ $university->name }} ({{ $university->nickname }})
-                            </p>
-                            <p class="subtitle">
-                                {{ $university->city }}
+                            </a>
+                            <p>
+                                Föreningar: {{ $university->associations->count() }}
                             </p>
                         </div>
                         <footer class="card-footer">

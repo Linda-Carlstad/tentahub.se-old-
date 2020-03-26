@@ -43,7 +43,7 @@
                     @endif
                 @endauth
             @else
-                <h3 class="subtitle">Inga kurser har lagts till på den här föreningen, vill du lägga till en nu?</h3>
+                <h3 class="subtitle">Inga kurser har lagts till på den här föreningen.</h3>
                 @auth
                     @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id == $association->slug || Auth::user()->role === 'moderator' && Auth::user()->association_id == $association->slug )
                         <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>

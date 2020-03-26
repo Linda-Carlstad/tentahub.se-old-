@@ -26,7 +26,7 @@
                     @endif
                 @endauth
             @else
-                <h3 class="subtitle">Inga föreningar har lagts till på det här universitetet, vill du lägga till en ny?</h3>
+                <h3 class="subtitle">Inga föreningar har lagts till på det här universitetet.</h3>
                 @auth
                     @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
                         <a class="button is-primary" href="{{ route( 'associations.create' ) }}">Lägg till förening</a>
