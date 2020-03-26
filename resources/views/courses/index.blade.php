@@ -16,23 +16,53 @@
             <div class="column is-half is-widescreen">
             <div class="card">
                 <div class="card-content">
-                    <p class="title is-5">
-                        {{ $course->name }} ({{ $course->code }})
-                    </p>
+                    @if( $course->university )
+                        <a class="title is-5" href="{{ route( 'courses.partial',
+                                            [ $course->university->slug,
+                                              $course->slug ] ) }}" class="card-footer-item">
+                            {{ $course->name }} ({{ $course->code }})
+                        </a>
+                    @else
+                        <a class="title is-5" href="{{ route( 'courses.full',
+                                        [ $course->association->university->slug,
+                                          $course->association->slug,
+                                          $course->slug ] ) }}" class="card-footer-item">
+                            {{ $course->name }} ({{ $course->code }})
+                        </a>
+                    @endif
                     <p>
-                        <a href="{{ route( 'associations.show', $course->association->id ) }}">
-                            {{ $course->association->name }}
-                        </a>
+                        @if( $course->association )
+                            <a href="{{ route( 'associations.full', [
+                                            $course->association->university->slug, $course->association->slug
+                                        ] ) }}">
+                                {{ $course->association->name }}
+                            </a>
                         -
-                        <a href="{{ route( 'universities.show', $course->association->university->id ) }}">
-                            {{ $course->association->university->name }}
-                        </a>
+                            <a href="{{ route( 'universities.full', $course->association->university->slug ) }}">
+                                {{ $course->association->university->name }}
+                            </a>
+                        @else
+                            <a href="{{ route( 'universities.full', $course->university->slug ) }}">
+                                {{ $course->university->name }}
+                            </a>
+                        @endif
                     </p>
                 </div>
                 <footer class="card-footer">
-                    <a href="{{ route( 'courses.show', $course->id ) }}" class="card-footer-item">
-                        Läs mer
-                    </a>
+                    @if( $course->association )
+                        <a href="{{ route( 'courses.full',
+                                        [ $course->association->university->slug,
+                                          $course->association->slug,
+                                          $course->slug ] ) }}" class="card-footer-item">
+                            Läs mer
+                        </a>
+                    @else
+                        <a href="{{ route( 'courses.partial',
+                                            [ $course->university->slug,
+                                              $course->slug ] ) }}" class="card-footer-item">
+                            Läs mer
+                        </a>
+                    @endif
                     @auth
                         @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
                             <a href="{{ route( 'courses.edit', $course->id ) }}" class="card-footer-item">

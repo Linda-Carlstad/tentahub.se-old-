@@ -6,15 +6,19 @@ use App\Association;
 
 use App\Course;
 use App\University;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AssociationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware( 'verified' )->except( 'index', 'show' );
-        $this->middleware( 'valid_user' )->except( 'index', 'show' );
+        $this->middleware( 'verified' )->except( 'index', 'show', 'full' );
+        $this->middleware( 'valid_user' )->except( 'index', 'show'. 'full' );
         $this->middleware( 'moderator' )->only( 'edit', 'update' );
         $this->middleware( 'admin' )->only( 'create', 'store', 'destroy' );
     }
@@ -22,13 +26,13 @@ class AssociationController extends Controller
      /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
 
     public function index()
     {
-        $total = Association::all()->count();
-        $associations = Association::orderBy( 'name', 'asc' )->get();
+        //$total = Association::all()->count();
+        $associations = Association::where( 'public', true )->orderBy( 'name', 'asc' )->with( 'university' )->get();
 
         return view( 'associations.index' )->with( 'associations', $associations );
     }
@@ -36,7 +40,8 @@ class AssociationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -49,8 +54,9 @@ class AssociationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store( Request $request )
     {
@@ -71,12 +77,12 @@ class AssociationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $slug
+     * @return Factory|View
      */
-    public function show( $id )
+    public function show( $slug )
     {
-        $association = Association::findOrFail( $id );
+        $association = Association::where( 'slug', $slug )->with( 'courses' )->first();
         $courses = $association->courses;
 
         return view( 'associations.show' )->with( 'association', $association )->with( 'courses', $courses );
@@ -85,8 +91,9 @@ class AssociationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param int $id
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function edit($id)
     {
@@ -101,9 +108,10 @@ class AssociationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(Request $request, $id)
     {
@@ -124,8 +132,9 @@ class AssociationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy($id)
     {

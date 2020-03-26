@@ -13,7 +13,7 @@
                 <ul>
                     @foreach( $associations as $association )
                         <li>-
-                            <a href="{{ route( 'associations.show', $association->id ) }}">
+                            <a href="{{ route( 'associations.full', [ $university->slug, $association->slug ] ) }}">
                                 {{ $association->name }}
                             </a>
                         </li>

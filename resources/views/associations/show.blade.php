@@ -10,7 +10,8 @@
                 <br>
                 Webbsida: <a target="_blank" href="{{ $association->url }}">{{ $association->url }}</a>
                 <br>
-                Tillhör universitet: <a href="{{ route( 'universities.show', $association->university->id ) }}">{{ $association->university->name }}</a>
+                Tillhör universitet:
+                <a href="{{ route( 'universities.full', $association->university->slug ) }}">{{ $association->university->name }}</a>
             </p>
             <hr>
             @if( $courses->isNotEmpty() )
@@ -18,9 +19,20 @@
                 <ul>
                     @foreach( $courses as $course )
                         <li>-
-                            <a href="{{ route( 'courses.show', $course->id ) }}">
-                                {{ $course->name }} ({{ $course->code }})
-                            </a>
+                            @if( $course->university )
+                                <a href="{{ route( 'courses.partial',
+                                            [ $course->university->slug,
+                                              $course->slug ] ) }}">
+                                    {{ $course->name }} ({{ $course->code }})
+                                </a>
+                            @else
+                                <a href="{{ route( 'courses.full',
+                                        [ $course->association->university->slug,
+                                          $course->association->slug,
+                                          $course->slug ] ) }}">
+                                    {{ $course->name }} ({{ $course->code }})
+                                </a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
