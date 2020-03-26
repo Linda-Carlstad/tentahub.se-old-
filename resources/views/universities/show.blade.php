@@ -37,7 +37,7 @@
                 @if( Auth::user()->role === 'super' || Auth::user()->role >= 'admin' && Auth::user()->association->univerity == $university )
                     <hr>
                     <h3 class="subtitle is-4">Ändra uppgifter</h3>
-                    <a class="button is-primary" href="{{ route( 'universities.edit', $university->id ) }}">Ändra uppggifter</a>
+                    <a class="button is-primary" href="{{ route( 'universities.edit', $university->slug ) }}">Ändra uppggifter</a>
                 @endif
             @endauth
             <hr>

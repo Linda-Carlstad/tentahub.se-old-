@@ -5,7 +5,7 @@
 
     <section class="section">
         <h1 class="title">Användare: {{ $user->name }}</h1>
-        <h4 class="subtitle is-4">Förening: <a class="has-text-underline" href="{{ route( 'associations.show', $user->association->id ) }}">{{ $user->association->name }}</a> på <a class="has-text-underline" href="{{ route( 'universities.show', $user->association->university->id ) }}">{{ $user->association->university->name }}</a></h4>
+        <h4 class="subtitle is-4">Förening: <a class="has-text-underline" href="{{ route( 'associations.show', $user->association->slug ) }}">{{ $user->association->name }}</a> på <a class="has-text-underline" href="{{ route( 'universities.show', $user->association->university->slug ) }}">{{ $user->association->university->name }}</a></h4>
         <p><b>Statistik föreingen:</b></p>
         <p>Användare: {{ $user->association->users->count() }}</p>
         <p>Kurser: {{ $user->association->courses->count() }}</p>

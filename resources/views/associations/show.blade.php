@@ -37,7 +37,7 @@
                     @endforeach
                 </ul>
                 @auth
-                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id == $association->id || Auth::user()->role === 'moderator' && Auth::user()->association_id == $association->id )
+                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id == $association->slug || Auth::user()->role === 'moderator' && Auth::user()->association_id == $association->slug )
                         <br>
                         <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>
                     @endif
@@ -45,16 +45,16 @@
             @else
                 <h3 class="subtitle">Inga kurser har lagts till på den här föreningen, vill du lägga till en nu?</h3>
                 @auth
-                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id == $association->id || Auth::user()->role === 'moderator' && Auth::user()->association_id == $association->id )
+                    @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id == $association->slug || Auth::user()->role === 'moderator' && Auth::user()->association_id == $association->slug )
                         <a class="button is-primary" href="{{ route( 'courses.create' ) }}">Lägg till kurs</a>
                     @endif
                 @endauth
             @endif
             @auth
-                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id === $association->id || Auth::user()->role === 'moderator' && Auth::user()->association_id === $association->id )
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association_id === $association->slug || Auth::user()->role === 'moderator' && Auth::user()->association_id === $association->slug )
                     <hr>
                     <h3 class="subtitle is-4">Ändra uppgifter</h3>
-                    <a class="button is-primary" href="{{ route( 'associations.edit', $association->id ) }}">Ändra uppggifter</a>
+                    <a class="button is-primary" href="{{ route( 'associations.edit', $association->slug ) }}">Ändra uppggifter</a>
                 @endif
             @endauth
             <hr>

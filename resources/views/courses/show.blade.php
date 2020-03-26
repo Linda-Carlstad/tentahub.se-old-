@@ -17,17 +17,17 @@
                 <div class="list is-hoverable">
                     @foreach( $exams as $exam )
                         <div class="list-item">
-                            <a href="{{ route( 'exams.show', $exam->id ) }}">
+                            <a href="{{ route( 'exams.show', $exam->slug ) }}">
                                 {{ $exam->name }}
                             </a>
                             -
-                            <a href="{{ route( 'exams.download', $exam->id ) }}">
+                            <a href="{{ route( 'exams.download', $exam->slug ) }}">
                                 Ladda ner
                             </a>
                             @auth
-                                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id === $course->association->id )
+                                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->slug === $course->association->university->slug || Auth::user()->role === 'moderator' && Auth::user()->association->slug === $course->association->slug )
                                     <hr>
-                                    <form class="form" action="{{ route( 'exams.destroy', $exam->id ) }}" method="post">
+                                    <form class="form" action="{{ route( 'exams.destroy', $exam->slug ) }}" method="post">
                                         @csrf
                                         @method( 'DELETE' )
                                         <button class="button is-link" type="submit">
@@ -44,10 +44,10 @@
                 Lägg till tenta
             </a>
             @auth
-                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id == $course->association->university->id || Auth::user()->role === 'moderator' && Auth::user()->association->id == $course->association_id )
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->slug == $course->association->university->slug || Auth::user()->role === 'moderator' && Auth::user()->association->slug == $course->association_id )
                     <hr>
                     <h3 class="subtitle is-4">Ändra uppgifter</h3>
-                    <a class="button is-primary" href="{{ route( 'courses.edit', $course->id ) }}">Ändra uppggifter</a>
+                    <a class="button is-primary" href="{{ route( 'courses.edit', $course->slug ) }}">Ändra uppggifter</a>
                 @endif
             @endauth
             <hr>
