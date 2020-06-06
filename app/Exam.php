@@ -151,7 +151,7 @@ class Exam extends Model
 
         $exam = Storage::putFileAs(
             'exams/' . $university->slug . '/' . $association->slug . '/' . $course->code,
-            new File( $request->exam ), $request->exam->getClientOriginalName() //. '-' .  $temp
+            new File( $request->exam ), $request->exam->getClientOriginalName() . '-' .  $temp . '.pdf'
         );
 
         return $exam;
