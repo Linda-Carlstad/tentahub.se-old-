@@ -11,9 +11,11 @@ class Verification extends Model
     {
         switch( $model )
         {
+            /*
             case 'recapthca':
                 $result = Verification::recaptcha( $request );
                 break;
+            */
 
             case 'exam':
                 $result = Verification::exam( $request );
@@ -51,6 +53,7 @@ class Verification extends Model
         return $result;
     }
 
+    /*
     private static function recaptcha( Request $request )
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -78,6 +81,7 @@ class Verification extends Model
 
         return true;
     }
+    */
 
     private static function exam( Request $request )
     {
@@ -86,7 +90,7 @@ class Verification extends Model
             'grade' => 'nullable|string',
             'points' => 'nullable|numeric',
             'exam' => 'mimetypes:application/pdf',
-            'recaptcha' => 'required',
+            //'recaptcha' => 'required',
             'type' => 'required|string',
             'date' => 'nullable|string',
             'created_from' => 'required|ip',

@@ -27,8 +27,8 @@ class SendContactRequest extends Controller
             'subject' => 'required|string',
             'text' => 'required',
             'type' => 'required|string',
-            'policy' => 'required|accepted',
-            'recaptcha' => 'required'
+            'policy' => 'required|accepted'
+            //'recaptcha' => 'required'
         ] );
 
         if( !$request->policy )
@@ -36,12 +36,14 @@ class SendContactRequest extends Controller
             return redirect()->back()->with( 'error', 'Ni måste godkänna avtalet, vänligen försök igen.' );
         }
 
+        /*
         $result = Verification::run( 'recaptcha', $request );
 
         if( $result != true )
         {
             return redirect()->back()->with( 'error', 'Capatcha fel!' );
         }
+        */
 
         switch( $request->type )
         {
