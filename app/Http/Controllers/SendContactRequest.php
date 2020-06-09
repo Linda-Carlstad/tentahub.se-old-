@@ -36,14 +36,12 @@ class SendContactRequest extends Controller
             return redirect()->back()->with( 'error', 'Ni måste godkänna avtalet, vänligen försök igen.' );
         }
 
-        /*
-        $result = Verification::run( 'recaptcha', $request );
+        $result = Verification::run( $request, 'recaptcha' );
 
         if( $result != true )
         {
             return redirect()->back()->with( 'error', 'Capatcha fel!' );
         }
-        */
 
         switch( $request->type )
         {

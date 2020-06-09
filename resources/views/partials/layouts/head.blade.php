@@ -55,6 +55,19 @@
 </script>
 <script src="https://www.google.com/recaptcha/api.js?render={{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}"></script>
 <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'contact' } ).then( function( token )
+        {
+            if( token )
+            {
+                if( document.getElementById( 'recaptcha' ) )
+                {
+                    document.getElementById( 'recaptcha' ).value = token;
+                }
+            }
+        });
+    });
+
     // Manual exam upload
     grecaptcha.ready(function() {
         grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'examManual' } ).then( function( token )
