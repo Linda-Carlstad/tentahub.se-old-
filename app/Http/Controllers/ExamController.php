@@ -60,13 +60,11 @@ class ExamController extends Controller
      */
     public function store( Request $request )
     {
-        /*
-        $result = Verification::run( $request, 'recapctha' );
+        $result = Verification::run( $request, 'recaptcha' );
         if( !$result )
         {
             return back()->with( 'error', 'Capatcha fel!' );
         }
-        */
 
         if( $request->type === 'manual' )
         {
