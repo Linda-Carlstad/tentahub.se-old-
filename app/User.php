@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public static function updateInfo( Request $request, User $user )
     {
-        $result = Verification::run( $request, 'user new' );
+        $result = Verification::run( $request, 'user info' );
         if( $result )
         {
             $user->name = $request->name;
