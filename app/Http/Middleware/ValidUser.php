@@ -22,6 +22,6 @@ class ValidUser
             return $next( $request );
         }
 
-        return redirect()->route( 'profile' )->with( 'error', 'Du måste byta lösenord för att fortsätta.' );
+        return redirect()->route( 'profile.settings' )->with( 'error', 'Du måste byta lösenord för att fortsätta.' );
     }
 }
