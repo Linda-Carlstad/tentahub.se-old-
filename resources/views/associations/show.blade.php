@@ -15,7 +15,7 @@
             </p>
             <hr>
             @if( $courses->isNotEmpty() )
-                <h3 class="subtitle is-3">Kurser:</h3>
+                <h3 class="subtitle is-3">Kurser</h3>
                 <ul>
                     @foreach( $courses as $course )
                         <li>-

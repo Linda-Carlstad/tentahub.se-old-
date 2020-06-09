@@ -9,7 +9,7 @@
             <a target="_blank" href="{{ $university->url }}">{{ $university->url }}</a>
             <hr>
             @if( $associations->isNotEmpty() )
-                <h3 class="subtitle is-3">Föreningar:</h3>
+                <h3 class="subtitle is-3">Föreningar</h3>
                 <ul>
                     @foreach( $associations as $association )
                         <li>-
