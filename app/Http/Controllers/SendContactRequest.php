@@ -27,8 +27,8 @@ class SendContactRequest extends Controller
             'subject' => 'required|string',
             'text' => 'required',
             'type' => 'required|string',
-            'policy' => 'required|accepted'
-            //'recaptcha' => 'required'
+            'policy' => 'required|accepted',
+            'recaptcha' => 'required'
         ] );
 
         if( !$request->policy )
