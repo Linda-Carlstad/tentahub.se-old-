@@ -18,11 +18,11 @@
             </small>
             <h4 class="title is-4">{{ $exam->name }} {{ $exam->name ? '- ' . $exam->date : '' }}</h4>
             <div class="field is-grouped">
-                <p class="control">
+                {{--<p class="control">
                     <a class="button is-primary" target="_blank" href="{{ route( 'exams.show', $exam->slug ) }}">
                         Visa
                     </a>
-                </p>
+                </p>--}}
                 <p class="control">
                     <a class="button is-primary" href="{{ route( 'exams.download', $exam->slug ) }}">
                         Ladda ner

@@ -149,9 +149,13 @@ class Exam extends Model
         $association = Association::findOrFail( $course->association_id );
         $university = University::findOrFail( $association->university_id );
 
+        $exam = $request->exam->getClientOriginalName();
+        $filename = pathinfo($exam, PATHINFO_FILENAME);
+        $extension = pathinfo($exam, PATHINFO_EXTENSION);
+
         $exam = Storage::putFileAs(
             'exams/' . $university->slug . '/' . $association->slug . '/' . $course->code,
-            new File( $request->exam ), $request->exam->getClientOriginalName() . '-' .  $temp . '.pdf'
+            new File( $request->exam ), $filename . '-' .  $temp . '.' . $extension
         );
 
         return $exam;
