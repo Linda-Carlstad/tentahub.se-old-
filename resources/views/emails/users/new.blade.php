@@ -11,4 +11,6 @@
         <b>Lösenord:</b> {{ $password }}
     </p>
 
+    <a class="button is-primary" href="{{ config( 'app.url' ) }}/logga-in">Logga in</a>
+
 @endsection
