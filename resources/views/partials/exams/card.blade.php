@@ -16,7 +16,7 @@
                     @endif
                 @endif
             </small>
-            <h4 class="title is-3">{{ $exam->name }} {{ $exam->name ? '- ' . $exam->date : '' }}</h4>
+            <h4 class="title is-4">{{ $exam->name }} {{ $exam->name ? '- ' . $exam->date : '' }}</h4>
             <div class="field is-grouped">
                 <p class="control">
                     <a class="button is-primary" target="_blank" href="{{ route( 'exams.show', $exam->slug ) }}">
