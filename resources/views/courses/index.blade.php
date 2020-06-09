@@ -24,14 +24,14 @@
                                 <a class="title is-5" href="{{ route( 'courses.partial',
                                                     [ $course->university->slug,
                                                       $course->slug ] ) }}" class="card-footer-item">
-                                    {{ $course->name }} ({{ $course->code }})
+                                    {{ $course->name }} - {{ $course->code }}
                                 </a>
                             @else
                                 <a class="title is-5" href="{{ route( 'courses.full',
                                                 [ $course->association->university->slug,
                                                   $course->association->slug,
                                                   $course->slug ] ) }}" class="card-footer-item">
-                                    {{ $course->name }} ({{ $course->code }})
+                                    {{ $course->name }} - {{ $course->code }}
                                 </a>
                             @endif
                             <p>

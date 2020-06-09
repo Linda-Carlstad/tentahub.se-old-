@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-content">
                             <a href="{{ route( 'universities.full', $university->slug ) }}" class="title is-5">
-                                {{ $university->name }} ({{ $university->nickname }})
+                                {{ $university->name }} - {{ $university->nickname }}
                             </a>
                             <p>
                                 Föreningar: {{ $university->associations->count() }}
