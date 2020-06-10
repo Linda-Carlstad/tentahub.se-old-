@@ -12,7 +12,7 @@
             Webbutvecklare, Webbutveckling, Data, Dataingenjör, IT-design, Datateknink, Teknik, Utbildningsförening,
             Karlstad, Universitet, Karlstads universitet, KAU, Linda, Tentahub, Carlstad, HHK, Handels,
             Högskolan, Handelshögskolan">
-<meta name="description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta name="description" content="Tentahub | Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
 <meta name="subject" content="Social">
 <meta name="image" content="{{ config( 'app.url' ) }}/img/logo.png">
 <meta name="copyright" content="Tentahub">
@@ -38,16 +38,16 @@
 
 <!-- Schema.org for Google -->
 <meta itemprop="name" content="Tentahub">
-<meta itemprop="description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta itemprop="description" content="Tentahub | Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
 <meta itemprop="image" content="{{ config( 'app.url' ) }}/img/logo.png">
 <!-- Twitter -->
-<meta property="twitter:card" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="twitter:card" content="Tentahub | Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
 <meta property="twitter:title" content="Tentahub">
-<meta property="twitter:description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="twitter:description" content="Tentahub | Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
 <meta property="twitter:image" content="{{ config( 'app.url' ) }}/img/logo.png">
 <!-- Open Graph general (Facebook, Pinterest & Google+) -->
 <meta property="og:title" content="Tentahub">
-<meta property="og:description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="og:description" content="Tentahub | Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
 <meta property="og:image" content="{{ config( 'app.url' ) }}/img/logo.png">
 <meta property="og:url" content="{{ config( 'app.url' ) }}">
 <meta property="og:site_name" content="Tentahub">
