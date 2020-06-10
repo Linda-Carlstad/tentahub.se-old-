@@ -55,7 +55,7 @@ Route::post('/linda', 'FileUploadController@showUploadFile');
 // Authentication Routes...
 Route::get('logga-in', 'Auth\LoginController@showLoginForm')->name('login-form');
 Route::post('login', 'Auth\LoginController@login')->name( 'login' );
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('logga-ut', 'Auth\LoginController@logout')->name('logout');
 
 // Password Reset Routes...
 Route::get('lösenord/återställ', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
