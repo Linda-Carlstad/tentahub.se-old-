@@ -7,7 +7,9 @@
             <h1 class="title">{{ $course->name }} - {{ $course->code }}</h1>
             <h2 class="subtitle">Poäng: {{ $course->points }}hp</h2>
             <p class="is-half">{{ $course->description }}</p>
-            <a target="_blank" href="{{ $course->url }}">{{ $course->url }}</a>
+            @if( $course->url )
+                <a target="_blank" rel="noreferrer" href="{{ $course->url }}">{{ $course->url }}</a>
+            @endif
             <hr>
             <h3 class="subtitle is-3">Tentor</h3>
             @if( $exams->isEmpty() )

@@ -8,7 +8,9 @@
             <p>
                 {{ $association->description }}
                 <br>
-                Webbsida: <a target="_blank" href="{{ $association->url }}">{{ $association->url }}</a>
+                @if( !empty( $association->url ) )
+                    <a target="_blank" rel="noreferrer" href="{{ $association->url }}">{{ $association->url }}</a>
+                @endif
                 <br>
                 Tillhör universitet:
                 <a href="{{ route( 'universities.full', $association->university->slug ) }}">{{ $association->university->name }}</a>

@@ -6,7 +6,9 @@
         <div class="column is-half is-widescreen">
             <h1 class="title">{{ $university->name }}</h1>
             <p>{{ $university->description }}</p>
-            <a target="_blank" href="{{ $university->url }}">{{ $university->url }}</a>
+            @if( $university->url )
+                <a target="_blank" rel="noreferrer" href="{{ $university->url }}">{{ $university->url }}</a>
+            @endif
             <hr>
             @if( $associations->isNotEmpty() )
                 <h3 class="subtitle is-3">Föreningar</h3>
