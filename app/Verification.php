@@ -55,7 +55,7 @@ class Verification extends Model
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = [
-            'secret'   => env( 'GOOGLE_RECAPTCHA_SECRET' ),
+            'secret'   => config( 'services.recaptcha.secret' ),
             'response' => $request->recaptcha
         ];
 

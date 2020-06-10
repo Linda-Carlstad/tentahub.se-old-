@@ -53,10 +53,10 @@
         })
     });
 </script>
-<script src="https://www.google.com/recaptcha/api.js?render={{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}"></script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ config( 'services.recaptcha.key' ) }}"></script>
 <script>
     grecaptcha.ready(function() {
-        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'contact' } ).then( function( token )
+        grecaptcha.execute( '{{ config( 'services.recaptcha.key' ) }}', { action: 'contact' } ).then( function( token )
         {
             if( token )
             {
@@ -70,7 +70,7 @@
 
     // Manual exam upload
     grecaptcha.ready(function() {
-        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'examManual' } ).then( function( token )
+        grecaptcha.execute( '{{ config( 'services.recaptcha.key' ) }}', { action: 'examManual' } ).then( function( token )
         {
             if( token )
             {
@@ -84,7 +84,7 @@
 
     // Automatic exam upload
     grecaptcha.ready(function() {
-        grecaptcha.execute( '{{ env( 'GOOGLE_RECAPTCHA_KEY' ) }}', { action: 'examAutomatic' } ).then( function( token )
+        grecaptcha.execute( '{{ config( 'services.recaptcha.key' ) }}', { action: 'examAutomatic' } ).then( function( token )
         {
             if( token )
             {
