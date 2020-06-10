@@ -4,7 +4,7 @@
             <div class="column is-3 is-hidden-touch">
                 <a target="_blank" href="https://lindacarlstad.se">
                     <figure class="image">
-                        <img src="{{ asset( 'img/logo.png' ) }}" />
+                        <img alt="Linda Carlstad logo" src="{{ asset( 'img/logo.png' ) }}" />
                     </figure>
                 </a>
             </div>
