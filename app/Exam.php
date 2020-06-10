@@ -161,6 +161,7 @@ class Exam extends Model
         return $exam;
     }
 
+    // Gets a random 4-digit number based on the current time minus a fixed date
     public static function getRandomNumber()
     {
         $now = time(); // or your date as well
