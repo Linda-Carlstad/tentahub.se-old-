@@ -62,6 +62,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Global "to" Address
+    |--------------------------------------------------------------------------
+    |
+    | You may wish for all e-mails sent by your application to be sent to
+    | the same address. Here, you may specify a address that is
+    | used globally for all e-mails that are sent by your application.
+    |
+    */
+
+    'to' => [
+        'address' => env( 'MAIL_TO_ADDRESS' ),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Global "support" Address
+    |--------------------------------------------------------------------------
+    |
+    | You may wish for all e-mails sent by your application to be sent to
+    | the same address. Here, you may specify a address that is
+    | used globally for all e-mails that are sent by your application.
+    |
+    */
+
+    'support' => [
+        'address' => env( 'MAIL_TO_ADDRESS_SUPPORT' ),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
     |--------------------------------------------------------------------------
     |

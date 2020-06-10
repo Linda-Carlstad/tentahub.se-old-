@@ -9,11 +9,11 @@
                 </a>
             </div>
             <div class="column is-3">
-                <h4 class="title is-4">{{ env( 'APP_NAME' ) }}</h4>
+                <h4 class="title is-4">{{ config( 'app.name' ) }}</h4>
                 <hr>
                 <p>
-                    <a href="mailto:{{ env( 'MAIL_TO_ADDRESS' ) }}">
-                        {{ env( 'MAIL_TO_ADDRESS' ) }}
+                    <a href="mailto:{{ config( 'mail.to.address' ) }}">
+                        {{ config( 'mail.to.address' ) }}
                     </a>
                     <br>
                     Universitetsgatan 2
@@ -51,11 +51,11 @@
                     </a>
                     <br>
                     <a href="{{ route( 'what-is' ) }}">
-                        Vad är {{ env( 'APP_NAME' ) }}?
+                        Vad är {{ config( 'app.name' ) }}?
                     </a>
                     <br>
                     <a href="{{ route( 'how-to-use' ) }}">
-                        Hur funkar {{ env( 'APP_NAME' ) }}?
+                        Hur funkar {{ config( 'app.name' ) }}?
                     </a>
                     <br>
                     <a href="{{ route( 'contacts.info' ) }}">
@@ -74,11 +74,11 @@
     <div class="content legal has-text-centered">
         <p>
             <strong>Tentahub</strong> by <a href="https://lindacarlstad.se">Linda Carlstad</a>.
-            The source code is licensed
-            <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL-3.0</a> and can be found on
+            Källkoden är licensierad
+            (<a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL-3.0</a>) och kan hittas på
             <a href="https://github.com/Linda-Carlstad/tentahub.se">Github</a>
             (<a target="_blank" href="https://github.com/Linda-Carlstad">Linda Carlstad</a>).
         </p>
-        <p>Copyright @ {{ date( 'Y' )  }} <a href="https://lindacarlstad.se">{{ env( 'APP_NAME' ) }}</a></p>
+        <p>Copyright @ {{ date( 'Y' )  }} <a href="https://lindacarlstad.se">{{ config( 'app.name' ) }}</a></p>
     </div>
 </footer>
