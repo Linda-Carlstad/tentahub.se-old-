@@ -3,16 +3,59 @@
 @endphp
 
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
 <title>{{ config('app.name', 'Tentahub') }} - @yield( 'title', 'Studentens samlingsplats för tentor' )</title>
+
+<meta name="keywords" content="Utbildning, Utbildningar, Förening, Föreningar, Studentförening, Studentföreningar,
+            Webbutvecklare, Webbutveckling, Data, Dataingenjör, IT-design, Datateknink, Teknik, Utbildningsförening,
+            Karlstad, Universitet, Karlstads universitet, KAU, Linda, Tentahub, Carlstad, HHK, Handels,
+            Högskolan, Handelshögskolan">
+<meta name="description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta name="subject" content="Social">
+<meta name="image" content="{{ config( 'app.url' ) }}/img/logo.png">
+<meta name="copyright" content="Tentahub">
+<meta name="language" content="{{ str_replace( '_', '-', app()->getLocale()) }}">
+<meta name="robots" content="index, follow">
+<meta name="Classification" content="Business">
+<meta name="author" content="Linda Carlstad">
+<meta name="designer" content="Linda Carlstad">
+<meta name="copyright" content="Linda Carlstad">
+<meta name="reply-to" content="info@lindacarlstad.se">
+<meta name="owner" content="Linda Carlstad">
+<meta name="url" content="{{ config( 'app.url' ) }}">
+<meta name="identifier-URL" content="{{ config( 'app.url' ) }}">
+<meta name="coverage" content="Worldwide">
+<meta name="distribution" content="Global">
+<meta name="rating" content="General">
+<meta name="revisit-after" content="7 days">
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="canonical" href="{{ Request::url() }}">
+<link rel="home" href="{{ Request::url() }}">
+<link rel="alternate" hreflang="x-default" href="{{ Request::url() }}">
+
+<!-- Schema.org for Google -->
+<meta itemprop="name" content="Tentahub">
+<meta itemprop="description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta itemprop="image" content="{{ config( 'app.url' ) }}/img/logo.png">
+<!-- Twitter -->
+<meta property="twitter:card" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="twitter:title" content="Tentahub">
+<meta property="twitter:description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="twitter:image" content="{{ config( 'app.url' ) }}/img/logo.png">
+<!-- Open Graph general (Facebook, Pinterest & Google+) -->
+<meta property="og:title" content="Tentahub">
+<meta property="og:description" content="Studentens samlingsplats för tentor skapad av Linda Carlstad - @yield( 'title')">
+<meta property="og:image" content="{{ config( 'app.url' ) }}/img/logo.png">
+<meta property="og:url" content="{{ config( 'app.url' ) }}">
+<meta property="og:site_name" content="Tentahub">
+<meta property="og:locale" content="{{ str_replace( '_', '-', app()->getLocale()) }}">
+<meta property="og:type" content="website">
 
 <!-- Styles -->
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" rel="stylesheet" type="text/css">
 <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
