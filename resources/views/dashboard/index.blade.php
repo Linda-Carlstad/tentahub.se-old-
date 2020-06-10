@@ -17,8 +17,8 @@
                 <h1 class="title">Vad vill du göra idag?</h1>
                 <h2 class="subtitle">Välj ett alternativ nedan:</h2>
                 <div class="buttons is-centered">
-                    <a href="{{ route( 'courses.index') }}" class="button is-primary">Redigera Kurser</a>
-                    <a href="{{ route( 'exams.index') }}" class="button is-primary">Redigera Tentor</a>
+                    <a href="{{ route( 'courses.index') }}" class="button is-primary">Redigera kurser</a>
+                    <a href="{{ route( 'exams.index') }}" class="button is-primary">Redigera tentor</a>
                 </div>
             @else
                 <h1 class="title">Byt lösenord</h1>
