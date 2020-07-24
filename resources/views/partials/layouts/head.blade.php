@@ -17,7 +17,7 @@
 <meta name="image" content="{{ config( 'app.url' ) }}/img/logo.png">
 <meta name="copyright" content="Tentahub">
 <meta name="language" content="{{ str_replace( '_', '-', app()->getLocale()) }}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <meta name="Classification" content="Business">
 <meta name="author" content="Linda Carlstad">
 <meta name="designer" content="Linda Carlstad">
