@@ -120,8 +120,8 @@ Route::delete( 'universitet/{university}', 'UniversityController@destroy' )->nam
 
 
 // Routes using only slugs, placed here to prevent router confusion
-Route::get( '{university}/{association}', 'AssociationController@full' )->name( 'associations.full' );
-Route::get( '{university}/{course}', 'CourseController@partial' )->name( 'courses.partial' );
-Route::get( '{university}/{association}/{course}', 'CourseController@full' )->name( 'courses.full' );
-Route::get( '{university}/{association}/{course}/{exam}', 'ExamController@full' )->name( 'exams.full' );
-Route::get( '{university}', 'UniversityController@full' )->name( 'universities.full' );
+Route::get( 'u/{university}', 'UniversityController@full' )->name( 'universities.full' );
+Route::get( 'u/{university}/{association}', 'AssociationController@full' )->name( 'associations.full' );
+Route::get( 'u/{university}/{course}', 'CourseController@partial' )->name( 'courses.partial' );
+Route::get( 'u/{university}/{association}/{course}', 'CourseController@full' )->name( 'courses.full' );
+Route::get( 'u/{university}/{association}/{course}/{exam}', 'ExamController@full' )->name( 'exams.full' );
