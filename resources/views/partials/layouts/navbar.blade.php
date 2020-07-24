@@ -19,10 +19,10 @@
                     Om oss
                 </a>
                 <a class="navbar-item" href="{{ route( 'what-is' ) }}">
-                    Vad är {{ env( 'APP_NAME' ) }}?
+                    Vad är {{ config( 'app.name' ) }}?
                 </a>
                 <a class="navbar-item" href="{{ route( 'how-to-use' ) }}">
-                    Hur funkar {{ env('APP_NAME') }}?
+                    Hur funkar {{ config( 'app.name' ) }}?
                 </a>
             @endguest
             <a class="navbar-item" href="{{ route( 'universities.index' ) }}">
