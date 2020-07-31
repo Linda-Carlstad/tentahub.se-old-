@@ -65,7 +65,7 @@ TBA
 - Submit issue
 
 #### - Coding
-- See the [issue list](https://github.com/Linda-Carlstad/lindacarlstad.se/issues)
+- See the [issue list](https://github.com/Linda-Carlstad/tentahub.se/issues)
 - Assign yourself to an issue
 - Open a new branch
 - Create your _beautiful_ code
