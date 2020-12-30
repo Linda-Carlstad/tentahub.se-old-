@@ -18,7 +18,7 @@
         "lodash": "^4.17.20",
         "popper.js": "^1.16.1",
         "resolve-url-loader": "^3.1.2",
-        "sass": "^1.29.0",
+        "sass": "^1.32.0",
         "sass-loader": "7.*",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
@@ -27,6 +27,6 @@
         "bulma": "^0.8.2",
         "bulma-accordion": "^2.0.1",
         "bulma-tooltip": "^3.0.2",
-        "flatpickr": "^4.6.6"
+        "flatpickr": "^4.6.9"
     }
 }
