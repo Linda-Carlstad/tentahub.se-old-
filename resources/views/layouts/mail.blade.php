@@ -125,8 +125,8 @@
     <body>
         <div class="wrapper">
             <header>
-                <h1>{{ env( 'APP_NAME' ) }}</h1>
-                <p>{{ env( 'APP_SLOGAN' ) }}</p>
+                <h1>{{ config( 'app.name' ) }}</h1>
+                <p>{{ config( 'app.slogan' ) }}</p>
             </header>
 
             <div class="main">
@@ -136,10 +136,10 @@
             </div>
 
             <footer>
-                <h3>{{ env( 'APP_NAME' ) }}</h3>
-                <a href="{{ env( 'APP_URL' ) }}">{{ env( 'APP_URL' ) }}</a>
+                <h3>{{ config( 'app.name' ) }}</h3>
+                <a href="{{ config( 'app.url' ) }}">{{ config( 'app.url' ) }}</a>
                 <br>
-                <a href="mailto:{{ env('MAIL_TO_ADDRESS') }}">{{ env('MAIL_TO_ADDRESS') }}</a>
+                <a href="mailto:{{ config( 'mail.to.address' ) }}">{{ config( 'mail.to.address' ) }}</a>
             </footer>
         </div>
     </body>
