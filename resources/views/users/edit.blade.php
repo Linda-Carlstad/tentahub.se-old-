@@ -102,6 +102,20 @@
                         </div>
                     </div>
                 </form>
+                @if( Auth::user()->role === 'super' || Auth::user()->role === 'admin' && Auth::user()->association->university->id === $course->association->university->id )
+                    @if( $user->role != 'super' )
+                        <hr>
+                        <form onSubmit="return confirm('Är su säker på att du vill ta bort {{ $user->name }}? Denna åtgärd är permanent.');" action="{{ route( 'users.destroy', $user->id ) }}" method="post">
+                            @csrf
+                            {{ method_field( 'delete' ) }}
+                            <h4>Ta bort {{ $user->name }}?</h4>
+                            <p>Denna åtgärd är permanent.</p>
+                            <button type="submit" class="button is-primary">
+                                Ta bort
+                            </button>
+                        </form>
+                    @endif
+                @endif
             </div>
         </div>
     </section>
