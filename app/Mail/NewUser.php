@@ -15,10 +15,12 @@ class NewUser extends Mailable
 
     public $user;
     public $password;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param User $user
+     * @param $password
      */
     public function __construct( User $user, $password )
     {
@@ -33,8 +35,8 @@ class NewUser extends Mailable
      */
     public function build()
     {
-        return $this->from( 'no-reply@tentahub.se', 'Tentahub' )
-                    ->subject( 'Registrera ny användare' )
+        return $this->from( config('mail.from.address'), config('mail.from.name') )
+                    ->subject( 'Registrering av ny användare' )
                     ->view( 'emails.users.new' );
     }
 }
