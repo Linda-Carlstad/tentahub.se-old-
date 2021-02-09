@@ -110,11 +110,12 @@ class User extends Authenticatable
 
     public static function createNew( Request $request )
     {
-        $randomString = md5( uniqid( time(), true ) );
-
         $result = Verification::run( $request, 'user new' );
+
         if( $result )
         {
+            $randomString = md5( uniqid( time(), true ) );
+
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
@@ -124,7 +125,7 @@ class User extends Authenticatable
             $user->save();
 
             Mail::to( $user->email )
-                ->send( new NewUser( $user, $randomString ) );
+                ->send( new NewUser( $user, $user->password ) );
 
             return [ 'success', 'Ny användare skapad, bra jobbat!' ];
         }
