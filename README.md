@@ -35,19 +35,30 @@ cp .env.example .env
 php artisan key:generate
 ```
 
+Create a database in MySQL on your computer. 
+
+Edit the `.env` file with your database credidentials. 
+Here is an example:
+```
+DB_PORT=3306
+DB_DATABASE=tentahub
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
 Create and seed database:
 ```
 php artisan migrate:refresh --seed
 ```
 
+Run this to generate CSS and JS files:
+```
+npm run dev
+```
+
 Run the local development server: 
 ```
 php artisan serve
-```
-
-Run this to generate CSS and JS files:
-```
-npm run watch
 ```
 
 ## Usage
