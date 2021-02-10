@@ -19,12 +19,6 @@ Follow this excellent guide to run a Laravel project on your Windows based compu
 
 When steps above are done, do these steps to get going.
 
-Copy and generate application key: 
-```
-cp .env.example .env
-php artisan key:generate
-```
-
 Install all composer dependencies: 
 ```
 composer install
@@ -33,6 +27,12 @@ composer install
 Install all NPM dependencies: 
 ```
 npm install
+```
+
+Copy and generate application key: 
+```
+cp .env.example .env
+php artisan key:generate
 ```
 
 Create and seed database:
