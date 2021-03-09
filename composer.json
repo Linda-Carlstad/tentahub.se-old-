@@ -13,7 +13,7 @@
         "caouecs/laravel-lang": "~5.0",
         "fideloper/proxy": "^4.0",
         "google/recaptcha": "^1.2",
-        "laravel/framework": "6.20.*",
+        "laravel/framework": "^6.20.18",
         "laravel/tinker": "^1.0",
         "spatie/laravel-sluggable": "^2.3"
     },
