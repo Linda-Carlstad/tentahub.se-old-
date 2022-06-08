@@ -42,9 +42,17 @@ Install all NPM dependencies:
 npm install
 ```
 
-Copy and generate application key: 
+Copy the example envirment file: 
 ```
+# macOs
 cp .env.example .env
+
+# Windows
+copy .env.example .env
+```
+
+Generate application key. 
+```
 php artisan key:generate
 ```
 
