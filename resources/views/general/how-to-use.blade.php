@@ -12,12 +12,6 @@
                 It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
                 Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.
             </p>
-            <br>
-            <ul>
-                <li>Saker 1</li>
-                <li>Saker 2</li>
-                <li>Saker 3</li>
-            </ul>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
             <p>Lägg till en bild på appen</p>
