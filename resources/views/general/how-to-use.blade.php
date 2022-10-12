@@ -11,14 +11,14 @@
                 Contrary to popular belief, Lorem Ipsum is not simply random text.
                 It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
                 Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.
+                <br>
+                Linda äger!
             </p>
         </div>
         <div class="column is-half is-widescreen has-text-centered level-item">
-            <p>Lägg till en bild på appen</p>
             <figure class="">
                 <img src="{{ asset( 'img/logo.png' ) }}" />
             </figure>
-            <p>Lägg till en bild på appen</p>
         </div>
     </section>
 
