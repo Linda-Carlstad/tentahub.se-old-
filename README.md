@@ -72,10 +72,16 @@ Create and seed database:
 php artisan migrate:refresh --seed
 ```
 
-Run this to generate CSS and JS files:
+
+
+Run this to generate CSS and JS files: 
+
+**(Does not work properly at the moment)**
 ```
 npm run dev
 ```
+
+****
 
 Run the local development server: 
 ```
