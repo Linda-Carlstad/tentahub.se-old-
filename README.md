@@ -34,7 +34,7 @@ Locate the project on your machine via the terminal and follow the steps below.
 
 Install all composer dependencies: 
 ```
-composer install
+composer update
 ```
 
 Install all NPM dependencies: 
