@@ -11,14 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
+ mix.override((config) => {
+    delete config.watchOptions;
+});
+
 if( mix.inProduction() )
 {
     mix.js('resources/js/app.js', 'public/js')
         .sass('resources/sass/app.scss', 'public/css')
-        .version();
+        .vue().version();
 }
 else
 {
     mix.js('resources/js/app.js', 'public/js')
-        .sass('resources/sass/app.scss', 'public/css');
+        .sass('resources/sass/app.scss', 'public/css')
+        .vue();
 }
