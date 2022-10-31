@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        \DB::table('users')->insert([
            'name' => 'Linda Carlstad info',
            'email' => 'info@lindacarlstad.se',
            'password' => bcrypt('BytMigSnartLinda'),
@@ -24,7 +26,7 @@ class UsersTableSeeder extends Seeder
            'updated_at' => now(),
         ]);
 
-        DB::table('users')->insert([
+        \DB::table('users')->insert([
            'name' => 'Linda Carlstad utbildning',
             'email' => 'utbildning@lindacarlstad.se',
             'password' => bcrypt('BytMigSnartLinda'),

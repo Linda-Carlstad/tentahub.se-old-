@@ -6,12 +6,13 @@ use App\Course;
 use Faker\Generator as Faker;
 
 $factory->define(Course::class, function (Faker $faker) {
+    $number = $faker->numberbetween(1,1000000);
     return [
         'name' => $faker->company,
         'association_id' => $faker->numberbetween(1,5),
-        'code' => $faker->regexify('[A-Za-z0-9]{10}'),
+        'code' => "ISA10$number",
         'points' => $faker->numberbetween(1,30),
-        'url' => $faker->url,
-        'description' => $faker->text
+        'url' => "192.0.0.1",
+        'description' => "Test"
     ];
 });

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\University;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,7 @@ class UniversitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('universities')->insert([
+        \DB::table('universities')->insert([
            'name' => 'Karlstad University',
            'nickname' => 'KAU',
            'city' => 'Karlstad',

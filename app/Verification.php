@@ -53,6 +53,11 @@ class Verification extends Model
 
     private static function recaptcha( Request $request )
     {
+        if (config('app.env') != "production")
+        {
+            return true;
+        }
+
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = [
             'secret'   => config( 'services.recaptcha.secret' ),

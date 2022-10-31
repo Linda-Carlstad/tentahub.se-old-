@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Association;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,7 @@ class AssociationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('associations')->insert([
+        \DB::table('associations')->insert([
            'name' => 'Linda Carlstad',
            'url' => 'https://lindacarlstad.se',
            'university_id' => 1,
