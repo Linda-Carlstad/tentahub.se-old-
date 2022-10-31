@@ -14,7 +14,7 @@ class UniversitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('universities')->insert([
+        \DB::table('universities')->insert([
            'name' => 'Karlstad University',
            'nickname' => 'KAU',
            'city' => 'Karlstad',

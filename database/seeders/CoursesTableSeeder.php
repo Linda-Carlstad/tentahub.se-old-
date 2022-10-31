@@ -14,7 +14,7 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('courses')->insert([
+        \DB::table('courses')->insert([
             'name' => 'Anskaffning av it-system',
             'association_id' => 1,
             'code' => 'ISGA03',
@@ -23,7 +23,7 @@ class CoursesTableSeeder extends Seeder
             'description' => null,
             'slug' => 'anskaffning-av-it-system'
         ]);
-        DB::table('courses')->insert([
+        \DB::table('courses')->insert([
             'name' => 'Saker som inte finns',
             'university_id' => 1,
             'code' => 'SAIF01',
