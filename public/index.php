@@ -8,8 +8,6 @@
  */
 
 define('LARAVEL_START', microtime(true));
-
-define('LARAVEL_START', microtime(true));
  
 if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
     require __DIR__.'/../storage/framework/maintenance.php';
