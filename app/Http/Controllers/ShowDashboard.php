@@ -22,7 +22,7 @@ class ShowDashboard extends Controller
             $this->middleware( 'verified' );
             return view('dashboard.index');
         }
-        $total = Association::all()->count();
+        $total = Association::all()->where('public', true)->count();
         return view( 'general.welcome' )->with('total', $total);
     }
 }
